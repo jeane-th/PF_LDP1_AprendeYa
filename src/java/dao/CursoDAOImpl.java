@@ -46,7 +46,7 @@ public class CursoDAOImpl implements CursoDAO {
         List<Curso> lista = new ArrayList<>();
         try {
             //throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
-            String sql = "SELECT *FROM tb_cursos;";
+            String sql = "SELECT * FROM tb_cursos;";
             Connection conecDB = Conexion.getConnection();
             PreparedStatement ps = conecDB.prepareStatement(sql);
             ResultSet rs = ps.executeQuery();
@@ -111,19 +111,43 @@ public class CursoDAOImpl implements CursoDAO {
             int filas = ps.executeUpdate();
             return filas > 0;
         } catch (Exception e) {
-             System.out.println("Error al actualizar curso: " + e.getMessage());
+            System.out.println("Error al actualizar curso: " + e.getMessage());
             return false;
         }
     }
 
     @Override
     public boolean eliminar(int idCurso) {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+        try {
+            //throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+            String sql = "DELETE FROM tb_cursos WHERE idCurso = ?";
+            Connection con = Conexion.getConnection();
+            PreparedStatement ps = con.prepareStatement(sql);
+            ps.setInt(1, idCurso);
+            int filas = ps.executeUpdate();
+            return filas > 0;
+        } catch (Exception e) {
+            System.out.println("Error al eliminar curso: " + e.getMessage());
+            return false;
+        }
     }
 
     @Override
-    public boolean cambiarEstado(int idCurso) {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+    public boolean cambiarEstado(int idCurso, boolean estado) {
+        //throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+        try {
+            //throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+            String sql = "UPDATE tb_cursos SET estado = ? WHERE idCurso = ?;";
+            Connection con = Conexion.getConnection();
+            PreparedStatement ps = con.prepareStatement(sql);
+            ps.setBoolean(1, estado);
+            ps.setInt(2, idCurso);
+            int filas = ps.executeUpdate();
+            return filas > 0;
+        } catch (Exception e) {
+            System.out.println("Error al cambiar estado de curso: " + e.getMessage());
+            return false;
+        }
     }
 
     @Override
