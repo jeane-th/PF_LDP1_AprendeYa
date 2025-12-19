@@ -11,10 +11,27 @@ import modelo.Curso;
  *
  * @author Home
  */
+//Agregar curso 
+//Listar cursos totales 
+//Buscar curso por id 
+//Actualizar curso 
+//Eliminar curso 
+//Desactivar curso 
+//Filtrar curso por categoría 
 public interface CursoDAO {
-        boolean agregar(Curso c);
-        List<Curso> listar();
-        Curso buscar (int idCurso);
-        boolean actualizar (Curso c);
-        boolean eliminar(int idCurso);
+
+    boolean agregar(Curso c);
+
+    List<Curso> listar();
+
+    Curso buscar(int idCurso);
+
+    boolean actualizar(Curso c);
+
+    boolean eliminar(int idCurso);
+
+    boolean cambiarEstado(int idCurso);
+
+    List<Curso> listarCategoria(String Categoria);
+
 }
