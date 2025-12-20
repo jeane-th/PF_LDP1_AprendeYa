@@ -30,8 +30,5 @@ public interface CursoDAO {
 
     boolean eliminar(int idCurso);
 
-    boolean cambiarEstado(int idCurso, boolean estado);
-
-    List<Curso> listarCategoria(String Categoria);
-
+    boolean cambiarEstado(int idCurso, boolean estado); 
 }

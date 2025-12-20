@@ -6,7 +6,6 @@ package test;
 
 import dao.CursoDAO;
 import dao.CursoDAOImpl;
-import modelo.Curso;
 
 /**
  *

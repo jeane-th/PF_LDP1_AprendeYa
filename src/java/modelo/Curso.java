@@ -27,11 +27,11 @@ public class Curso {
         this.descripcion = descripcion;
         this.categoria = categoria;
         this.imagen = imagen;
-        this.video = video;
+        this.video = video; 
         this.estado = estado;
     }
-    
-        public Curso(String titulo, String descripcion, String categoria, String imagen, String video, boolean estado) {
+
+    public Curso(String titulo, String descripcion, String categoria, String imagen, String video, boolean estado) {
         this.titulo = titulo;
         this.descripcion = descripcion;
         this.categoria = categoria;
@@ -137,11 +137,9 @@ public class Curso {
     public void setEstado(boolean estado) {
         this.estado = estado;
     }
-    
-    
-     @Override
-    public String toString () {
-        return idCurso + " | " + titulo + " | " + descripcion +" | " + categoria +" | " + imagen +" | " + video +" | " +  estado;
+
+    @Override
+    public String toString() {
+        return idCurso + " | " + titulo + " | " + descripcion + " | " + categoria + " | " + imagen + " | " + video + " | " + estado;
     }
 }
-

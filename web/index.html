@@ -3,13 +3,33 @@
 Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
 Click nbfs://nbhost/SystemFileSystem/Templates/JSP_Servlet/Html.html to edit this template
 -->
-<html>
+<html lang="es" class="">
     <head>
-        <title>TODO supply a title</title>
-        <meta charset="UTF-8">
-        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+        <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
+        <link href="https://cdn.jsdelivr.net/npm/flowbite@4.0.1/dist/flowbite.min.css" rel="stylesheet" />
+
+        <link rel="icon" type="image/svg+xml" href="icons/Icon.svg">
+        <link rel="stylesheet" href="style.css" type="text/css"/>
+
+
+        <title>AprendeYa|Perfil</title>
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <!-- Detectar modo oscuro por preferencia del usuario -->
+        <script>
+            if (
+                    localStorage.getItem('color-theme') === 'dark' ||
+                    (!('color-theme' in localStorage) && window.matchMedia('(prefers-color-scheme: dark)').matches)
+                    ) {
+                document.documentElement.classList.add('dark');
+            } else {
+                document.documentElement.classList.remove('dark');
+            }
+        </script>
     </head>
     <body>
-        <div>TODO write content</div>
+        <a href="perfil.jsp">Perfil</a>
+        <a href="reproductorCurso.jsp">Curso</a>
+        <a></a>
     </body>
 </html>
