@@ -3,3 +3,8 @@
 /build/
 /nbproject/private/
 /dist/
+
+nbproject/
+build/
+dist/
+lib/*.jar
