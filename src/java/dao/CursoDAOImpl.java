@@ -19,7 +19,6 @@ public class CursoDAOImpl implements CursoDAO {
     @Override
     public boolean agregar(Curso c) {
         try {
-            //throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
             String sql = "INSERT INTO tb_cursos(titulo, descripcion, categoria,imagen, video, estado)"
                     + "VALUES(?,?,?,?,?,?)";
 
@@ -43,7 +42,6 @@ public class CursoDAOImpl implements CursoDAO {
     public List<Curso> listar() {
         List<Curso> lista = new ArrayList<>();
         try {
-            //throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
             String sql = "SELECT * FROM tb_cursos;";
             Connection conecDB = Conexion.getConnection();
             PreparedStatement ps = conecDB.prepareStatement(sql);
@@ -68,7 +66,6 @@ public class CursoDAOImpl implements CursoDAO {
 
     @Override
     public Curso buscar(int idCurso) {
-        //throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
         String sql = "select * from tb_cursos where idCurso = ?";
         try {
             Connection con = Conexion.getConnection();
@@ -95,7 +92,6 @@ public class CursoDAOImpl implements CursoDAO {
     @Override
     public boolean actualizar(Curso c) {
         try {
-            //throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
             String sql = "UPDATE tb_cursos SET titulo = ?, descripcion = ?, categoria = ?, imagen = ?, video = ?, estado = ? WHERE idCurso = ?;";
             Connection con = Conexion.getConnection();
             PreparedStatement ps = con.prepareStatement(sql);
@@ -117,7 +113,6 @@ public class CursoDAOImpl implements CursoDAO {
     @Override
     public boolean eliminar(int idCurso) {
         try {
-            //throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
             String sql = "DELETE FROM tb_cursos WHERE idCurso = ?";
             Connection con = Conexion.getConnection();
             PreparedStatement ps = con.prepareStatement(sql);
@@ -132,9 +127,7 @@ public class CursoDAOImpl implements CursoDAO {
 
     @Override
     public boolean cambiarEstado(int idCurso, boolean estado) {
-        //throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
         try {
-            //throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
             String sql = "UPDATE tb_cursos SET estado = ? WHERE idCurso = ?;";
             Connection con = Conexion.getConnection();
             PreparedStatement ps = con.prepareStatement(sql);

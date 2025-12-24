@@ -13,9 +13,13 @@ import java.sql.DriverManager;
  */
 public class Conexion {
 
-    private static final String URL = System.getProperty("DB_URL");
-    private static final String USER = System.getProperty("DB_USER");
-    private static final String PASSWORD = System.getProperty("DB_PASS");
+//    private static final String URL = System.getProperty("DB_URL");
+//    private static final String USER = System.getProperty("DB_USER");
+//    private static final String PASSWORD = System.getProperty("DB_PASS");
+    
+        private static final String URL = "jdbc:mysql://switchyard.proxy.rlwy.net:27477/railway";
+    private static final String USER = "root";
+    private static final String PASSWORD ="IQzFpuRljoPwvCaCLYlDsxwxasbMhveu";
 
     public static Connection getConnection() {
         Connection con = null;
@@ -31,3 +35,5 @@ public class Conexion {
     }
 
 }
+
+//-DDB_URL=jdbc:mysql://switchyard.proxy.rlwy.net:27477/railway -DDB_USER=root -DDB_PASS=IQzFpuRljoPwvCaCLYlDsxwxasbMhveu

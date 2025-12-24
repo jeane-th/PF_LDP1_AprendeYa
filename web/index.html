@@ -10,26 +10,18 @@ Click nbfs://nbhost/SystemFileSystem/Templates/JSP_Servlet/Html.html to edit thi
         <link href="https://cdn.jsdelivr.net/npm/flowbite@4.0.1/dist/flowbite.min.css" rel="stylesheet" />
 
         <link rel="icon" type="image/svg+xml" href="icons/Icon.svg">
-        <link rel="stylesheet" href="style.css" type="text/css"/>
 
 
-        <title>AprendeYa|Perfil</title>
-        <meta name="viewport" content="width=device-width, initial-scale=1">
-        <!-- Detectar modo oscuro por preferencia del usuario -->
-        <script>
-            if (
-                    localStorage.getItem('color-theme') === 'dark' ||
-                    (!('color-theme' in localStorage) && window.matchMedia('(prefers-color-scheme: dark)').matches)
-                    ) {
-                document.documentElement.classList.add('dark');
-            } else {
-                document.documentElement.classList.remove('dark');
-            }
-        </script>
+        <title>AprendeYa</title>
     </head>
     <body>
-        <a href="perfil.jsp">Perfil</a>
-        <a href="reproductorCurso.jsp">Curso</a>
+        <h1 class="text-3xl">Pagina de inicio</h1>
+        <div>
+            <a href="perfil.jsp" class="text-xl">Perfil</a>
+        </div>
+        <div>
+            <a href="reproductorCurso.jsp">Curso</a>
+        </div>
         <a></a>
     </body>
 </html>

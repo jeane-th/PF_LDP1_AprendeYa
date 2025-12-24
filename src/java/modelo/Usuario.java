@@ -9,7 +9,7 @@ package modelo;
  * @author GamingWorld
  */
 public class Usuario {
-    
+
     // 1. ATRIBUTOS (Espejo de tu tabla en la imagen)
     private int idUsuario;      // Viene de 'id_usuario'
     private String nombre;
@@ -25,6 +25,14 @@ public class Usuario {
     // 3. CONSTRUCTOR COMPLETO
     public Usuario(int idUsuario, String nombre, String email, String password, String rol, int estado) {
         this.idUsuario = idUsuario;
+        this.nombre = nombre;
+        this.email = email;
+        this.password = password;
+        this.rol = rol;
+        this.estado = estado;
+    }
+
+    public Usuario(String nombre, String email, String password, String rol, int estado) {
         this.nombre = nombre;
         this.email = email;
         this.password = password;
@@ -81,4 +89,3 @@ public class Usuario {
         this.estado = estado;
     }
 }
-
