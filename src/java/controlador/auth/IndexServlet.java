@@ -20,7 +20,7 @@ import modelo.Curso;
  *
  * @author jtafu
  */
-@WebServlet(name = "IndexServlet", urlPatterns = {"/IndexServlet"})
+@WebServlet("") // para ejecutar al cargar la pagina de inicio
 public class IndexServlet extends HttpServlet {
 
     @Override
