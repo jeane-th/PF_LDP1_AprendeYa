@@ -17,9 +17,9 @@ public class Conexion {
 //    private static final String USER = System.getProperty("DB_USER");
 //    private static final String PASSWORD = System.getProperty("DB_PASS");
     
-        private static final String URL = "jdbc:mysql://switchyard.proxy.rlwy.net:27477/railway";
+        private static final String URL = "jdbc:mysql://ballast.proxy.rlwy.net:59771/railway";
     private static final String USER = "root";
-    private static final String PASSWORD ="IQzFpuRljoPwvCaCLYlDsxwxasbMhveu";
+    private static final String PASSWORD ="hfFQBDBSllggeMedKrCYDaApxHsDeUQN";
 
     public static Connection getConnection() {
         Connection con = null;
@@ -37,3 +37,5 @@ public class Conexion {
 }
 
 //-DDB_URL=jdbc:mysql://switchyard.proxy.rlwy.net:27477/railway -DDB_USER=root -DDB_PASS=IQzFpuRljoPwvCaCLYlDsxwxasbMhveu
+
+//mysql://root:hfFQBDBSllggeMedKrCYDaApxHsDeUQN@ballast.proxy.rlwy.net:59771/railway

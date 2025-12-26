@@ -16,128 +16,121 @@ public class Curso {
     private String categoria;
     private String imagen;
     private String video;
+    private String profesor;
+    private double precio;
+    private int duracion; // en horas
     private boolean estado;
 
     public Curso() {
     }
 
-    public Curso(int idCurso, String titulo, String descripcion, String categoria, String imagen, String video, boolean estado) {
+    public Curso(int idCurso, String titulo, String descripcion, String categoria, String imagen, String video, String profesor, double precio, int duracion, boolean estado) {
         this.idCurso = idCurso;
         this.titulo = titulo;
         this.descripcion = descripcion;
         this.categoria = categoria;
         this.imagen = imagen;
-        this.video = video; 
+        this.video = video;
+        this.profesor = profesor;
+        this.precio = precio;
+        this.duracion = duracion;
         this.estado = estado;
     }
 
-    public Curso(String titulo, String descripcion, String categoria, String imagen, String video, boolean estado) {
+    public Curso(String titulo, String descripcion, String categoria, String imagen, String video, String profesor, double precio, int duracion, boolean estado) {
         this.titulo = titulo;
         this.descripcion = descripcion;
         this.categoria = categoria;
         this.imagen = imagen;
         this.video = video;
+        this.profesor = profesor;
+        this.precio = precio;
+        this.duracion = duracion;
         this.estado = estado;
     }
 
-    /**
-     * @return the idCurso
-     */
     public int getIdCurso() {
         return idCurso;
     }
 
-    /**
-     * @param idCurso the idCurso to set
-     */
     public void setIdCurso(int idCurso) {
         this.idCurso = idCurso;
     }
 
-    /**
-     * @return the titulo
-     */
     public String getTitulo() {
         return titulo;
     }
 
-    /**
-     * @param titulo the titulo to set
-     */
     public void setTitulo(String titulo) {
         this.titulo = titulo;
     }
 
-    /**
-     * @return the descripcion
-     */
     public String getDescripcion() {
         return descripcion;
     }
 
-    /**
-     * @param descripcion the descripcion to set
-     */
     public void setDescripcion(String descripcion) {
         this.descripcion = descripcion;
     }
 
-    /**
-     * @return the categoria
-     */
     public String getCategoria() {
         return categoria;
     }
 
-    /**
-     * @param categoria the categoria to set
-     */
     public void setCategoria(String categoria) {
         this.categoria = categoria;
     }
 
-    /**
-     * @return the imagen
-     */
     public String getImagen() {
         return imagen;
     }
 
-    /**
-     * @param imagen the imagen to set
-     */
     public void setImagen(String imagen) {
         this.imagen = imagen;
     }
 
-    /**
-     * @return the video
-     */
     public String getVideo() {
         return video;
     }
 
-    /**
-     * @param video the video to set
-     */
     public void setVideo(String video) {
         this.video = video;
     }
 
-    /**
-     * @return the estado
-     */
+    public String getProfesor() {
+        return profesor;
+    }
+
+    public void setProfesor(String profesor) {
+        this.profesor = profesor;
+    }
+
+    public double getPrecio() {
+        return precio;
+    }
+
+    public void setPrecio(double precio) {
+        this.precio = precio;
+    }
+
+    public int getDuracion() {
+        return duracion;
+    }
+
+    public void setDuracion(int duracion) {
+        this.duracion = duracion;
+    }
+
     public boolean isEstado() {
         return estado;
     }
 
-    /**
-     * @param estado the estado to set
-     */
     public void setEstado(boolean estado) {
         this.estado = estado;
     }
 
+    
+    
     @Override
     public String toString() {
         return idCurso + " | " + titulo + " | " + descripcion + " | " + categoria + " | " + imagen + " | " + video + " | " + estado;

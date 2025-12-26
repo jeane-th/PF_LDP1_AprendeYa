@@ -8,3 +8,5 @@ nbproject/
 build/
 dist/
 lib/*.jar
+
+.vscode/settings.json

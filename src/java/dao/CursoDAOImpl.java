@@ -19,17 +19,22 @@ public class CursoDAOImpl implements CursoDAO {
     @Override
     public boolean agregar(Curso c) {
         try {
-            String sql = "INSERT INTO tb_cursos(titulo, descripcion, categoria,imagen, video, estado)"
-                    + "VALUES(?,?,?,?,?,?)";
+            String sql = "INSERT INTO tb_cursos "
+                    + "(titulo, descripcion, categoria, imagen, video, profesor, precio, duracion, estado) "
+                    + "VALUES (?,?,?,?,?,?,?,?,?)";
 
-            Connection conecDB = Conexion.getConnection();
-            PreparedStatement ps = conecDB.prepareStatement(sql);
+            Connection con = Conexion.getConnection();
+            PreparedStatement ps = con.prepareStatement(sql);
+
             ps.setString(1, c.getTitulo());
             ps.setString(2, c.getDescripcion());
             ps.setString(3, c.getCategoria());
             ps.setString(4, c.getImagen());
             ps.setString(5, c.getVideo());
-            ps.setBoolean(6, true); // activo por defecto
+            ps.setString(6, c.getProfesor());
+            ps.setDouble(7, c.getPrecio());
+            ps.setInt(8, c.getDuracion()); // ej: "10 horas"
+            ps.setBoolean(9, true); // activo por defecto
             int filas = ps.executeUpdate();
             return filas > 0;
         } catch (Exception e) {
@@ -48,12 +53,15 @@ public class CursoDAOImpl implements CursoDAO {
             ResultSet rs = ps.executeQuery();
             while (rs.next()) {
                 Curso c = new Curso();
-                c.setIdCurso(rs.getInt("idCurso"));
+                c.setIdCurso(rs.getInt("idCurso")); // revisa el nombre real en tu BD
                 c.setTitulo(rs.getString("titulo"));
                 c.setDescripcion(rs.getString("descripcion"));
                 c.setCategoria(rs.getString("categoria"));
                 c.setImagen(rs.getString("imagen"));
                 c.setVideo(rs.getString("video"));
+                c.setProfesor(rs.getString("profesor"));
+                c.setPrecio(rs.getDouble("precio"));
+                c.setDuracion(rs.getInt("duracion"));
                 c.setEstado(rs.getBoolean("estado"));
                 lista.add(c);
             }
@@ -80,6 +88,9 @@ public class CursoDAOImpl implements CursoDAO {
                         rs.getString("categoria"),
                         rs.getString("imagen"),
                         rs.getString("video"),
+                        rs.getString("profesor"),
+                        rs.getDouble("precio"),
+                        rs.getInt("duracion"),
                         rs.getBoolean("estado")
                 );
             }
@@ -92,7 +103,7 @@ public class CursoDAOImpl implements CursoDAO {
     @Override
     public boolean actualizar(Curso c) {
         try {
-            String sql = "UPDATE tb_cursos SET titulo = ?, descripcion = ?, categoria = ?, imagen = ?, video = ?, estado = ? WHERE idCurso = ?;";
+            String sql = "UPDATE tb_cursos SET titulo = ?, descripcion = ?, categoria = ?, imagen = ?, video = ?, profesor = ?, precio = ?, duracion = ?, estado = ? WHERE idCurso = ?;";
             Connection con = Conexion.getConnection();
             PreparedStatement ps = con.prepareStatement(sql);
             ps.setString(1, c.getTitulo());
@@ -100,8 +111,11 @@ public class CursoDAOImpl implements CursoDAO {
             ps.setString(3, c.getCategoria());
             ps.setString(4, c.getImagen());
             ps.setString(5, c.getVideo());
-            ps.setBoolean(6, c.isEstado());
-            ps.setInt(7, c.getIdCurso());
+            ps.setString(6, c.getProfesor());
+            ps.setDouble(7, c.getPrecio());
+            ps.setInt(8, c.getDuracion());
+            ps.setBoolean(9, c.isEstado());
+            ps.setInt(10, c.getIdCurso());
             int filas = ps.executeUpdate();
             return filas > 0;
         } catch (Exception e) {
@@ -140,7 +154,5 @@ public class CursoDAOImpl implements CursoDAO {
             return false;
         }
     }
-
-
 
 }

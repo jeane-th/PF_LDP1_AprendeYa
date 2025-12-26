@@ -39,7 +39,7 @@ public class UsuarioDAOImpl implements UsuarioDAO {
             rs = ps.executeQuery();
             while (rs.next()) {
                 u = new Usuario();
-                u.setIdUsuario(rs.getInt("id_usuario")); // Nota: En BD es id_usuario
+                u.setId_usuario(rs.getInt("id_usuario")); // Nota: En BD es id_usuario
                 u.setNombre(rs.getString("nombre"));
                 u.setEmail(rs.getString("email"));
                 u.setPassword(rs.getString("password"));
@@ -67,7 +67,7 @@ public class UsuarioDAOImpl implements UsuarioDAO {
                 String hash = rs.getString("password");
                 if (BCrypt.checkpw(password, hash)) {
                     Usuario u = new Usuario();
-                    u.setIdUsuario(rs.getInt("id_usuario"));
+                    u.setId_usuario(rs.getInt("id_usuario"));
                     u.setNombre(rs.getString("nombre"));
                     u.setEmail(rs.getString("email"));
                     u.setRol(rs.getString("rol"));
@@ -91,7 +91,7 @@ public class UsuarioDAOImpl implements UsuarioDAO {
             rs = ps.executeQuery();
             while (rs.next()) {
                 Usuario u = new Usuario();
-                u.setIdUsuario(rs.getInt("id_usuario"));
+                u.setId_usuario(rs.getInt("id_usuario"));
                 u.setNombre(rs.getString("nombre"));
                 u.setEmail(rs.getString("email"));
                 u.setPassword(rs.getString("password"));
@@ -143,7 +143,7 @@ public class UsuarioDAOImpl implements UsuarioDAO {
             ps.setString(3, usuario.getPassword());
             ps.setString(4, usuario.getRol());
             ps.setInt(5, usuario.getEstado()); // Aquí permitimos editar el estado manualmente si se quiere
-            ps.setInt(6, usuario.getIdUsuario()); // El WHERE necesita el ID
+            ps.setInt(6, usuario.getId_usuario()); // El WHERE necesita el ID
             ps.executeUpdate();
             return true;
         } catch (Exception e) {
@@ -179,7 +179,7 @@ public class UsuarioDAOImpl implements UsuarioDAO {
             rs = ps.executeQuery();
             while (rs.next()) {
                 u = new Usuario();
-                u.setIdUsuario(rs.getInt("id_usuario"));
+                u.setId_usuario(rs.getInt("id_usuario"));
                 u.setNombre(rs.getString("nombre"));
                 u.setEmail(rs.getString("email"));
                 u.setPassword(rs.getString("password"));
