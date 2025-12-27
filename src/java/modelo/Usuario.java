@@ -11,7 +11,7 @@ package modelo;
 public class Usuario {
 
     // 1. ATRIBUTOS (Espejo de tu tabla en la imagen)
-    private int idUsuario;      // Viene de 'idUsuario'
+    private int id_usuario;     
     private String nombre;
     private String email;
     private String password;
@@ -24,8 +24,8 @@ public class Usuario {
     }
 
     // 3. CONSTRUCTOR COMPLETO
-    public Usuario(int idUsuario, String nombre, String email, String password, String pais, String rol, int estado) {
-        this.idUsuario = idUsuario;
+    public Usuario(int id_usuario, String nombre, String email, String password, String pais, String rol, int estado) {
+        this.id_usuario = id_usuario;
         this.nombre = nombre;
         this.email = email;
         this.password = password;
@@ -44,12 +44,12 @@ public class Usuario {
     }
 
     // 4. GETTERS Y SETTERS
-    public int getIdUsuario() {
-        return idUsuario;
+    public int getId_usuario() {
+        return id_usuario;
     }
 
-    public void setIdUsuario(int idUsuario) {
-        this.idUsuario = idUsuario;
+    public void setId_usuario(int id_usuario) {
+        this.id_usuario = id_usuario;
     }
 
     public String getNombre() {
@@ -100,3 +100,5 @@ public class Usuario {
         this.pais = pais;
     }
 }
+
+
