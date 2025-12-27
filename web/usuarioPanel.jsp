@@ -193,9 +193,11 @@
         </div>
 
         <script>
+            // el filtro funciona
             function filterUsers() {
+                console.log("el filtro funciona")
                 console.log("¡Ejecutando filtro!"); // Si ves esto en la consola, ¡ya ganamos!
-
+                
                 const roleFilter = document.getElementById('roleFilter');
                 const statusFilter = document.getElementById('statusFilter');
                 const searchInput = document.getElementById('searchInput');
