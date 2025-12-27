@@ -42,10 +42,10 @@
             </div>
 
             <div class="tabs tabs-boxed bg-transparent mb-8 gap-4 border-b border-white/10 rounded-none pb-0">
-                <a href="cursoPanel.jsp" class="tab hover:text-white">Cursos</a>
+                <a href="${pageContext.request.contextPath}/cursoPanel.jsp" class="tab hover:text-white">Cursos</a>
                 <a class="tab tab-active text-primary border-b-2 border-primary font-bold bg-transparent">Usuarios</a>
                 <a class="tab hover:text-white">Matrículas</a>
-                <a href="comentariosAdmin.jsp" class="tab hover:text-white">Comentarios</a>
+                <a href="${pageContext.request.contextPath}/comentariosAdmin.jsp" class="tab hover:text-white">Comentarios</a>
                 <a class="tab hover:text-white">Reportes</a>
             </div>
 
