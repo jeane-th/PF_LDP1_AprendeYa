@@ -37,7 +37,7 @@ public class UsuarioServlet extends HttpServlet {
                     break;
                     
                 case "bloquear":
-                    int idBloquear = Integer.parseInt(request.getParameter("id_usuario"));
+                    int idBloquear = Integer.parseInt(request.getParameter("idUsuario"));
 
                     dao.cambiarEstado(idBloquear, 0);
 
@@ -56,7 +56,7 @@ public class UsuarioServlet extends HttpServlet {
     private void actualizarUsuario(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         try {
-            int id = Integer.parseInt(request.getParameter("id_usuario")); 
+            int id = Integer.parseInt(request.getParameter("idUsuario")); 
             String nombre = request.getParameter("nombre");
             String email = request.getParameter("email");
             
@@ -65,7 +65,7 @@ public class UsuarioServlet extends HttpServlet {
            int estado = Integer.parseInt(request.getParameter("estado"));
 
             Usuario u = new Usuario();
-            u.setId_usuario(id);
+            u.setIdUsuario(id);
             u.setNombre(nombre);
             u.setEmail(email);
             u.setRol(rol);

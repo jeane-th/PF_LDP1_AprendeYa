@@ -11,7 +11,7 @@ package modelo;
 public class Usuario {
 
     // 1. ATRIBUTOS (Espejo de tu tabla en la imagen)
-    private int id_usuario;     
+    private int idUsuario;     
     private String nombre;
     private String email;
     private String password;
@@ -23,9 +23,8 @@ public class Usuario {
     public Usuario() {
     }
 
-    // 3. CONSTRUCTOR COMPLETO
-    public Usuario(int id_usuario, String nombre, String email, String password, String pais, String rol, int estado) {
-        this.id_usuario = id_usuario;
+    public Usuario(int idUsuario, String nombre, String email, String password, String pais, String rol, int estado) {
+        this.idUsuario = idUsuario;
         this.nombre = nombre;
         this.email = email;
         this.password = password;
@@ -34,7 +33,7 @@ public class Usuario {
         this.estado = estado;
     }
 
-    public Usuario(String nombre, String email, String password, String pais, String web, String descripcion, String rol, int estado) {
+    public Usuario(String nombre, String email, String password, String pais, String rol, int estado) {
         this.nombre = nombre;
         this.email = email;
         this.password = password;
@@ -43,13 +42,12 @@ public class Usuario {
         this.estado = estado;
     }
 
-    // 4. GETTERS Y SETTERS
-    public int getId_usuario() {
-        return id_usuario;
+    public int getIdUsuario() {
+        return idUsuario;
     }
 
-    public void setId_usuario(int id_usuario) {
-        this.id_usuario = id_usuario;
+    public void setIdUsuario(int idUsuario) {
+        this.idUsuario = idUsuario;
     }
 
     public String getNombre() {
@@ -76,6 +74,14 @@ public class Usuario {
         this.password = password;
     }
 
+    public String getPais() {
+        return pais;
+    }
+
+    public void setPais(String pais) {
+        this.pais = pais;
+    }
+
     public String getRol() {
         return rol;
     }
@@ -92,13 +98,5 @@ public class Usuario {
         this.estado = estado;
     }
 
-    public String getPais() {
-        return pais;
-    }
-
-    public void setPais(String pais) {
-        this.pais = pais;
-    }
 }
-
-
+   

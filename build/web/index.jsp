@@ -91,7 +91,7 @@ Click nbfs://nbhost/SystemFileSystem/Templates/JSP_Servlet/Html.html to edit thi
                                         </a>
                                     </li>
                                     <li>
-                                        <a href="#"
+                                        <a href="${pageContext.request.contextPath}/usuarioPanel.jsp"
                                            class="flex items-center py-2 px-4  hover:bg-gray-100 hover:bg-gray-600 hover:text-white gap-2">
                                             <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24"
                                                  fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"

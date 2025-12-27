@@ -29,10 +29,10 @@
         <div class="p-8 text-base-content max-w-[1400px] mx-auto">
             
             <div class="flex items-center gap-4 mb-6">
-                 <button class="btn btn-ghost btn-sm text-gray-400">
+                <a href="${pageContext.request.contextPath}/" class="btn btn-ghost btn-sm text-gray-400">
                     <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 19l-7-7m0 0l7-7m-7 7h18" /></svg>
                     Volver
-                </button>
+                </a>
                 <div class="text-sm breadcrumbs text-gray-400
                      <ul>
                         <li><a href="cursoPanel.jsp">Panel de Administración</a></li>
@@ -149,12 +149,12 @@
         
                                     <ul tabindex="0" class="dropdown-content z-[1] menu p-2 shadow bg-base-100 rounded-box w-52">
                                         <li>
-                                            <a onclick="abrirModalEditar('<%= u.getId_usuario() %>', '<%= u.getNombre() %>', '<%= u.getEmail() %>', '<%= u.getRol() %>', '<%= u.getEstado() %>')">
+                                            <a onclick="abrirModalEditar('<%= u.getIdUsuario() %>', '<%= u.getNombre() %>', '<%= u.getEmail() %>', '<%= u.getRol() %>', '<%= u.getEstado() %>')">
                                                 <i class="fa-regular fa-pen-to-square"></i> Editar
                                             </a>
                                         </li>
                                         <li>
-                                            <a class="text-error" href="UsuarioServlet?accion=bloquear&id_usuario=<%= u.getId_usuario() %>">
+                                            <a class="text-error" href="UsuarioServlet?accion=bloquear&idUsuario=<%= u.getIdUsuario() %>">
                                                 <i class="fa-solid fa-lock"></i> Bloquear Usuario
                                             </a>
                                         </li>
@@ -218,7 +218,7 @@
         
                 <form action="UsuarioServlet" method="POST">
                     <input type="hidden" name="accion" value="actualizar">
-                    <input type="hidden" name="id_usuario" id="modal_id"> <div class="grid grid-cols-2 gap-4">
+                    <input type="hidden" name="idUsuario" id="modal_id"> <div class="grid grid-cols-2 gap-4">
                         <div class="form-control">
                             <label class="label"><span class="label-text text-white">Nombre</span></label>
                             <input type="text" name="nombre" id="modal_nombre" class="input input-bordered bg-slate-800" />
