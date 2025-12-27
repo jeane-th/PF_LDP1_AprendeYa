@@ -1,12 +1,6 @@
-# Carpetas generadas
-/build/
-/dist/
 
 # NetBeans - solo privados
 /nbproject/private/
-
-# Librerías compiladas
-/lib/*.jar
 
 # Archivos del sistema
 .DS_Store
