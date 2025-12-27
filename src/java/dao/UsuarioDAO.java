@@ -17,8 +17,8 @@ public interface UsuarioDAO {
     public Usuario validar(String email, String password);
 
     // Para mostrar la tabla en tu página
-    public List<Usuario> listar();
-
+    public List<Usuario> listarUsuarios();
+    
     // Para guardar uno nuevo (siempre es bueno tenerlo)
     public boolean insertar(Usuario usuario);
 
@@ -35,4 +35,8 @@ public interface UsuarioDAO {
     // Metodo para hacer login
     public Usuario login(String email, String password);
 
+    
+    public boolean cambiarEstado(int id, int nuevoEstado);
+
 }
+
