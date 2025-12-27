@@ -36,7 +36,7 @@ Click nbfs://nbhost/SystemFileSystem/Templates/JSP_Servlet/Html.html to edit thi
         </script>
     </head>
     <body class="bg-brand-dark text-white font-sans">
-    <header class="h-16 fixed top-0 left-0 w-full z-50 bg-gray-900 shadow-lg">
+        <header class="h-16 fixed top-0 left-0 w-full z-50 bg-gray-900 shadow-lg">
             <div class="max-w-7xl mx-auto px-6 flex items-center justify-between text-white h-full">
                 <!-- Logo -->
                 <div>
@@ -74,6 +74,7 @@ Click nbfs://nbhost/SystemFileSystem/Templates/JSP_Servlet/Html.html to edit thi
                                 <div class="py-3 px-4">
                                     <span class="block font-semibold">${sessionScope.usuario.nombre}</span>
                                     <span class="block truncate">${sessionScope.usuario.email}</span>
+                                    <span class="block truncate">${sessionScope.usuario.rol}</span>
                                 </div>
                                 <ul class="py-1" aria-labelledby="dropdown">
                                     <li>
@@ -90,19 +91,22 @@ Click nbfs://nbhost/SystemFileSystem/Templates/JSP_Servlet/Html.html to edit thi
                                             Perfil
                                         </a>
                                     </li>
-                                    <li>
-                                        <a href="${pageContext.request.contextPath}/usuarioPanel.jsp"
-                                           class="flex items-center py-2 px-4  hover:bg-gray-100 hover:bg-gray-600 hover:text-white gap-2">
-                                            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24"
-                                                 fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
-                                                 stroke-linejoin="round" class="lucide lucide-cog-icon lucide-cog">
-                                            <path d="M11 10.27 7 3.34" /> <path d="m11 13.73-4 6.93" /><path d="M12 22v-2" /> <path d="M12 2v2" /><path d="M14 12h8" /><path d="m17 20.66-1-1.73" /> 
-                                            <path d="m17 3.34-1 1.73" /><path d="M2 12h2" /><path d="m20.66 17-1.73-1" /> <path d="m20.66 7-1.73 1" /><path d="m3.34 17 1.73-1" /> <path d="m3.34 7 1.73 1" /> 
-                                            <circle cx="12" cy="12" r="2" />  <circle cx="12" cy="12" r="8" />
-                                            </svg>
-                                            Administrador
-                                        </a>
-                                    </li>
+                                    <c:if test="${sessionScope.usuario.rol eq 'Admin'}">
+                                        <li>
+                                            <a href="${pageContext.request.contextPath}/UsuarioServlet"
+                                               class="flex items-center py-2 px-4  hover:bg-gray-100 hover:bg-gray-600 hover:text-white gap-2">
+                                                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24"
+                                                     fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                                                     stroke-linejoin="round" class="lucide lucide-cog-icon lucide-cog">
+                                                <path d="M11 10.27 7 3.34" /> <path d="m11 13.73-4 6.93" /><path d="M12 22v-2" /> <path d="M12 2v2" /><path d="M14 12h8" /><path d="m17 20.66-1-1.73" /> 
+                                                <path d="m17 3.34-1 1.73" /><path d="M2 12h2" /><path d="m20.66 17-1.73-1" /> <path d="m20.66 7-1.73 1" /><path d="m3.34 17 1.73-1" /> <path d="m3.34 7 1.73 1" /> 
+                                                <circle cx="12" cy="12" r="2" />  <circle cx="12" cy="12" r="8" />
+                                                </svg>
+                                                Administrador
+                                            </a>
+                                        </li>
+                                    </c:if>
+
                                 </ul>
                                 <ul class="py-1" aria-labelledby="dropdown">
                                     <li>
@@ -132,7 +136,7 @@ Click nbfs://nbhost/SystemFileSystem/Templates/JSP_Servlet/Html.html to edit thi
                     <p class="py-2 text-xl text-gray-300 mb-8">
                         Accede a más de 500 cursos impartidos por expertos de la industria
                     </p>
-                    
+
                 </div>
             </div>
         </div>
@@ -171,8 +175,8 @@ Click nbfs://nbhost/SystemFileSystem/Templates/JSP_Servlet/Html.html to edit thi
                                 <!--                                <span><i class="fa-solid fa-user-group"></i> 2340</span>-->
                                 <span><i class="fa-regular fa-clock"></i> ${c.duracion} horas</span>
                             </div>
-                                     
-                           <div class="card-actions justify-between items-center mt-auto">
+
+                            <div class="card-actions justify-between items-center mt-auto">
                                 <span class="text-2xl font-bold text-blue-400">S/ ${c.precio}</span>
 
                                 <div class="flex gap-2">
@@ -201,10 +205,10 @@ Click nbfs://nbhost/SystemFileSystem/Templates/JSP_Servlet/Html.html to edit thi
                                         </c:otherwise>
 
                                     </c:choose>
-                                       
+
                                 </div>
                             </div>
-                                
+
                         </div>
 
                     </div>

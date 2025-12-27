@@ -13,6 +13,7 @@ import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
+import jakarta.servlet.http.HttpSession;
 
 /**
  *
@@ -21,6 +22,7 @@ import jakarta.servlet.http.HttpServletResponse;
 @WebServlet(name = "UsuarioServlet", urlPatterns = {"/UsuarioServlet"})
 
 public class UsuarioServlet extends HttpServlet {
+
     private final UsuarioDAO dao = new UsuarioDAOImpl();
 
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
@@ -35,7 +37,7 @@ public class UsuarioServlet extends HttpServlet {
                 case "actualizar":
                     actualizarUsuario(request, response);
                     break;
-                    
+
                 case "bloquear":
                     int idBloquear = Integer.parseInt(request.getParameter("idUsuario"));
 
@@ -56,13 +58,13 @@ public class UsuarioServlet extends HttpServlet {
     private void actualizarUsuario(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         try {
-            int id = Integer.parseInt(request.getParameter("idUsuario")); 
+            int id = Integer.parseInt(request.getParameter("idUsuario"));
             String nombre = request.getParameter("nombre");
             String email = request.getParameter("email");
-            
-           String rol = request.getParameter("rol"); 
-            
-           int estado = Integer.parseInt(request.getParameter("estado"));
+
+            String rol = request.getParameter("rol");
+
+            int estado = Integer.parseInt(request.getParameter("estado"));
 
             Usuario u = new Usuario();
             u.setIdUsuario(id);
@@ -78,28 +80,36 @@ public class UsuarioServlet extends HttpServlet {
             } else {
                 request.getSession().setAttribute("error", "No se pudo actualizar el usuario.");
             }
-            
+
             response.sendRedirect("usuarioPanel.jsp");
 
-                } catch (NumberFormatException e) {
-                    System.out.println("Error al convertir números: " + e.getMessage());
-                    response.sendRedirect("usuarioPanel.jsp?error=datos_invalidos");
-                } catch (Exception e) {
-                    System.out.println("Error general: " + e.getMessage());
-                    e.printStackTrace();
-                    response.sendRedirect("usuarioPanel.jsp?error=desconocido");
-                }
-            }
+        } catch (NumberFormatException e) {
+            System.out.println("Error al convertir números: " + e.getMessage());
+            response.sendRedirect("usuarioPanel.jsp?error=datos_invalidos");
+        } catch (Exception e) {
+            System.out.println("Error general: " + e.getMessage());
+            e.printStackTrace();
+            response.sendRedirect("usuarioPanel.jsp?error=desconocido");
+        }
+    }
 
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        processRequest(request, response);
-    }
 
-    @Override
-    protected void doPost(HttpServletRequest request, HttpServletResponse response)
-            throws ServletException, IOException {
-        processRequest(request, response);
+        HttpSession session = request.getSession(false);
+        // valida que exista la sesion
+        if (session == null || session.getAttribute("usuario") == null) {
+            response.sendRedirect(request.getContextPath() + "/login.jsp");
+            return;
+        }
+        Usuario u = (Usuario) session.getAttribute("usuario");
+
+        // no es admin
+        if (!"Admin".equals(u.getRol())) {
+            response.sendRedirect(request.getContextPath() + "/");
+            return;
+        }
+        request.getRequestDispatcher("/usuarioPanel.jsp").forward(request, response);
     }
 }

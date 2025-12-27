@@ -23,7 +23,7 @@ import java.io.IOException;
  */
 
 // paginas a restringir
-@WebFilter(urlPatterns = {"/perfil.jsp"})  
+@WebFilter(urlPatterns = {"/perfil.jsp", "/reproductorCurso.jsp","/usuarioPanel.jsp"})  
 
 public class AuthFilter implements Filter{
     @Override
