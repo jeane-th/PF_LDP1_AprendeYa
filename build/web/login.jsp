@@ -4,10 +4,10 @@
     Author     : jtafu
 --%>
 
-
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <%@taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %> <!-- libreria control -->
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %> <!-- libreria de funciones -->
+
 <!DOCTYPE html>
 <html lang="es">
 
@@ -17,6 +17,8 @@
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
         <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
         <link href="https://cdn.jsdelivr.net/npm/flowbite@4.0.1/dist/flowbite.min.css" rel="stylesheet" />
+        <!-- Librería JustValidate (SIN defer) -->
+        <script src="https://cdn.jsdelivr.net/npm/just-validate@latest/dist/just-validate.production.min.js"></script>
         <link rel="icon" type="image/svg+xml" href="icons/icon_book.svg">
         <title>AprendeYa | Login</title>
     </head>
@@ -157,9 +159,6 @@
         </main>
         <script src="https://cdn.jsdelivr.net/npm/flowbite@4.0.1/dist/flowbite.min.js"></script>
 
-        <!-- Librería JustValidate (SIN defer) -->
-        <script src="https://cdn.jsdelivr.net/npm/just-validate@latest/dist/just-validate.production.min.js"></script>
-
         <!-- Tu validación -->
         <script>
             const validate = new JustValidate('#formLogin', {
@@ -176,11 +175,11 @@
                     .addField('#password', [
                         {rule: 'required', errorMessage: 'Complete su contraseña'},
                         {rule: 'minLength', value: 6, errorMessage: 'Mínimo 6 caracteres'}
-                    ]);
+                    ])
 
-            .onSuccess((event) => {
-                event.target.submit();
-            });
+                    .onSuccess((event) => {
+                        event.target.submit();
+                    });
         </script>
 
     </body>

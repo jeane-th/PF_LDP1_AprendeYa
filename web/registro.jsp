@@ -16,12 +16,14 @@
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
         <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
         <link href="https://cdn.jsdelivr.net/npm/flowbite@4.0.1/dist/flowbite.min.css" rel="stylesheet" />
+        <!-- Librería JustValidate (SIN defer) -->
+        <script src="https://cdn.jsdelivr.net/npm/just-validate@latest/dist/just-validate.production.min.js"></script>
         <link rel="icon" type="image/svg+xml" href="icons/icon_book.svg">
         <title>AprendeYa | Registro</title>
     </head>
 
     <body class="bg-gray-900">
-    <header class="h-16 fixed top-0 left-0 w-full z-50 bg-gray-900 shadow-lg">
+        <header class="h-16 fixed top-0 left-0 w-full z-50 bg-gray-900 shadow-lg">
             <div class="max-w-7xl mx-auto px-6 flex items-center justify-between text-white h-full">
                 <!-- Logo -->
                 <div>
@@ -169,10 +171,9 @@
         </div> -->
             </section>
         </main>
-        <script src="https://cdn.jsdelivr.net/npm/flowbite@4.0.1/dist/flowbite.min.js"></script>
 
-        <!-- Librería JustValidate (SIN defer) -->
-        <script src="https://cdn.jsdelivr.net/npm/just-validate@latest/dist/just-validate.production.min.js"></script>
+
+
 
         <!-- Tu validación -->
         <script>
@@ -197,13 +198,12 @@
                     .addField('#password', [
                         {rule: 'required', errorMessage: 'Complete su contraseña'},
                         {rule: 'minLength', value: 6, errorMessage: 'Mínimo 6 caracteres'}
-                    ]);
-
+                    ])
             .onSuccess((event) => {
                 event.target.submit();
             });
         </script>
-
+        <script src="https://cdn.jsdelivr.net/npm/flowbite@4.0.1/dist/flowbite.min.js"></script>
     </body>
 
 </html>
