@@ -157,12 +157,12 @@
         
                                     <ul tabindex="0" class="dropdown-content z-[1] menu p-2 shadow bg-base-100 rounded-box w-52">
                                         <li>
-                                            <a onclick="abrirModalEditar('<%= u.getId_usuario() %>', '<%= u.getNombre() %>', '<%= u.getEmail() %>', '<%= u.getRol() %>', '<%= u.getEstado() %>')">
+                                            <a onclick="abrirModalEditar('<%= u.getIdUsuario() %>', '<%= u.getNombre() %>', '<%= u.getEmail() %>', '<%= u.getRol() %>', '<%= u.getEstado() %>')">
                                                 <i class="fa-regular fa-pen-to-square"></i> Editar
                                             </a>
                                         </li>
                                         <li>
-                                            <a class="text-error" href="UsuarioServlet?accion=bloquear&id_usuario=<%= u.getId_usuario() %>">
+                                            <a class="text-error" href="UsuarioServlet?accion=bloquear&idUsuario=<%= u.getIdUsuario() %>">
                                                 <i class="fa-solid fa-lock"></i> Bloquear Usuario
                                             </a>
                                         </li>
@@ -231,7 +231,7 @@
         
                 <form action="UsuarioServlet" method="POST">
                     <input type="hidden" name="accion" value="actualizar">
-                    <input type="hidden" name="id_usuario" id="modal_id"> <div class="grid grid-cols-2 gap-4">
+                    <input type="hidden" name="idUsuario" id="modal_id"> <div class="grid grid-cols-2 gap-4">
                         <div class="form-control">
                             <label class="label"><span class="label-text text-white">Nombre</span></label>
                             <input type="text" name="nombre" id="modal_nombre" class="input input-bordered bg-slate-800" />
