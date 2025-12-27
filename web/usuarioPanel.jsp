@@ -84,7 +84,6 @@
                             <th class="py-4 pl-6">Usuario</th>
                             <th>Rol</th>
                             <th>Cursos</th> 
-                            <th>Gasto Total</th>
                             <th>Estado</th>
                             <th class="pr-6 text-right">Acciones</th>
                         </tr>
@@ -142,8 +141,11 @@
                                 </span>
                             </td>
                             
-                            <td><div class="text-gray-300">0 inscritos</div></td>
-                            <td class="font-bold text-white">$0.00</td>
+                            <td>
+                                <div class="<%= u.getNroCursos() > 0 ? "text-white font-bold" : "text-gray-500" %>">
+                                    <%= u.getNroCursos() %> inscritos
+                                </div>
+                            </td>
                             
                             <td><span class="badge badge-sm <%= estadoClass %>"><%= estadoTexto %></span></td>
                             
