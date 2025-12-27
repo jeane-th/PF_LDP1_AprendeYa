@@ -29,10 +29,10 @@
         <div class="p-8 text-base-content max-w-[1400px] mx-auto">
             
             <div class="flex items-center gap-4 mb-6">
-                <a href="${pageContext.request.contextPath}/" class="btn btn-ghost btn-sm text-gray-400">
+                 <button class="btn btn-ghost btn-sm text-gray-400">
                     <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 19l-7-7m0 0l7-7m-7 7h18" /></svg>
                     Volver
-                </a>
+                </button>
                 <div class="text-sm breadcrumbs text-gray-400
                      <ul>
                         <li><a href="cursoPanel.jsp">Panel de Administración</a></li>
@@ -49,7 +49,7 @@
             </div>
             
             <div class="mb-8">
-                <h1 class="text-3xl font-bold text-white mb-2">Gestión de Usuarios</h1>
+                <h1 class="text-3xl font-bold text-white mb-2">Gestión de Usuarios v2</h1>
                 <p class="text-gray-400">Administra usuarios, edita datos y gestiona accesos</p>
                 <p class="text-gray-400">Total registrados: <%= listaUsuarios.size() %></p>
             </div>
@@ -57,20 +57,23 @@
             <div class="bg-[#1d232a] p-4 rounded-lg border border-white/5 mb-6 flex flex-wrap gap-4 items-center">
                 <div class="relative grow max-w-md">
                     <span class="absolute inset-y-0 left-0 flex items-center pl-3 text-gray-500">🔍</span>
-                    <input type="text" id="searchInput" placeholder="Buscar por nombre o email..." class="input input-bordered w-full pl-10 bg-[#15191e] border-white/10 focus:border-primary" />
+                    <input type="text" id="searchInput" 
+                           oninput="filterUsers()" placeholder="Buscar por nombre o email..." class="input input-bordered w-full pl-10 bg-[#15191e] border-white/10 focus:border-primary" />
                 </div>
                 
-                <select id="roleFilter" class="select select-bordered bg-[#15191e] border-white/10 min-w-[180px]">
+                <select id="roleFilter"
+                        onchange="filterUsers()" class="select select-bordered bg-[#15191e] border-white/10 min-w-[180px]">
                     <option value="all">Todos los roles</option>
                     <option value="estudiante">Estudiante</option>
                     <option value="instructor">Instructor</option>
                     <option value="admin">Admin</option>
                 </select>
 
-                <select class="select select-bordered bg-[#15191e] border-white/10 min-w-[180px]">
-                    <option selected>Todos los estados</option>
-                    <option>Activo</option>
-                    <option>Bloqueado</option>
+                <select id="statusFilter" 
+                        onchange="filterUsers()" class="select select-bordered bg-[#15191e] border-white/10 min-w-[180px]">
+                    <option value="all" selected>Todos los estados</option>
+                    <option value="active">Activo</option>
+                    <option value="blocked">Bloqueado</option>
                 </select>
             </div>
 
@@ -96,6 +99,7 @@
                             }
                             
                             String rolNormalizado = (u.getRol() != null) ? u.getRol().toLowerCase() : "usuario";
+                            // Si en la BD dice 'USUARIO', visualmente es 'Estudiante'
                             String rolVisual = "Estudiante"; 
                             String badgeClass = "badge-primary"; 
                             String badgeColor = "text-blue-400 border-blue-500/20 bg-blue-500/10";
@@ -113,10 +117,12 @@
                             boolean esActivo = (u.getEstado() == 1);
                             String estadoClass = esActivo ? "text-green-400 border-green-500/20 bg-green-500/10" : "text-red-400 border-red-500/20 bg-red-500/10";
                             String estadoTexto = esActivo ? "Activo" : "Bloqueado";
+                            String statusKey = esActivo ? "active" : "blocked";
                         %>
 
                         <tr class="user-row hover:bg-white/5 border-b border-white/5 transition-colors" 
-                            data-role="<%= rolVisual.toLowerCase() %>"> <td class="pl-6 py-4">
+                            data-role="<%= rolVisual.toLowerCase() %>"
+                            data-status="<%= statusKey %>" > <td class="pl-6 py-4">
                                 <div class="flex items-center space-x-3">
                                     <div class="avatar placeholder">
                                         <div class="bg-neutral text-neutral-content mask mask-circle w-10 h-10">
@@ -149,12 +155,12 @@
         
                                     <ul tabindex="0" class="dropdown-content z-[1] menu p-2 shadow bg-base-100 rounded-box w-52">
                                         <li>
-                                            <a onclick="abrirModalEditar('<%= u.getIdUsuario() %>', '<%= u.getNombre() %>', '<%= u.getEmail() %>', '<%= u.getRol() %>', '<%= u.getEstado() %>')">
+                                            <a onclick="abrirModalEditar('<%= u.getId_usuario() %>', '<%= u.getNombre() %>', '<%= u.getEmail() %>', '<%= u.getRol() %>', '<%= u.getEstado() %>')">
                                                 <i class="fa-regular fa-pen-to-square"></i> Editar
                                             </a>
                                         </li>
                                         <li>
-                                            <a class="text-error" href="UsuarioServlet?accion=bloquear&idUsuario=<%= u.getIdUsuario() %>">
+                                            <a class="text-error" href="UsuarioServlet?accion=bloquear&id_usuario=<%= u.getId_usuario() %>">
                                                 <i class="fa-solid fa-lock"></i> Bloquear Usuario
                                             </a>
                                         </li>
@@ -176,40 +182,45 @@
         </div>
 
         <script>
-            const roleFilter = document.getElementById('roleFilter');
-            const searchInput = document.getElementById('searchInput');
-            const rows = document.querySelectorAll('.user-row');
-            const noResults = document.getElementById('noResults');
-
             function filterUsers() {
+                console.log("¡Ejecutando filtro!"); // Si ves esto en la consola, ¡ya ganamos!
+
+                const roleFilter = document.getElementById('roleFilter');
+                const statusFilter = document.getElementById('statusFilter');
+                const searchInput = document.getElementById('searchInput');
+                const rows = document.querySelectorAll('.user-row');
+                const noResults = document.getElementById('noResults');
+
                 const selectedRole = roleFilter.value.toLowerCase();
+                const selectedStatus = statusFilter.value; 
                 const searchTerm = searchInput.value.toLowerCase();
+
                 let visibleCount = 0;
 
                 rows.forEach(row => {
-                    const rowRole = row.getAttribute('data-role'); 
+                    const rowRole = row.getAttribute('data-role');
+                    const rowStatus = row.getAttribute('data-status');
                     const rowText = row.innerText.toLowerCase();
 
                     const matchesRole = (selectedRole === 'all') || (rowRole === selectedRole);
+                    const matchesStatus = (selectedStatus === 'all') || (rowStatus === selectedStatus);
                     const matchesSearch = rowText.includes(searchTerm);
 
-                    if (matchesRole && matchesSearch) {
-                        row.style.display = ''; // Mostrar
+                    if (matchesRole && matchesStatus && matchesSearch) {
+                        row.style.display = ''; 
                         visibleCount++;
                     } else {
-                        row.style.display = 'none'; // Ocultar
+                        row.style.display = 'none'; 
                     }
                 });
 
+                // 4. Mensaje de "No hay resultados"
                 if (visibleCount === 0) {
                     noResults.classList.remove('hidden');
                 } else {
                     noResults.classList.add('hidden');
                 }
             }
-           
-            roleFilter.addEventListener('change', filterUsers);
-            searchInput.addEventListener('input', filterUsers);
         </script>
         
         <dialog id="modal_editar_usuario" class="modal">
@@ -218,7 +229,7 @@
         
                 <form action="UsuarioServlet" method="POST">
                     <input type="hidden" name="accion" value="actualizar">
-                    <input type="hidden" name="idUsuario" id="modal_id"> <div class="grid grid-cols-2 gap-4">
+                    <input type="hidden" name="id_usuario" id="modal_id"> <div class="grid grid-cols-2 gap-4">
                         <div class="form-control">
                             <label class="label"><span class="label-text text-white">Nombre</span></label>
                             <input type="text" name="nombre" id="modal_nombre" class="input input-bordered bg-slate-800" />
@@ -260,14 +271,12 @@
         
         <script>
             function abrirModalEditar(id, nombre, email, rol, estado) {
-                // 1. Llenar los campos del modal con los datos recibidos
                 document.getElementById('modal_id').value = id;
                 document.getElementById('modal_nombre').value = nombre;
                 document.getElementById('modal_email').value = email;
                 document.getElementById('modal_rol').value = rol;
                 document.getElementById('modal_estado').value = estado;
 
-                // 2. Mostrar el modal (usando la API nativa de <dialog>)
                 document.getElementById('modal_editar_usuario').showModal();
             }
         </script>
