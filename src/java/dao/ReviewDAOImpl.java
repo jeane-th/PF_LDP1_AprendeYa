@@ -13,7 +13,7 @@ public class ReviewDAOImpl implements ReviewDAO {
     @Override
     public boolean insertar(Review r) {
         // Primero validar que el usuario esté matriculado en el curso (tabla 'matriculas')
-        String checkSql = "SELECT COUNT(*) AS cnt FROM matriculas WHERE id_usuario = ? AND idCurso = ? AND estado = 1";
+        String checkSql = "SELECT COUNT(*) AS cnt FROM matriculas WHERE idUsuario = ? AND idCurso = ? AND estado = 1";
         String insertSql = "INSERT INTO reviews(idCurso, idUsuario, comentario, valoracion, fecha) VALUES(?,?,?,?,NOW())";
 
         try (Connection con = Conexion.getConnection();
@@ -50,7 +50,7 @@ public class ReviewDAOImpl implements ReviewDAO {
     public List<Review> listarPorCurso(int idCurso) {
         List<Review> lista = new ArrayList<>();
         String sql = "SELECT r.idReview, r.idCurso, r.idUsuario, r.comentario, r.valoracion, r.fecha, u.nombre "
-                + "FROM reviews r LEFT JOIN usuario u ON r.idUsuario = u.id_usuario "
+                + "FROM reviews r LEFT JOIN tb_usuarios u ON r.idUsuario = u.idUsuario "
                 + "WHERE r.idCurso = ? ORDER BY r.fecha DESC";
         try (Connection con = Conexion.getConnection();
                 PreparedStatement ps = con.prepareStatement(sql)) {

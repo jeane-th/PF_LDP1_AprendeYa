@@ -1,6 +1,7 @@
 
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
-<%@taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
+<%@taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %> <!-- libreria control -->
+<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %> <!-- libreria de funciones -->
 <!DOCTYPE html>
 <!--
 Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
@@ -35,7 +36,7 @@ Click nbfs://nbhost/SystemFileSystem/Templates/JSP_Servlet/Html.html to edit thi
         </script>
     </head>
     <body class="bg-brand-dark text-white font-sans">
-        <header class="h-16 fixed top-0 left-0 w-full z-50 bg-gray-900 shadow-lg">
+    <header class="h-16 fixed top-0 left-0 w-full z-50 bg-gray-900 shadow-lg">
             <div class="max-w-7xl mx-auto px-6 flex items-center justify-between text-white h-full">
                 <!-- Logo -->
                 <div>
@@ -54,21 +55,21 @@ Click nbfs://nbhost/SystemFileSystem/Templates/JSP_Servlet/Html.html to edit thi
 
                     <a href="${pageContext.request.contextPath}/" class="px-2">Inicio</a>
                     <a href="${pageContext.request.contextPath}/perfil" class="px-2">Mis cursos</a>
-                    <a href="${pageContext.request.contextPath}/nosotros" class="px-2">Nosotros</a>
                 </nav>
-
                 <c:choose>
                     <c:when test="${not empty sessionScope.usuario}">
                         <!-- Usuario logueado -->
                         <div>
-                            <!--                            Boton usuario -->
+
                             <button type="button" class="" id="user-menu-button" aria-expanded="false"
                                     data-dropdown-toggle="dropdown">
                                 <span class="sr-only">Open user menu</span>
                                 <span
-                                    class="bg-blue-600 hover:bg-blue-700 text-white font-bold py-1 px-2 w-8 h-8 rounded-full flex items-center justify-center cursor-pointer">J</span>
+                                    class="bg-blue-600 hover:bg-blue-700 text-white font-bold py-1 px-2 w-8 h-8 rounded-full flex items-center justify-center cursor-pointer"> 
+                                    ${fn:toUpperCase(fn:substring(sessionScope.usuario.nombre, 0, 1))}
+                                </span>
                             </button>
-                            <!--                            menu usuario  -->
+
                             <div class="hidden z-50 my-4 w-56 text-white rounded shadow bg-gray-700" id="dropdown">
                                 <div class="py-3 px-4">
                                     <span class="block font-semibold">${sessionScope.usuario.nombre}</span>
@@ -95,22 +96,11 @@ Click nbfs://nbhost/SystemFileSystem/Templates/JSP_Servlet/Html.html to edit thi
                                             <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24"
                                                  fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
                                                  stroke-linejoin="round" class="lucide lucide-cog-icon lucide-cog">
-                                            <path d="M11 10.27 7 3.34" />
-                                            <path d="m11 13.73-4 6.93" />
-                                            <path d="M12 22v-2" />
-                                            <path d="M12 2v2" />
-                                            <path d="M14 12h8" />
-                                            <path d="m17 20.66-1-1.73" />
-                                            <path d="m17 3.34-1 1.73" />
-                                            <path d="M2 12h2" />
-                                            <path d="m20.66 17-1.73-1" />
-                                            <path d="m20.66 7-1.73 1" />
-                                            <path d="m3.34 17 1.73-1" />
-                                            <path d="m3.34 7 1.73 1" />
-                                            <circle cx="12" cy="12" r="2" />
-                                            <circle cx="12" cy="12" r="8" />
+                                            <path d="M11 10.27 7 3.34" /> <path d="m11 13.73-4 6.93" /><path d="M12 22v-2" /> <path d="M12 2v2" /><path d="M14 12h8" /><path d="m17 20.66-1-1.73" /> 
+                                            <path d="m17 3.34-1 1.73" /><path d="M2 12h2" /><path d="m20.66 17-1.73-1" /> <path d="m20.66 7-1.73 1" /><path d="m3.34 17 1.73-1" /> <path d="m3.34 7 1.73 1" /> 
+                                            <circle cx="12" cy="12" r="2" />  <circle cx="12" cy="12" r="8" />
                                             </svg>
-                                            Configuración
+                                            Administrador
                                         </a>
                                     </li>
                                 </ul>
@@ -120,8 +110,6 @@ Click nbfs://nbhost/SystemFileSystem/Templates/JSP_Servlet/Html.html to edit thi
                                     </li>
                                 </ul>
                             </div>
-
-
                         </div>
                     </c:when>
 
@@ -135,6 +123,8 @@ Click nbfs://nbhost/SystemFileSystem/Templates/JSP_Servlet/Html.html to edit thi
             </div>
         </header>
 
+
+
         <div class=" bg-blue-600/65 hero py-20 bg-gradient-to-b from-blue-900/30 to-brand-dark mt-16">
             <div class="hero-content text-center">
                 <div class="max-w-3xl">
@@ -142,7 +132,7 @@ Click nbfs://nbhost/SystemFileSystem/Templates/JSP_Servlet/Html.html to edit thi
                     <p class="py-2 text-xl text-gray-300 mb-8">
                         Accede a más de 500 cursos impartidos por expertos de la industria
                     </p>
-                    <!--                    <button class="btn bg-brand-blue hover:bg-blue-700 text-white border-none px-8 text-lg">Explorar Cursos</button>-->
+                    
                 </div>
             </div>
         </div>
@@ -181,11 +171,40 @@ Click nbfs://nbhost/SystemFileSystem/Templates/JSP_Servlet/Html.html to edit thi
                                 <!--                                <span><i class="fa-solid fa-user-group"></i> 2340</span>-->
                                 <span><i class="fa-regular fa-clock"></i> ${c.duracion} horas</span>
                             </div>
-                            <div class="card-actions justify-between items-center mt-auto">
+                                     
+                           <div class="card-actions justify-between items-center mt-auto">
                                 <span class="text-2xl font-bold text-blue-400">S/ ${c.precio}</span>
-                                <button class="btn btn-sm bg-brand-blue hover:bg-blue-700 text-white border-none">Ver Curso</button>
-                            </div>
 
+                                <div class="flex gap-2">
+                                    <!-- VER CURSO -->
+                                    <a href="${pageContext.request.contextPath}/curso?id=${c.idCurso}"
+                                       class="btn btn-sm btn-outline border-blue-500 text-blue-400 hover:bg-blue-600 hover:text-white">
+                                        Ver curso
+                                    </a>     
+                                    <c:choose>
+
+                                        <c:when test="${not empty sessionScope.usuario}">
+                                            <form action="${pageContext.request.contextPath}/matricular" method="post">
+                                                <input type="hidden" name="idCurso" value="${c.idCurso}">
+                                                <button type="submit"
+                                                        class="btn btn-sm bg-brand-blue hover:bg-blue-700 text-white border-none">
+                                                    Matricularme
+                                                </button>
+                                            </form>
+                                        </c:when>
+
+                                        <c:otherwise>
+                                            <a href="${pageContext.request.contextPath}/login.jsp"
+                                               class="btn btn-sm bg-brand-blue hover:bg-blue-700 text-white border-none">
+                                                Matricularme
+                                            </a>
+                                        </c:otherwise>
+
+                                    </c:choose>
+                                       
+                                </div>
+                            </div>
+                                
                         </div>
 
                     </div>

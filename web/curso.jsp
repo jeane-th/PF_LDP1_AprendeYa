@@ -1,27 +1,47 @@
 <%-- 
-    Document   : registro.jsp
-    Created on : 23 dic 2025, 22:33:35
-    Author     : jtafu
+    Document   : curso
+    Created on : 26 dic. 2025, 21:31:09
+    Author     : josueLady
 --%>
 
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <%@taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %> <!-- libreria control -->
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %> <!-- libreria de funciones -->
-<!DOCTYPE html>
-<html lang="es">
 
+<!DOCTYPE html>
+<html lang="es" data-theme="night">
     <head>
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+
         <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
-        <link href="https://cdn.jsdelivr.net/npm/flowbite@4.0.1/dist/flowbite.min.css" rel="stylesheet" />
-        <link rel="icon" type="image/svg+xml" href="icons/icon_book.svg">
-        <title>AprendeYa | Registro</title>
+        <script src="https://cdn.tailwindcss.com"></script>
+
+        <link href="https://cdn.jsdelivr.net/npm/flowbite@4.0.1/dist/flowbite.min.css" rel="stylesheet"/>
+        <link href="https://cdn.jsdelivr.net/npm/daisyui@4.7.2/dist/full.min.css" rel="stylesheet"/>
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+
+        <title>AprendeYa | ${curso.titulo}</title>
+
+        <script>
+            tailwind.config = {
+                theme: {
+                    extend: {
+                        colors: {
+                            'brand-blue': '#2563eb',
+                            'brand-dark': '#0f172a',
+                            'brand-card': '#1e293b',
+                        }
+                    }
+                }
+            }
+        </script>
     </head>
 
-    <body class="bg-gray-900">
-    <header class="h-16 fixed top-0 left-0 w-full z-50 bg-gray-900 shadow-lg">
+    <body class="bg-brand-dark text-white font-sans">
+
+
+        <header class="h-16 fixed top-0 left-0 w-full z-50 bg-gray-900 shadow-lg">
             <div class="max-w-7xl mx-auto px-6 flex items-center justify-between text-white h-full">
                 <!-- Logo -->
                 <div>
@@ -108,102 +128,77 @@
             </div>
         </header>
 
+        <main class="mt-24 max-w-6xl mx-auto px-6">
 
-        <main class="pt-16 bg-gray-900">
-            <section
-                class="p-5 max-w-md mx-auto m-16 rounded-lg border border-gray-200 shadow-sm border-gray-700 bg-gray-800">
-                <div class="mb-5">
-                    <div class="size-16 bg-blue-600 text-white rounded-full flex items-center justify-center mx-auto mb-4">
-                        <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24" fill="none"
-                             stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
-                             class="lucide lucide-user-icon lucide-user">
-                        <path d="M19 21v-2a4 4 0 0 0-4-4H9a4 4 0 0 0-4 4v2" />
-                        <circle cx="12" cy="7" r="4" />
-                        </svg>
+            <div class="grid grid-cols-1 lg:grid-cols-3 gap-10">
+
+
+                <div class="lg:col-span-2 bg-brand-card border border-gray-800 rounded-xl shadow-xl overflow-hidden">
+
+                    <img src="${curso.imagen}" class="w-full h-72 object-cover">
+
+                    <div class="p-8 space-y-4">
+
+                        <span class="badge bg-blue-900 text-blue-200 border-none">
+                            ${curso.categoria}
+                        </span>
+
+                        <h1 class="text-4xl font-bold">
+                            ${curso.titulo}
+                        </h1>
+
+                        <p class="text-gray-400">
+                            ${curso.descripcion}
+                        </p>
+
+                        <div class="flex flex-wrap gap-6 text-sm text-gray-400 pt-4">
+                            <span><i class="fa-solid fa-user mr-1"></i> ${curso.profesor}</span>
+                            <span><i class="fa-regular fa-clock mr-1"></i> ${curso.duracion} horas</span>
+                            <span class="text-yellow-400 font-bold">
+                                <i class="fa-solid fa-star"></i> 4.8
+                            </span>
+                        </div>
+
                     </div>
-                    <h2 class="text-2xl font-bold text-center text-white mb-2">Crear Cuenta</h2>
-                    <p class="text-center text-white mb-6">Regístrate para comenzar a aprender</p>
                 </div>
-                <form id="formRegistro" class="max-w-sm mx-auto" action="registro" method="post" novalidate>
-                    <div class="mb-5">
-                        <label for="nombre" class="block mb-2.5 text-sm font-medium text-gray-700 text-white">Nombre</label>
-                        <input type="text" name="nombre" id="nombre"
-                               class="border border-gray-300 text-gray-900 rounded-xl  focus:border-blue-500 block w-full p-2.5 bg-gray-700 placeholder-gray-400 text-white"
-                               placeholder="nombre">
+
+                <div class="bg-brand-card border border-gray-800 rounded-xl shadow-xl p-6 h-fit">
+
+                    <p class="text-3xl font-bold text-blue-400 mb-4">
+                        S/ ${curso.precio}
+                    </p>
+
+                    <c:choose>
+
+                        <c:when test="${not empty sessionScope.usuario}">
+                            <form action="${pageContext.request.contextPath}/matricular" method="post">
+                                <input type="hidden" name="idCurso" value="${curso.idCurso}">
+                                <button type="submit"
+                                        class="btn w-full bg-brand-blue hover:bg-blue-700 text-white border-none">
+                                    Matricularme
+                                </button>
+                            </form>
+                        </c:when>
+
+                        <c:otherwise>
+                            <a href="${pageContext.request.contextPath}/login.jsp"
+                               class="btn w-full bg-brand-blue hover:bg-blue-700 text-white border-none text-center">
+                                Matricularme
+                            </a>
+                        </c:otherwise>
+
+                    </c:choose>
+
+                    <div class="mt-6 text-sm text-gray-400 space-y-2">
+                        <p>✔ Acceso de por vida</p>
+                        <p>✔ Certificado digital</p>
+                        <p>✔ Contenido actualizado</p>
                     </div>
-                    <div class="mb-5">
-                        <label for="pais" class="block mb-2.5 text-sm font-medium text-gray-700 text-white">Pais</label>
-                        <input type="text" name="pais" id="pais"
-                               class="border border-gray-300 text-gray-900 rounded-xl  focus:border-blue-500 block w-full p-2.5 bg-gray-700 placeholder-gray-400 text-white"
-                               placeholder="pais">
-                    </div>
-                    <div class="mb-5">
-                        <label for="email" class="block mb-2.5 text-sm font-medium text-gray-700 text-white">Email</label>
-                        <input type="email" name="email" id="email"
-                               class="border border-gray-300 text-gray-900 rounded-xl  focus:border-blue-500 block w-full p-2.5 bg-gray-700 placeholder-gray-400 text-white"
-                               placeholder="name@flowbite.com">
-                    </div>
-                    <div class="mb-5">
-                        <label for="password"
-                               class="block mb-2.5 text-sm font-medium text-gray-700 text-white">Contraseña</label>
-                        <input type="password" name="password" id="password"
-                               class="border border-gray-300 text-gray-900 rounded-xl  focus:border-blue-500 block w-full p-2.5 bg-gray-700 placeholder-gray-400 text-white"
-                               placeholder="********">
-                    </div>
-                    <button type="submit"
-                            class="bg-blue-600 hover:bg-blue-700 text-white font-semibold py-1 px-2 p rounded-xl cursor-pointer w-full px-4 py-2.5 my-4">
-                        Crear Cuenta</button>
-                    <div class="pt-4 border-t border-gray-300 border-gray-700 mt-4">
-                        <p class=" text-sm font-medium text-gray-700 text-white select-none h-6 w-full text-center">¿Ya
-                            tienes una cuenta?<a href="login.jsp" class="text-blue-600 hover:underline ml-2">Inicia sesión
-                                aquí
-                            </a></p>
-                    </div>
-                </form>
-                <!-- <div>
-                    <p class="text-red-500 h-6 w-full text-center">
-                <c:if test="${not empty error}">
-                    ${error}
-                </c:if>
-            </p>
-        </div> -->
-            </section>
+                </div>
+
+            </div>
         </main>
+
         <script src="https://cdn.jsdelivr.net/npm/flowbite@4.0.1/dist/flowbite.min.js"></script>
-
-        <!-- Librería JustValidate (SIN defer) -->
-        <script src="https://cdn.jsdelivr.net/npm/just-validate@latest/dist/just-validate.production.min.js"></script>
-
-        <!-- Tu validación -->
-        <script>
-            const validate = new JustValidate('#formRegistro', {
-                errorFieldCssClass: 'border-red-500',
-                errorLabelCssClass: 'text-red-500 text-sm mt-1',
-                focusInvalidField: true
-            });
-
-            validate
-                    .addField('#nombre', [
-                        {rule: 'required', errorMessage: 'Complete su nombre'},
-                        {rule: 'minLength', value: 3, errorMessage: 'Mínimo 3 caracteres'}
-                    ])
-                    .addField('#pais', [
-                        {rule: 'required', errorMessage: 'Complete su país'}
-                    ])
-                    .addField('#email', [
-                        {rule: 'required', errorMessage: 'Complete su email'},
-                        {rule: 'email', errorMessage: 'Email inválido'}
-                    ])
-                    .addField('#password', [
-                        {rule: 'required', errorMessage: 'Complete su contraseña'},
-                        {rule: 'minLength', value: 6, errorMessage: 'Mínimo 6 caracteres'}
-                    ]);
-
-            .onSuccess((event) => {
-                event.target.submit();
-            });
-        </script>
-
     </body>
-
 </html>

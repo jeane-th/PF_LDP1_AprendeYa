@@ -38,14 +38,12 @@
 
                     <a href="${pageContext.request.contextPath}/" class="px-2">Inicio</a>
                     <a href="${pageContext.request.contextPath}/perfil" class="px-2">Mis cursos</a>
-                    <a href="${pageContext.request.contextPath}/nosotros" class="px-2">Nosotros</a>
                 </nav>
-
                 <c:choose>
                     <c:when test="${not empty sessionScope.usuario}">
                         <!-- Usuario logueado -->
                         <div>
-                            <!--                            Boton usuario -->
+
                             <button type="button" class="" id="user-menu-button" aria-expanded="false"
                                     data-dropdown-toggle="dropdown">
                                 <span class="sr-only">Open user menu</span>
@@ -54,7 +52,7 @@
                                     ${fn:toUpperCase(fn:substring(sessionScope.usuario.nombre, 0, 1))}
                                 </span>
                             </button>
-                            <!--                            menu usuario  -->
+
                             <div class="hidden z-50 my-4 w-56 text-white rounded shadow bg-gray-700" id="dropdown">
                                 <div class="py-3 px-4">
                                     <span class="block font-semibold">${sessionScope.usuario.nombre}</span>
@@ -81,22 +79,11 @@
                                             <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24"
                                                  fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
                                                  stroke-linejoin="round" class="lucide lucide-cog-icon lucide-cog">
-                                            <path d="M11 10.27 7 3.34" />
-                                            <path d="m11 13.73-4 6.93" />
-                                            <path d="M12 22v-2" />
-                                            <path d="M12 2v2" />
-                                            <path d="M14 12h8" />
-                                            <path d="m17 20.66-1-1.73" />
-                                            <path d="m17 3.34-1 1.73" />
-                                            <path d="M2 12h2" />
-                                            <path d="m20.66 17-1.73-1" />
-                                            <path d="m20.66 7-1.73 1" />
-                                            <path d="m3.34 17 1.73-1" />
-                                            <path d="m3.34 7 1.73 1" />
-                                            <circle cx="12" cy="12" r="2" />
-                                            <circle cx="12" cy="12" r="8" />
+                                            <path d="M11 10.27 7 3.34" /> <path d="m11 13.73-4 6.93" /><path d="M12 22v-2" /> <path d="M12 2v2" /><path d="M14 12h8" /><path d="m17 20.66-1-1.73" /> 
+                                            <path d="m17 3.34-1 1.73" /><path d="M2 12h2" /><path d="m20.66 17-1.73-1" /> <path d="m20.66 7-1.73 1" /><path d="m3.34 17 1.73-1" /> <path d="m3.34 7 1.73 1" /> 
+                                            <circle cx="12" cy="12" r="2" />  <circle cx="12" cy="12" r="8" />
                                             </svg>
-                                            Configuración
+                                            Administrador
                                         </a>
                                     </li>
                                 </ul>
@@ -106,8 +93,6 @@
                                     </li>
                                 </ul>
                             </div>
-
-
                         </div>
                     </c:when>
 
@@ -120,6 +105,7 @@
                     </c:choose>
             </div>
         </header>
+
         <main class="pt-16 ">
             <!-- Fondo degradado -->
             <section class="bg-gradient-to-br from-blue-900 via-blue-700 to-gray-900 text-white">
@@ -148,121 +134,145 @@
                                     <span>${sessionScope.usuario.pais}</span>
                                 </div>
                             </div>
+
                         </div>
-                    </div>
-                    <!-- tarjetas resumen de usuario -->
-                    <div class="grid grid-cols-2 md:grid-cols-4 gap-4 mt-8">
-                        <div class="bg-white/10 backdrop-blur-sm rounded-lg p-4">
+                        <div class="bg-white/10 backdrop-blur-sm rounded-lg p-4 ml-100">
+                            <c:set var="totalCursos" value="${fn:length(listaCursos)}" />
                             <div class="flex items-center gap-3">
-                                <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" 
+                                <svg xmlns="http://www.w3.org/2000/svg" width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" 
                                      stroke-linejoin="round" class="lucide lucide-book-open-icon lucide-book-open"><path d="M12 7v14"/>
                                 <path d="M3 18a1 1 0 0 1-1-1V4a1 1 0 0 1 1-1h5a4 4 0 0 1 4 4 4 4 0 0 1 4-4h5a1 1 0 0 1 1 1v13a1 1 0 0 1-1 1h-6a3 3 0 0 0-3 3 3 3 0 0 0-3-3z"/></svg>
                                 <div>
-                                    <div class="text-2xl font-bold">8</div>
+                                    <div class="text-2xl font-bold">${totalCursos}</div>
                                     <div class="text-sm text-blue-100">Cursos Inscritos</div>
                                 </div>
                             </div>
                         </div>
-                        <div class="bg-white/10 backdrop-blur-sm rounded-lg p-4">
-                            <div class="flex items-center gap-3">
-                                <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" 
-                                     stroke-linejoin="round" class="lucide lucide-circle-check-big-icon lucide-circle-check-big">
-                                <path d="M21.801 10A10 10 0 1 1 17 3.335"/><path d="m9 11 3 3L22 4"/></svg>
-                                <div>
-                                    <div class="text-2xl font-bold">6</div>
-                                    <div class="text-sm text-blue-100">Completados</div>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="bg-white/10 backdrop-blur-sm rounded-lg p-4">
-                            <div class="flex items-center gap-3">
-                                <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" 
-                                     stroke-linejoin="round" class="lucide lucide-award-icon lucide-award">
-                                <path d="m15.477 12.89 1.515 8.526a.5.5 0 0 1-.81.47l-3.58-2.687a1 1 0 0 0-1.197 0l-3.586 2.686a.5.5 0 0 1-.81-.469l1.514-8.526"/><circle cx="12" cy="8" r="6"/></svg>
-                                <div>
-                                    <div class="text-2xl font-bold">4</div>
-                                    <div class="text-sm text-blue-100">Certificados</div>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="bg-white/10 backdrop-blur-sm rounded-lg p-4">
-                            <div class="flex items-center gap-3">
-                                <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-trending-up-icon lucide-trending-up"><path d="M16 7h6v6"/><path d="m22 7-8.5 8.5-5-5L2 17"/></svg>
-                                <div>
-                                    <div class="text-2xl font-bold">12</div>
-                                    <div class="text-sm text-blue-100">Días seguidos</div>
-                                </div>
-                            </div>
-                        </div>
+                    </div>
+                    <!-- tarjetas resumen de usuario -->
+                    <div class="grid grid-cols-2 md:grid-cols-4 gap-4 mt-8">
+
                     </div>
                 </div>
             </section>
-            <section class="bg-gray-50 py-8 antialiased dark:bg-gray-900 md:py-12">
+            <section class="bg-gray-50 py-8 antialiased bg-gray-900 md:py-12">
                 <div class="mx-auto max-w-screen-xl px-4 2xl:px-0">
                     <!-- Heading & Filters -->
                     <div class="mb-4 items-end justify-between space-y-4 sm:flex sm:space-y-0 md:mb-8">
-                        <h2 class="mt-3 text-xl font-semibold text-gray-900 dark:text-white sm:text-2xl">Mis cursos</h2>
+                        <h2 class="mt-3 text-xl font-semibold text-gray-900 text-white sm:text-2xl">Mis cursos</h2>
                     </div>
+
+
+
+
                     <div class="mb-4 grid gap-4 sm:grid-cols-2 md:mb-8 lg:grid-cols-3 xl:grid-cols-4">
-                        <!-- Card de curso -->
-                        <c:forEach var="c" items="${listaCursos}">
-                            <div class="rounded-lg border border-gray-200 bg-white shadow-sm dark:border-gray-700 dark:bg-gray-800">
 
-                                <div class="rounded-t-lg w-64 w-full overflow-hidden">
-                                    <img 
-                                        src="${c.imagen}"
-                                        class="w-full h-full object-cover"
-                                        alt=""
-                                        >
+                        <c:choose>
+
+                            <c:when test="${empty listaCursos}">
+                                <div class="col-span-full text-center text-gray-500 text-gray-400 text-lg py-12">
+                                    Aún no estás matriculado a ningún curso
                                 </div>
-                                <div class="m-6">
-                                    <!-- categoria y favoritos -->
-                                    <div class="mb-4 flex items-center justify-between gap-4">
-                                        <span class="me-2 rounded bg-blue-100 px-2.5 py-0.5 text-xs font-medium text-gray-800 dark:bg-blue-900 dark:text-gray-300">${c.categoria}</span> 
-                                        <div class="flex items-center justify-end gap-1">
-                                            <button type="button" 
-                                                    class="rounded-lg p-2 text-gray-500 hover:bg-gray-100 hover:text-gray-900 
-                                                    dark:text-gray-400 dark:hover:bg-gray-700 dark:hover:text-white
-                                                    cursor-pointer">
-                                                <span class="sr-only"> Add to Favorites </span>
-                                                <svg class="h-5 w-5" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
-                                                <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6C6.5 1 1 8 5.8 13l6.2 7 6.2-7C23 8 17.5 1 12 6Z" />
-                                                </svg>
-                                            </button>
+                            </c:when>
+
+                            <c:otherwise>
+                                <c:forEach var="c" items="${listaCursos}">
+                                    <div class="rounded-lg border border-gray-200  shadow-sm border-gray-700 bg-gray-800">
+
+                                        <div class="rounded-t-lg w-64 w-full overflow-hidden">
+                                            <img 
+                                                src="${c.imagen}"
+                                                class="w-full h-full object-cover"
+                                                alt=""
+                                                >
+                                        </div>
+
+                                        <div class="m-6">
+
+                                            <div class="mb-4 flex items-center justify-between gap-4">
+                                                <span class="me-2 rounded bg-blue-100 px-2.5 py-0.5 text-xs font-medium bg-blue-900 text-gray-300">
+                                                    ${c.categoria}
+                                                </span> 
+                                                <div class="flex items-center justify-end gap-1">
+                                                    <button type="button" 
+                                                            class="rounded-lg p-2 text-gray-500 hover:bg-gray-100 hover:text-gray-900 
+                                                            text-gray-400 hover:bg-gray-700 hover:text-white
+                                                            cursor-pointer">
+                                                        <span class="sr-only"> Add to Favorites </span>
+                                                        <svg class="h-5 w-5" aria-hidden="true"
+                                                             xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
+                                                        <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                                              d="M12 6C6.5 1 1 8 5.8 13l6.2 7 6.2-7C23 8 17.5 1 12 6Z" />
+                                                        </svg>
+                                                    </button>
+                                                </div>
+                                            </div>
+
+                                            <p class="text-lg font-semibold leading-tight text-gray-900 text-white">
+                                                ${c.titulo}
+                                            </p>
+
+                                            <p class="text-base mt-2 font-medium text-gray-500 text-gray-400">
+                                                Por: ${c.profesor}
+                                            </p>
+
+                                            <div class="mt-4 mb-4 flex items-center gap-2">
+                                                <p class="text-sm font-medium text-gray-900 text-white">⭐5.0</p>
+                                                <div class=" flex flex-rown items-center ml-4">
+                                                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-alarm-clock-icon lucide-alarm-clock text-gray-500"><circle cx="12" cy="13" r="8"/><path d="M12 9v4l2 2"/><path d="M5 3 2 6"/><path d="m22 6-3-3"/><path d="M6.38 18.7 4 21"/><path d="M17.64 18.67 20 21"/>
+                                                    </svg>
+                                                    <p class="text-sm font-medium text-gray-500 text-gray-400 ml-1">
+                                                        ${c.duracion} horas
+                                                    </p>
+                                                </div>
+
+                                            </div>
+
+                                            <div class="mt-4 flex items-center justify-between gap-2">
+
+                                                <a href="${pageContext.request.contextPath}/reproductorServlet?id=${c.idCurso}" class="w-full">
+                                                    <button type="button"
+                                                            class="inline-flex items-center rounded-lg bg-blue-700 px-4 py-2.5 text-sm font-medium text-white 
+                                                            hover:bg-blue-800 focus:outline-none focus:ring-4 focus:ring-primary-300 
+                                                            bg-blue-600 hover:bg-blue-700 focus:ring-primary-800 w-full
+                                                            justify-center cursor-pointer">
+                                                        Ver curso
+                                                    </button>
+                                                </a>
+
+                                                <form action="${pageContext.request.contextPath}/EliminarMatriculaServlet" 
+                                                      method="post"
+                                                      onsubmit="return confirm('¿Seguro que deseas eliminar este curso?');">
+
+                                                    <input type="hidden" name="idCurso" value="${c.idCurso}">
+
+                                                    <button type="submit"
+                                                            class="inline-flex items-center rounded-lg bg-red-600 px-4 py-2.5 text-sm font-medium text-white 
+                                                            hover:bg-red-700 focus:outline-none focus:ring-4 focus:ring-red-300 
+                                                            bg-red-500 hover:bg-red-600 focus:ring-red-800
+                                                            cursor-pointer">
+                                                        Eliminar
+                                                    </button>
+                                                </form>
+
+                                            </div>
+
                                         </div>
                                     </div>
-                                    <!-- Titulo -->
-                                    <p class="text-lg font-semibold leading-tight text-gray-900 dark:text-white">${c.titulo}</p>
-                                    <p class="text-base mt-2 font-medium text-gray-500 dark:text-gray-400">Por: ${c.profesor}</p>
-                                    <div class="mt-4 mb-4 flex items-center gap-2">
-                                        <div class="flex items-center">
-                                            <svg class="h-4 w-4 text-yellow-400" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 24 24">
-                                            <path d="M13.8 4.2a2 2 0 0 0-3.6 0L8.4 8.4l-4.6.3a2 2 0 0 0-1.1 3.5l3.5 3-1 4.4c-.5 1.7 1.4 3 2.9 2.1l3.9-2.3 3.9 2.3c1.5 1 3.4-.4 3-2.1l-1-4.4 3.4-3a2 2 0 0 0-1.1-3.5l-4.6-.3-1.8-4.2Z" />
-                                            </svg>
-                                        </div>
-                                        <!-- Valoracion de reviews -->
-                                        <p class="text-sm font-medium text-gray-900 dark:text-white">5.0</p>
-                                        <p class="text-sm font-medium text-gray-500 dark:text-gray-400">${c.duracion} horas</p>
-                                    </div>
-                                    <div class="mt-4 flex items-center justify-between gap-4 ">
-                                        <button type="button" 
-                                                class="inline-flex items-center rounded-lg bg-blue-700 px-5 py-2.5 text-sm font-medium text-white 
-                                                hover:bg-blue-800 focus:outline-none focus:ring-4 focus:ring-primary-300 
-                                                dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-primary-800 w-full
-                                                justify-center cursor-pointer">
-                                            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" 
-                                                 class="lucide lucide-eye-icon lucide-eye mr-2"><path d="M2.062 12.348a1 1 0 0 1 0-.696 10.75 10.75 0 0 1 19.876 0 1 1 0 0 1 0 .696 10.75 10.75 0 0 1-19.876 0"/>
-                                            <circle cx="12" cy="12" r="3"/></svg>
-                                            Ver curso
-                                        </button>
-                                    </div>
-                                </div>
+                                </c:forEach>
+                            </c:otherwise>
 
-                            </div>
-                        </c:forEach>
+                        </c:choose>
+
                     </div>
+
+
+
+
+
+
                     <!--                    <div class="w-full text-center">
-                                            <button type="button" class="rounded-lg border border-gray-200 bg-white px-5 py-2.5 text-sm font-medium text-gray-900 hover:bg-gray-100 hover:text-gray-700 focus:z-10 focus:outline-none focus:ring-4 focus:ring-gray-100 dark:border-gray-600 dark:bg-gray-800 dark:text-gray-400 dark:hover:bg-gray-700 dark:hover:text-white dark:focus:ring-gray-700">Show more</button>
+                                            <button type="button" class="rounded-lg border border-gray-200 bg-white px-5 py-2.5 text-sm font-medium text-gray-900 hover:bg-gray-100 hover:text-gray-700 focus:z-10 focus:outline-none focus:ring-4 focus:ring-gray-100 border-gray-600 bg-gray-800 text-gray-400 hover:bg-gray-700 hover:text-white focus:ring-gray-700">Show more</button>
                                         </div>-->
                 </div>
 

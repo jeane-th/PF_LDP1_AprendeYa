@@ -4,8 +4,8 @@
  */
 package controlador;
 
-import dao.CursoDAO;
-import dao.CursoDAOImpl;
+import dao.MatriculaDAO;
+import dao.MatriculaDAOImpl;
 import dao.UsuarioDAO;
 import dao.UsuarioDAOImpl;
 import java.io.IOException;
@@ -43,13 +43,14 @@ public class PerfilServlet extends HttpServlet {
             response.sendRedirect("login.jsp");
             return;
         }
-        CursoDAO dao = new CursoDAOImpl();
-        List<Curso> cursos = dao.listar();
-        System.out.println("Cantidad de cursos: " + cursos.size());
-        cursos.forEach(c -> System.out.println(c.getTitulo()));
-        System.out.println("Se ejecuto el GET");
-        request.setAttribute("listaCursos", dao.listar());
+        MatriculaDAO dao = new MatriculaDAOImpl();
+
+        // Cursos matriculados del usuario logueado
+        List<Curso> cursos = dao.cursosPorUsuario(u.getIdUsuario());
+
+        request.setAttribute("listaCursos", cursos);
         request.setAttribute("usuario", u);
+
         request.getRequestDispatcher("perfil.jsp").forward(request, response);
     }
 }

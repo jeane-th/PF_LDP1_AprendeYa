@@ -39,7 +39,7 @@ public class UsuarioDAOImpl implements UsuarioDAO {
             rs = ps.executeQuery();
             while (rs.next()) {
                 u = new Usuario();
-                u.setId_usuario(rs.getInt("id_usuario")); // Nota: En BD es id_usuario
+                u.setIdUsuario(rs.getInt("idUsuario"));
                 u.setNombre(rs.getString("nombre"));
                 u.setEmail(rs.getString("email"));
                 u.setPassword(rs.getString("password"));
@@ -67,7 +67,7 @@ public class UsuarioDAOImpl implements UsuarioDAO {
                 String hash = rs.getString("password");
                 if (BCrypt.checkpw(password, hash)) {
                     Usuario u = new Usuario();
-                    u.setId_usuario(rs.getInt("id_usuario"));
+                    u.setIdUsuario(rs.getInt("idUsuario"));
                     u.setNombre(rs.getString("nombre"));
                     u.setEmail(rs.getString("email"));
                     u.setPais(rs.getString("pais"));
@@ -92,7 +92,7 @@ public class UsuarioDAOImpl implements UsuarioDAO {
             rs = ps.executeQuery();
             while (rs.next()) {
                 Usuario u = new Usuario();
-                u.setId_usuario(rs.getInt("id_usuario"));
+                u.setIdUsuario(rs.getInt("idUsuario"));
                 u.setNombre(rs.getString("nombre"));
                 u.setEmail(rs.getString("email"));
                 u.setPassword(rs.getString("password"));
@@ -136,7 +136,7 @@ public class UsuarioDAOImpl implements UsuarioDAO {
     @Override
     public boolean actualizar(Usuario usuario) {
         // Actualizamos todo EXCEPTO el id
-        String sql = "UPDATE tb_usuarios SET nombre=?, email=?, password=? , pais=? WHERE id_usuario=?";
+        String sql = "UPDATE tb_usuarios SET nombre=?, email=?, password=? , pais=? WHERE idUsuario=?";
         try {
             con = Conexion.getConnection();
             String hash = BCrypt.hashpw(usuario.getPassword(), BCrypt.gensalt());
@@ -145,7 +145,7 @@ public class UsuarioDAOImpl implements UsuarioDAO {
             ps.setString(2, usuario.getEmail());
             ps.setString(3, hash);
             ps.setString(4, usuario.getPais());
-            ps.setInt(5, usuario.getId_usuario()); // El WHERE necesita el ID
+            ps.setInt(5, usuario.getIdUsuario()); // El WHERE necesita el ID
             ps.executeUpdate();
             return true;
         } catch (Exception e) {
@@ -157,7 +157,7 @@ public class UsuarioDAOImpl implements UsuarioDAO {
     @Override
     public boolean eliminar(int id) {
         // AQUÍ ESTÁ EL TRUCO: No usamos DELETE, usamos UPDATE para cambiar estado a 0
-        String sql = "UPDATE tb_usuarios SET estado=0 WHERE id_usuario=?";
+        String sql = "UPDATE tb_usuarios SET estado=0 WHERE idUsuario=?";
         try {
             con = Conexion.getConnection();
             ps = con.prepareStatement(sql);
@@ -173,7 +173,7 @@ public class UsuarioDAOImpl implements UsuarioDAO {
     @Override
     public Usuario obtenerPorId(int id) {
         Usuario u = null;
-        String sql = "SELECT * FROM tb_usuarios WHERE id_usuario=?";
+        String sql = "SELECT * FROM tb_usuarios WHERE idUsuario=?";
         try {
             con = Conexion.getConnection();
             ps = con.prepareStatement(sql);
@@ -181,7 +181,7 @@ public class UsuarioDAOImpl implements UsuarioDAO {
             rs = ps.executeQuery();
             while (rs.next()) {
                 u = new Usuario();
-                u.setId_usuario(rs.getInt("id_usuario"));
+                u.setIdUsuario(rs.getInt("idUsuario"));
                 u.setNombre(rs.getString("nombre"));
                 u.setEmail(rs.getString("email"));
                 u.setPassword(rs.getString("password"));
