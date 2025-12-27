@@ -30,6 +30,7 @@ public class RegisterServlet extends HttpServlet {
         u.setNombre(request.getParameter("nombre"));
         u.setEmail(request.getParameter("email"));
         u.setPassword(request.getParameter("password"));
+        u.setPais(request.getParameter("pais"));
         UsuarioDAO dao = new UsuarioDAOImpl();
         if (dao.insertar(u)) {
             response.sendRedirect("login.jsp");

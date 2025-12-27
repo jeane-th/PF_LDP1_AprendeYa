@@ -17,85 +17,104 @@
         <meta name="viewport" content="width=device-width, initial-scale=1">
     </head>
     <body>
-         <header  class="h-16 fixed top-0 left-0 w-full z-50 bg-gray-900 items-center shadow-lg">
-            <nav class="bg-white border-gray-200 px-4 lg:px-6 py-2.5 dark:bg-gray-900 w-full">
-                <div class="flex flex-wrap justify-between items-center mx-auto max-w-screen-xl">
-                    <div class="flex justify-start items-center"">
-                        <button data-collapse-toggle="mobile-menu-2" type="button" class="inline-flex items-center p-2 mr-2 text-sm text-gray-500 rounded-lg lg:hidden hover:bg-gray-100 focus:outline-none focus:ring-2 focus:ring-gray-200 dark:text-gray-400 dark:hover:bg-gray-700 dark:focus:ring-gray-600" aria-controls="mobile-menu-2" aria-expanded="false">
-                            <span class="sr-only">Open main menu</span>
-                            <svg class="w-6 h-6" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" d="M3 5a1 1 0 011-1h12a1 1 0 110 2H4a1 1 0 01-1-1zM3 10a1 1 0 011-1h12a1 1 0 110 2H4a1 1 0 01-1-1zM3 15a1 1 0 011-1h12a1 1 0 110 2H4a1 1 0 01-1-1z" clip-rule="evenodd"></path></svg>
-                            <svg class="hidden w-6 h-6" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" d="M4.293 4.293a1 1 0 011.414 0L10 8.586l4.293-4.293a1 1 0 111.414 1.414L11.414 10l4.293 4.293a1 1 0 01-1.414 1.414L10 11.414l-4.293 4.293a1 1 0 01-1.414-1.414L8.586 10 4.293 5.707a1 1 0 010-1.414z" clip-rule="evenodd"></path></svg>
-                        </button>
-                        <a href="#" class="flex items-center">
-                            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="text-blue-600 size-8 text-xl font-bold mr-3 h-6 sm:h-9">
-                            <path stroke-linecap="round" stroke-linejoin="round" d="M12 6.042A8.967 8.967 0 0 0 6 3.75c-1.052 0-2.062.18-3 .512v14.25A8.987 8.987 0 0 1 6 18c2.305 0 4.408.867 6 2.292m0-14.25a8.966 8.966 0 0 1 6-2.292c1.052 0 2.062.18 3 .512v14.25A8.987 8.987 0 0 0 18 18a8.967 8.967 0 0 0-6 2.292m0-14.25v14.25" />
-                            </svg>
-                            <span class="text-xl self-center font-bold text-gray-900 whitespace-nowrap dark:text-white">AprenderYa</span>
-                        </a>
-                    </div>
-                    <div class="flex items-center lg:order-2">
-                        <!-- usuario -->
-                        <button type="button" class="flex mx-3  bg-gray-800 rounded-full md:mr-0 focus:ring-4 focus:ring-gray-300 dark:focus:ring-gray-600" id="user-menu-button" aria-expanded="false" data-dropdown-toggle="dropdown">
-                            <span class="sr-only">Open user menu</span>
-                            <!--<img class="w-8 h-8 rounded-full" src="https://flowbite.com/docs/images/people/profile-picture-5.jpg" alt="user photo">-->
-                            <span class="w-8 h-8 rounded-full border-2 border-white text-white bg-blue-600 flex items-center justify-center text-white">JT</span>
-                        </button>
-                        <!-- Dropdown menu usuario -->
-                        <div class="hidden z-50 my-4 w-56 text-base list-none bg-white rounded divide-y divide-gray-100 shadow dark:bg-gray-700 dark:divide-gray-600" id="dropdown">
-                            <div class="py-3 px-4">
-                                <span class="block font-semibold text-gray-900 dark:text-white">Neil sims</span>
-                                <span class="block  text-gray-500 truncate dark:text-gray-400">name@flowbite.com</span>
-                            </div>
-                            <ul class="py-1 text-gray-500 dark:text-gray-400" aria-labelledby="dropdown">
-                                <li>
-                                    <a href="#" class="flex items-center py-2 px-4  hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white gap-2">
-                                        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" 
-                                             stroke-linejoin="round" class="lucide lucide-cog-icon lucide-cog"><path d="M11 10.27 7 3.34"/><path d="m11 13.73-4 6.93"/><path d="M12 22v-2"/>
-                                        <path d="M12 2v2"/><path d="M14 12h8"/><path d="m17 20.66-1-1.73"/><path d="m17 3.34-1 1.73"/><path d="M2 12h2"/><path d="m20.66 17-1.73-1"/>
-                                        <path d="m20.66 7-1.73 1"/><path d="m3.34 17 1.73-1"/><path d="m3.34 7 1.73 1"/><circle cx="12" cy="12" r="2"/><circle cx="12" cy="12" r="8"/></svg>                                      
-                                        Mis cursos
-                                    </a>
-                                </li>
-                                <li>
-                                    <a href="#" class="flex items-center py-2 px-4  hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white gap-2">
-                                        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-book-copy-icon lucide-book-copy"><path d="M5 7a2 2 0 0 0-2 2v11"/><path d="M5.803 18H5a2 2 0 0 0 0 4h9.5a.5.5 0 0 0 .5-.5V21"/><path d="M9 15V4a2 2 0 0 1 2-2h9.5a.5.5 0 0 1 .5.5v14a.5.5 0 0 1-.5.5H11a2 2 0 0 1 0-4h10"/></svg>                             
-                                        Configuración
-                                    </a>
-                                </li>
-                            </ul>
-                            <ul class="py-1 text-gray-500 dark:text-gray-400" aria-labelledby="dropdown">
-                                <li>
-                                    <a href="#" class="block py-2 px-4  hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white">Sign out</a>
-                                </li>
-                            </ul>
-                        </div>
-                    </div>
-                    <div class="hidden justify-between items-center w-full lg:flex lg:w-auto lg:order-1" id="mobile-menu-2">
-                        <ul class="flex flex-col lg:items-center mt-4 font-medium lg:flex-row lg:space-x-8 lg:mt-0 ">
-                            <li>
-                                <form action="#" method="GET" class="lg:block lg:pl-2">
-                                    <label for="topbar-search" class="sr-only">Search</label>
-                                    <div class="relative mt-1 lg:w-96">
-                                        <div class="flex absolute inset-y-0 left-0 items-center pl-3 pointer-events-none">
-                                            <svg class="w-4 h-4 text-gray-500 dark:text-gray-400" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 20 20"> <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="m19 19-4-4m0-7A7 7 0 1 1 1 8a7 7 0 0 1 14 0Z"/> </svg>
-                                        </div>
-                                        <input type="text" name="email" id="topbar-search" class="bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full pl-9 p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500 pl-10" placeholder="Search">
-                                    </div>
-                                </form>
-                            </li>
-                            <li>
-                                <a href="#" class="block py-2 pr-4 pl-3 text-white rounded lg:bg-transparent lg:text-gray-700 lg:p-0 dark:text-white" aria-current="page">Inicio</a>
-                            </li>
-                            <li>
-                                <a href="#" class="block py-2 pr-4 pl-3 text-gray-700   hover:bg-gray-50 lg:hover:bg-transparent lg:border-0 lg:hover:text-gray-700 lg:p-0 dark:text-gray-400 lg:dark:hover:text-white dark:hover:bg-gray-700 dark:hover:text-white lg:dark:hover:bg-transparent dark:border-gray-700">Cursos</a>
-                            </li>
-                            <li>
-                                <a href="#" class="block py-2 pr-4 pl-3 text-gray-700   hover:bg-gray-50 lg:hover:bg-transparent lg:border-0 lg:hover:text-gray-700 lg:p-0 dark:text-gray-400 lg:dark:hover:text-white dark:hover:bg-gray-700 dark:hover:text-white lg:dark:hover:bg-transparent dark:border-gray-700">Nosotros</a>
-                            </li>
-                        </ul>
-                    </div>
+        <header class="h-16 fixed top-0 left-0 w-full z-50 bg-gray-900 shadow-lg">
+            <div class="max-w-7xl mx-auto px-6 flex items-center justify-between text-white h-full">
+                <!-- Logo -->
+                <div>
+
+                    <a href="${pageContext.request.contextPath}/" class="flex items-center">
+                        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5"
+                             stroke="currentColor" class="text-blue-600 size-8 text-xl font-bold mr-3 h-6 sm:h-9">
+                        <path stroke-linecap="round" stroke-linejoin="round"
+                              d="M12 6.042A8.967 8.967 0 0 0 6 3.75c-1.052 0-2.062.18-3 .512v14.25A8.987 8.987 0 0 1 6 18c2.305 0 4.408.867 6 2.292m0-14.25a8.966 8.966 0 0 1 6-2.292c1.052 0 2.062.18 3 .512v14.25A8.987 8.987 0 0 0 18 18a8.967 8.967 0 0 0-6 2.292m0-14.25v14.25" />
+                        </svg>
+                        <span class="text-3xl font-bold">AprendeYa</span>
+                    </a>
                 </div>
-            </nav>
+                <!-- Menu -->
+                <nav>
+
+                    <a href="${pageContext.request.contextPath}/" class="px-2">Inicio</a>
+                    <a href="${pageContext.request.contextPath}/perfil" class="px-2">Mis cursos</a>
+                    <a href="${pageContext.request.contextPath}/nosotros" class="px-2">Nosotros</a>
+                </nav>
+
+                <c:choose>
+                    <c:when test="${not empty sessionScope.usuario}">
+                        <!-- Usuario logueado -->
+                        <div>
+                            <!--                            Boton usuario -->
+                            <button type="button" class="" id="user-menu-button" aria-expanded="false"
+                                    data-dropdown-toggle="dropdown">
+                                <span class="sr-only">Open user menu</span>
+                                <span
+                                    class="bg-blue-600 hover:bg-blue-700 text-white font-bold py-1 px-2 w-8 h-8 rounded-full flex items-center justify-center cursor-pointer">J</span>
+                            </button>
+                            <!--                            menu usuario  -->
+                            <div class="hidden z-50 my-4 w-56 text-white rounded shadow bg-gray-700" id="dropdown">
+                                <div class="py-3 px-4">
+                                    <span class="block font-semibold">${sessionScope.usuario.nombre}</span>
+                                    <span class="block truncate">${sessionScope.usuario.email}</span>
+                                </div>
+                                <ul class="py-1" aria-labelledby="dropdown">
+                                    <li>
+                                        <a href="${pageContext.request.contextPath}/perfil"
+                                           class="flex items-center py-2 px-4  hover:bg-gray-100 hover:bg-gray-600 hover:text-white gap-2">
+                                            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24"
+                                                 fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                                                 stroke-linejoin="round" class="lucide lucide-book-copy-icon lucide-book-copy">
+                                            <path d="M5 7a2 2 0 0 0-2 2v11" />
+                                            <path d="M5.803 18H5a2 2 0 0 0 0 4h9.5a.5.5 0 0 0 .5-.5V21" />
+                                            <path
+                                                d="M9 15V4a2 2 0 0 1 2-2h9.5a.5.5 0 0 1 .5.5v14a.5.5 0 0 1-.5.5H11a2 2 0 0 1 0-4h10" />
+                                            </svg>
+                                            Perfil
+                                        </a>
+                                    </li>
+                                    <li>
+                                        <a href="#"
+                                           class="flex items-center py-2 px-4  hover:bg-gray-100 hover:bg-gray-600 hover:text-white gap-2">
+                                            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24"
+                                                 fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                                                 stroke-linejoin="round" class="lucide lucide-cog-icon lucide-cog">
+                                            <path d="M11 10.27 7 3.34" />
+                                            <path d="m11 13.73-4 6.93" />
+                                            <path d="M12 22v-2" />
+                                            <path d="M12 2v2" />
+                                            <path d="M14 12h8" />
+                                            <path d="m17 20.66-1-1.73" />
+                                            <path d="m17 3.34-1 1.73" />
+                                            <path d="M2 12h2" />
+                                            <path d="m20.66 17-1.73-1" />
+                                            <path d="m20.66 7-1.73 1" />
+                                            <path d="m3.34 17 1.73-1" />
+                                            <path d="m3.34 7 1.73 1" />
+                                            <circle cx="12" cy="12" r="2" />
+                                            <circle cx="12" cy="12" r="8" />
+                                            </svg>
+                                            Configuración
+                                        </a>
+                                    </li>
+                                </ul>
+                                <ul class="py-1" aria-labelledby="dropdown">
+                                    <li>
+                                        <a href="${pageContext.request.contextPath}/LogoutServlet" class="block py-2 px-4  hover:bg-gray-600">Cerrar sesión</a>
+                                    </li>
+                                </ul>
+                            </div>
+
+
+                        </div>
+                    </c:when>
+
+                    <c:otherwise>
+                        <!-- Usuario NO logueado -->
+                        <a href="${pageContext.request.contextPath}/login.jsp"
+                           class="bg-blue-600 hover:bg-blue-700 text-white font-semibold py-1 px-2 p rounded-xl cursor-pointer px-4 py-2.5 my-4">
+                            Iniciar sesión</a>
+                        </c:otherwise>
+                    </c:choose>
+            </div>
         </header>
         <main class="pt-16 ">
             <section class="bg-white pb-8 pt-2 antialiased dark:bg-gray-900 md:py-16">

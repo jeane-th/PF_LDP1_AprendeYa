@@ -35,7 +35,7 @@ public class LoginServlet extends HttpServlet {
             if(u != null){
                 HttpSession session = request.getSession();
                 session.setAttribute("usuario",u);
-                response.sendRedirect("perfil");
+                response.sendRedirect(request.getContextPath()+"/");
                 System.out.println("Sesion: "+u);
             }else{
                 request.setAttribute("error", "Error en las credenciales");

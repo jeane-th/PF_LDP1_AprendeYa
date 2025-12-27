@@ -54,7 +54,7 @@ public class UsuarioDAOImpl implements UsuarioDAO {
 
     // Inicio de sesion
     @Override
-    public Usuario login(String email,String password) {
+    public Usuario login(String email, String password) {
         Connection con = null;
         PreparedStatement ps = null;
         try {
@@ -70,6 +70,7 @@ public class UsuarioDAOImpl implements UsuarioDAO {
                     u.setId_usuario(rs.getInt("id_usuario"));
                     u.setNombre(rs.getString("nombre"));
                     u.setEmail(rs.getString("email"));
+                    u.setPais(rs.getString("pais"));
                     u.setRol(rs.getString("rol"));
                     u.setEstado(rs.getInt("estado"));
                     return u;
@@ -109,7 +110,7 @@ public class UsuarioDAOImpl implements UsuarioDAO {
     @Override
     public boolean insertar(Usuario usuario) {
         // Asumimos estado 1 (Activo) por defecto al crear
-        String sql = "INSERT INTO tb_usuarios(nombre, email, password, rol, estado) VALUES(?,?,?,?,1)";
+        String sql = "INSERT INTO tb_usuarios(nombre, email, password, pais, rol, estado) VALUES(?,?,?,?,?,1)";
         try {
             con = Conexion.getConnection();
             // Importacion de la libreria para encriptar contraseñas
@@ -122,7 +123,8 @@ public class UsuarioDAOImpl implements UsuarioDAO {
             // cambio el Password normal al cifrado
             //ps.setString(3, usuario.getPassword());
             ps.setString(3, hash);
-            ps.setString(4, "usuario"); // estudiante por defecto
+            ps.setString(4, usuario.getPais());
+            ps.setString(5, "usuario"); // estudiante por defecto
             ps.executeUpdate();
             return true;
         } catch (Exception e) {
@@ -134,16 +136,16 @@ public class UsuarioDAOImpl implements UsuarioDAO {
     @Override
     public boolean actualizar(Usuario usuario) {
         // Actualizamos todo EXCEPTO el id
-        String sql = "UPDATE tb_usuarios SET nombre=?, email=?, password=?, rol=?, estado=? WHERE id_usuario=?";
+        String sql = "UPDATE tb_usuarios SET nombre=?, email=?, password=? , pais=? WHERE id_usuario=?";
         try {
             con = Conexion.getConnection();
+            String hash = BCrypt.hashpw(usuario.getPassword(), BCrypt.gensalt());
             ps = con.prepareStatement(sql);
             ps.setString(1, usuario.getNombre());
             ps.setString(2, usuario.getEmail());
-            ps.setString(3, usuario.getPassword());
-            ps.setString(4, usuario.getRol());
-            ps.setInt(5, usuario.getEstado()); // Aquí permitimos editar el estado manualmente si se quiere
-            ps.setInt(6, usuario.getId_usuario()); // El WHERE necesita el ID
+            ps.setString(3, hash);
+            ps.setString(4, usuario.getPais());
+            ps.setInt(5, usuario.getId_usuario()); // El WHERE necesita el ID
             ps.executeUpdate();
             return true;
         } catch (Exception e) {

@@ -37,9 +37,10 @@ Click nbfs://nbhost/SystemFileSystem/Templates/JSP_Servlet/Html.html to edit thi
     <body class="bg-brand-dark text-white font-sans">
         <header class="h-16 fixed top-0 left-0 w-full z-50 bg-gray-900 shadow-lg">
             <div class="max-w-7xl mx-auto px-6 flex items-center justify-between text-white h-full">
+                <!-- Logo -->
                 <div>
-                    <!-- Logo -->
-                    <a href="#" class="flex items-center">
+
+                    <a href="${pageContext.request.contextPath}/" class="flex items-center">
                         <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5"
                              stroke="currentColor" class="text-blue-600 size-8 text-xl font-bold mr-3 h-6 sm:h-9">
                         <path stroke-linecap="round" stroke-linejoin="round"
@@ -48,81 +49,93 @@ Click nbfs://nbhost/SystemFileSystem/Templates/JSP_Servlet/Html.html to edit thi
                         <span class="text-3xl font-bold">AprendeYa</span>
                     </a>
                 </div>
+                <!-- Menu -->
                 <nav>
-                    <!-- Menu -->
-                    <a href="" class="px-2">Inicio</a>
-                    <a href="" class="px-2">Cursos</a>
-                    <a href="" class="px-2">Nosotros</a>
+
+                    <a href="${pageContext.request.contextPath}/" class="px-2">Inicio</a>
+                    <a href="${pageContext.request.contextPath}/perfil" class="px-2">Mis cursos</a>
+                    <a href="${pageContext.request.contextPath}/nosotros" class="px-2">Nosotros</a>
                 </nav>
 
-                <button type="submit"
-                        class="bg-blue-600 hover:bg-blue-700 text-white font-semibold py-1 px-2 p rounded-xl cursor-pointer px-4 py-2.5 my-4">
-                    Iniciar sesion</button>
-                <!--                <div>
-                                     Boton usuario 
-                                    <button type="button" class="" id="user-menu-button" aria-expanded="false"
-                                            data-dropdown-toggle="dropdown">
-                                        <span class="sr-only">Open user menu</span>
-                                        <span
-                                            class="bg-blue-600 hover:bg-blue-700 text-white font-bold py-1 px-2 w-8 h-8 rounded-full flex items-center justify-center border-1 border-white cursor-pointer">J</span>
-                                    </button>
-                                     menu usuario  
-                                    <div class="hidden z-50 my-4 w-56 text-white rounded shadow bg-gray-700" id="dropdown">
-                                        <div class="py-3 px-4">
-                                            <span class="block font-semibold">Neil sims</span>
-                                            <span class="block truncate">name@flowbite.com</span>
-                                        </div>
-                                        <ul class="py-1" aria-labelledby="dropdown">
-                                            <li>
-                                                <a href="#"
-                                                   class="flex items-center py-2 px-4  hover:bg-gray-100 hover:bg-gray-600 hover:text-white gap-2">
-                                                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24"
-                                                         fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
-                                                         stroke-linejoin="round" class="lucide lucide-book-copy-icon lucide-book-copy">
-                                                    <path d="M5 7a2 2 0 0 0-2 2v11" />
-                                                    <path d="M5.803 18H5a2 2 0 0 0 0 4h9.5a.5.5 0 0 0 .5-.5V21" />
-                                                    <path
-                                                        d="M9 15V4a2 2 0 0 1 2-2h9.5a.5.5 0 0 1 .5.5v14a.5.5 0 0 1-.5.5H11a2 2 0 0 1 0-4h10" />
-                                                    </svg>
-                                                    Mis cursos
-                                                </a>
-                                            </li>
-                                            <li>
-                                                <a href="#"
-                                                   class="flex items-center py-2 px-4  hover:bg-gray-100 hover:bg-gray-600 hover:text-white gap-2">
-                                                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24"
-                                                         fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
-                                                         stroke-linejoin="round" class="lucide lucide-cog-icon lucide-cog">
-                                                    <path d="M11 10.27 7 3.34" />
-                                                    <path d="m11 13.73-4 6.93" />
-                                                    <path d="M12 22v-2" />
-                                                    <path d="M12 2v2" />
-                                                    <path d="M14 12h8" />
-                                                    <path d="m17 20.66-1-1.73" />
-                                                    <path d="m17 3.34-1 1.73" />
-                                                    <path d="M2 12h2" />
-                                                    <path d="m20.66 17-1.73-1" />
-                                                    <path d="m20.66 7-1.73 1" />
-                                                    <path d="m3.34 17 1.73-1" />
-                                                    <path d="m3.34 7 1.73 1" />
-                                                    <circle cx="12" cy="12" r="2" />
-                                                    <circle cx="12" cy="12" r="8" />
-                                                    </svg>
-                                                    Configuración
-                                                </a>
-                                            </li>
-                                        </ul>
-                                        <ul class="py-1" aria-labelledby="dropdown">
-                                            <li>
-                                                <a href="#" class="block py-2 px-4  hover:bg-gray-600">Cerrar sesión</a>
-                                            </li>
-                                        </ul>
-                                    </div>
-                                </div>-->
+                <c:choose>
+                    <c:when test="${not empty sessionScope.usuario}">
+                        <!-- Usuario logueado -->
+                        <div>
+                            <!--                            Boton usuario -->
+                            <button type="button" class="" id="user-menu-button" aria-expanded="false"
+                                    data-dropdown-toggle="dropdown">
+                                <span class="sr-only">Open user menu</span>
+                                <span
+                                    class="bg-blue-600 hover:bg-blue-700 text-white font-bold py-1 px-2 w-8 h-8 rounded-full flex items-center justify-center cursor-pointer">J</span>
+                            </button>
+                            <!--                            menu usuario  -->
+                            <div class="hidden z-50 my-4 w-56 text-white rounded shadow bg-gray-700" id="dropdown">
+                                <div class="py-3 px-4">
+                                    <span class="block font-semibold">${sessionScope.usuario.nombre}</span>
+                                    <span class="block truncate">${sessionScope.usuario.email}</span>
+                                </div>
+                                <ul class="py-1" aria-labelledby="dropdown">
+                                    <li>
+                                        <a href="${pageContext.request.contextPath}/perfil"
+                                           class="flex items-center py-2 px-4  hover:bg-gray-100 hover:bg-gray-600 hover:text-white gap-2">
+                                            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24"
+                                                 fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                                                 stroke-linejoin="round" class="lucide lucide-book-copy-icon lucide-book-copy">
+                                            <path d="M5 7a2 2 0 0 0-2 2v11" />
+                                            <path d="M5.803 18H5a2 2 0 0 0 0 4h9.5a.5.5 0 0 0 .5-.5V21" />
+                                            <path
+                                                d="M9 15V4a2 2 0 0 1 2-2h9.5a.5.5 0 0 1 .5.5v14a.5.5 0 0 1-.5.5H11a2 2 0 0 1 0-4h10" />
+                                            </svg>
+                                            Perfil
+                                        </a>
+                                    </li>
+                                    <li>
+                                        <a href="#"
+                                           class="flex items-center py-2 px-4  hover:bg-gray-100 hover:bg-gray-600 hover:text-white gap-2">
+                                            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24"
+                                                 fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                                                 stroke-linejoin="round" class="lucide lucide-cog-icon lucide-cog">
+                                            <path d="M11 10.27 7 3.34" />
+                                            <path d="m11 13.73-4 6.93" />
+                                            <path d="M12 22v-2" />
+                                            <path d="M12 2v2" />
+                                            <path d="M14 12h8" />
+                                            <path d="m17 20.66-1-1.73" />
+                                            <path d="m17 3.34-1 1.73" />
+                                            <path d="M2 12h2" />
+                                            <path d="m20.66 17-1.73-1" />
+                                            <path d="m20.66 7-1.73 1" />
+                                            <path d="m3.34 17 1.73-1" />
+                                            <path d="m3.34 7 1.73 1" />
+                                            <circle cx="12" cy="12" r="2" />
+                                            <circle cx="12" cy="12" r="8" />
+                                            </svg>
+                                            Configuración
+                                        </a>
+                                    </li>
+                                </ul>
+                                <ul class="py-1" aria-labelledby="dropdown">
+                                    <li>
+                                        <a href="${pageContext.request.contextPath}/LogoutServlet" class="block py-2 px-4  hover:bg-gray-600">Cerrar sesión</a>
+                                    </li>
+                                </ul>
+                            </div>
+
+
+                        </div>
+                    </c:when>
+
+                    <c:otherwise>
+                        <!-- Usuario NO logueado -->
+                        <a href="${pageContext.request.contextPath}/login.jsp"
+                           class="bg-blue-600 hover:bg-blue-700 text-white font-semibold py-1 px-2 p rounded-xl cursor-pointer px-4 py-2.5 my-4">
+                            Iniciar sesión</a>
+                        </c:otherwise>
+                    </c:choose>
             </div>
         </header>
 
-        <div class=" bg-blue-600 hero py-20 bg-gradient-to-b from-blue-900/30 to-brand-dark mt-16">
+        <div class=" bg-blue-600/65 hero py-20 bg-gradient-to-b from-blue-900/30 to-brand-dark mt-16">
             <div class="hero-content text-center">
                 <div class="max-w-3xl">
                     <h1 class="text-5xl font-bold text-white mb-6 mt-6">Aprende Nuevas Habilidades</h1>
@@ -135,23 +148,12 @@ Click nbfs://nbhost/SystemFileSystem/Templates/JSP_Servlet/Html.html to edit thi
         </div>
 
         <div class="container mx-auto px-4 md:px-12 m-16">
-            <!--            <div class="flex justify-center mb-10">
-                            <div class="relative w-full max-w-2xl">
-                                <span class="absolute inset-y-0 left-0 flex items-center pl-3">
-                                    <i class="fa-solid fa-magnifying-glass text-gray-400"></i>
-                                </span>
-                                <input type="text" placeholder="Buscar cursos..." class="input input-bordered w-full pl-10 bg-gray-800 border-gray-700 text-white focus:outline-none focus:border-blue-500 rounded-lg h-12" />
-                            </div>
-                        </div>-->
-
             <div class="flex flex-wrap justify-center gap-3">
-                <button class="btn btn-sm bg-brand-blue text-white border-none hover:bg-blue-700 px-6 rounded-full"><i class="fa-solid fa-layer-group"></i> Todos</button>
-                <button class="btn btn-sm btn-outline text-gray-300 hover:bg-gray-800 hover:text-white border-gray-700 px-4 rounded-full"><i class="fa-solid fa-laptop-code"></i> Desarrollo Web</button>
-                <button class="btn btn-sm btn-outline text-gray-300 hover:bg-gray-800 hover:text-white border-gray-700 px-4 rounded-full"><i class="fa-solid fa-palette"></i> Diséño</button>
-                <button class="btn btn-sm btn-outline text-gray-300 hover:bg-gray-800 hover:text-white border-gray-700 px-4 rounded-full"><i class="fa-solid fa-mobile-screen"></i> Marketing</button>
-                <button class="btn btn-sm btn-outline text-gray-300 hover:bg-gray-800 hover:text-white border-gray-700 px-4 rounded-full"><i class="fa-solid fa-briefcase"></i> Negocios</button>
-                <button class="btn btn-sm btn-outline text-gray-300 hover:bg-gray-800 hover:text-white border-gray-700 px-4 rounded-full"><i class="fa-solid fa-chart-simple"></i> Data Science</button>
-                <button class="btn btn-sm btn-outline text-gray-300 hover:bg-gray-800 hover:text-white border-gray-700 px-4 rounded-full"><i class="fa-solid fa-camera"></i> Fotografìa</button>
+                <button class="btn btn-sm bg-brand-blue text-white border-none hover:bg-blue-700 px-6 rounded-full">Todos</button>
+                <button class="btn btn-sm btn-outline text-gray-300 hover:bg-gray-800 hover:text-white border-gray-700 px-4 rounded-full">Diséño</button>
+                <button class="btn btn-sm btn-outline text-gray-300 hover:bg-gray-800 hover:text-white border-gray-700 px-4 rounded-full">Desarrollo Web</button>
+                <button class="btn btn-sm btn-outline text-gray-300 hover:bg-gray-800 hover:text-white border-gray-700 px-4 rounded-full">Marketing</button>
+                <button class="btn btn-sm btn-outline text-gray-300 hover:bg-gray-800 hover:text-white border-gray-700 px-4 rounded-full">Data Science</button>
             </div>
         </div>
 
@@ -159,11 +161,12 @@ Click nbfs://nbhost/SystemFileSystem/Templates/JSP_Servlet/Html.html to edit thi
             <h2 class="text-2xl font-bold text-white mb-8">Cursos Destacados</h2>
 
             <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-    <c:forEach var="c" items="${listaCursos}">
-                <div class="card bg-brand-card shadow-xl border border-gray-800">
-                
+                <!-- Card de curso -->
+                <c:forEach var="c" items="${listaCursos}">
+                    <div class="card bg-brand-card shadow-xl border border-gray-800" data-category="${c.categoria}">
+
                         <figure class="relative h-48">
-                            <img src="https://images.unsplash.com/photo-1633356122544-f134324a6cee?q=80&w=1000&auto=format&fit=crop" alt="React" class="w-full h-full object-cover" />
+                            <img src="${c.imagen}" alt="React" class="w-full h-full object-cover" />
                             <div class="absolute top-2 right-2 badge bg-yellow-400 text-black border-none font-bold">Destacado</div>
                         </figure>
 
@@ -172,10 +175,10 @@ Click nbfs://nbhost/SystemFileSystem/Templates/JSP_Servlet/Html.html to edit thi
                             <div class="badge bg-blue-900 text-blue-200 border-none mb-2">${c.categoria}</div>
                             <h2 class="card-title text-white text-lg leading-tight">${c.titulo}</h2>
                             <p class="text-gray-400 text-sm mt-2">${c.descripcion}</p>
-                            <p class="text-gray-500 text-xs mt-4">${c.profesor}</p>
+                            <p class="text-gray-500 text-xs">Por: ${c.profesor}</p>
                             <div class="flex items-center gap-4 text-xs text-gray-400 mt-2 mb-4">
                                 <span class="text-yellow-400 font-bold"><i class="fa-solid fa-star"></i> 4.8</span>
-<!--                                <span><i class="fa-solid fa-user-group"></i> 2340</span>-->
+                                <!--                                <span><i class="fa-solid fa-user-group"></i> 2340</span>-->
                                 <span><i class="fa-regular fa-clock"></i> ${c.duracion} horas</span>
                             </div>
                             <div class="card-actions justify-between items-center mt-auto">
@@ -184,10 +187,10 @@ Click nbfs://nbhost/SystemFileSystem/Templates/JSP_Servlet/Html.html to edit thi
                             </div>
 
                         </div>
-                 
-                </div>
-   </c:forEach>
-         
+
+                    </div>
+                </c:forEach>
+
 
             </div>
         </div>
@@ -248,6 +251,23 @@ Click nbfs://nbhost/SystemFileSystem/Templates/JSP_Servlet/Html.html to edit thi
                 <p>© 2025 AprenderYa. Todos los derechos reservados.</p>
             </aside>
         </div>
+        <script>
+            const buttons = document.querySelectorAll('.btn');
+            const cards = document.querySelectorAll('.card');
+
+            buttons.forEach(btn => {
+                btn.addEventListener('click', () => {
+                    const category = btn.textContent.trim();
+                    cards.forEach(card => {
+                        if (category === 'Todos' || card.dataset.category === category) {
+                            card.style.display = 'block';
+                        } else {
+                            card.style.display = 'none';
+                        }
+                    });
+                });
+            });
+        </script>
         <script src="https://cdn.jsdelivr.net/npm/flowbite@4.0.1/dist/flowbite.min.js"></script>
     </body>
 </html>
