@@ -46,6 +46,11 @@ public class UsuarioServlet extends HttpServlet {
                     response.sendRedirect("usuarioPanel.jsp");
                     break;
                 case "eliminar":
+                    int idEliminar = Integer.parseInt(request.getParameter("id_usuario"));
+    
+                    dao.eliminar(idEliminar);
+
+                    response.sendRedirect("usuarioPanel.jsp");
                     break;
                 default:
                     response.sendRedirect("usuarioPanel.jsp");
