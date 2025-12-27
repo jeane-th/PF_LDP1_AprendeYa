@@ -156,15 +156,23 @@ public class UsuarioDAOImpl implements UsuarioDAO {
 
     @Override
     public boolean eliminar(int id) {
-        String sql = "UPDATE tb_usuarios SET estado=0 WHERE idUsuario=?";
+        // CAMBIO: Usamos DELETE para borrar físicamente el registro
+        // Asegúrate de que el nombre de la columna sea 'idUsuario' (tal cual tu imagen)
+        String sql = "DELETE FROM tb_usuarios WHERE idUsuario=?";
+
         try {
             con = Conexion.getConnection();
             ps = con.prepareStatement(sql);
             ps.setInt(1, id);
-            ps.executeUpdate();
-            return true;
+
+            int filas = ps.executeUpdate(); // Ejecuta el borrado real
+            return filas > 0;
+
         } catch (Exception e) {
-            System.err.println("Error en eliminar (baja lógica): " + e);
+            System.err.println("Error al eliminar de la BD: " + e);
+            // IMPORTANTE: Si te sale error aquí, lee la advertencia de abajo
+        } finally {
+            try { if(ps!=null) ps.close(); if(con!=null) con.close(); } catch(Exception e){}
         }
         return false;
     }
@@ -217,5 +225,6 @@ public class UsuarioDAOImpl implements UsuarioDAO {
         return false;
     }
 }
+
 
 
