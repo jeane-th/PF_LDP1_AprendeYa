@@ -166,6 +166,15 @@
                                                 <i class="fa-solid fa-lock"></i> Bloquear Usuario
                                             </a>
                                         </li>
+                                        <li>
+                                            <a class="text-error font-bold" 
+                                               href="UsuarioServlet?accion=eliminar&id_usuario=<%= u.getId_usuario() %>"
+                                               onclick="return confirm('⚠️ ¿Estás seguro de eliminar a este usuario? Pasará a estado Inactivo.')">
+
+                                               <i class="fa-solid fa-trash-can"></i> Eliminar
+                                            </a>
+                                        </li>
+
                                     </ul>
                                             </div>
                             </td>
