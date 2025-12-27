@@ -108,4 +108,103 @@ public class ReviewDAOImpl implements ReviewDAO {
         return 0;
     }
 
+    @Override
+    public List<Review> listarTodos() {
+        List<Review> lista = new ArrayList<>();
+        String sql = "SELECT r.idReview, r.idCurso, r.idUsuario, r.comentario, r.valoracion, r.fecha, u.nombre, c.titulo "
+                + "FROM reviews r "
+                + "LEFT JOIN tb_usuarios u ON r.idUsuario = u.idUsuario "
+                + "LEFT JOIN tb_cursos c ON r.idCurso = c.idCurso "
+                + "ORDER BY r.fecha DESC";
+        try (Connection con = Conexion.getConnection();
+                PreparedStatement ps = con.prepareStatement(sql);
+                ResultSet rs = ps.executeQuery()) {
+            while (rs.next()) {
+                Review r = new Review();
+                r.setIdReview(rs.getInt("idReview"));
+                r.setIdCurso(rs.getInt("idCurso"));
+                r.setIdUsuario(rs.getInt("idUsuario"));
+                r.setComentario(rs.getString("comentario"));
+                r.setValoracion(rs.getInt("valoracion"));
+                r.setFecha(rs.getTimestamp("fecha"));
+                r.setNombreUsuario(rs.getString("nombre"));
+                r.setNombreCurso(rs.getString("titulo"));
+                lista.add(r);
+            }
+        } catch (Exception e) {
+            System.err.println("Error en listarTodos: " + e.getMessage());
+        }
+        return lista;
+    }
+
+    @Override
+    public boolean actualizar(Review r) {
+        String sql = "UPDATE reviews SET idCurso = ?, idUsuario = ?, comentario = ?, valoracion = ? WHERE idReview = ?";
+        try (Connection con = Conexion.getConnection();
+                PreparedStatement ps = con.prepareStatement(sql)) {
+            ps.setInt(1, r.getIdCurso());
+            ps.setInt(2, r.getIdUsuario());
+            ps.setString(3, r.getComentario());
+            ps.setInt(4, r.getValoracion());
+            ps.setInt(5, r.getIdReview());
+            return ps.executeUpdate() > 0;
+        } catch (Exception e) {
+            System.err.println("Error en actualizar review: " + e.getMessage());
+            return false;
+        }
+    }
+
+    @Override
+    public boolean eliminar(int id) {
+        String sql = "DELETE FROM reviews WHERE idReview = ?";
+        try (Connection con = Conexion.getConnection();
+                PreparedStatement ps = con.prepareStatement(sql)) {
+            ps.setInt(1, id);
+            return ps.executeUpdate() > 0;
+        } catch (Exception e) {
+            System.err.println("Error en eliminar review: " + e.getMessage());
+            return false;
+        }
+    }
+
+    @Override
+    public Review buscarPorId(int id) {
+        String sql = "SELECT * FROM reviews WHERE idReview = ?";
+        try (Connection con = Conexion.getConnection();
+                PreparedStatement ps = con.prepareStatement(sql)) {
+            ps.setInt(1, id);
+            try (ResultSet rs = ps.executeQuery()) {
+                if (rs.next()) {
+                    Review r = new Review();
+                    r.setIdReview(rs.getInt("idReview"));
+                    r.setIdCurso(rs.getInt("idCurso"));
+                    r.setIdUsuario(rs.getInt("idUsuario"));
+                    r.setComentario(rs.getString("comentario"));
+                    r.setValoracion(rs.getInt("valoracion"));
+                    r.setFecha(rs.getTimestamp("fecha"));
+                    return r;
+                }
+            }
+        } catch (Exception e) {
+            System.err.println("Error en buscarPorId review: " + e.getMessage());
+        }
+        return null;
+    }
+
+    @Override
+    public boolean insertarAdmin(Review r) {
+        String insertSql = "INSERT INTO reviews(idCurso, idUsuario, comentario, valoracion, fecha) VALUES(?,?,?,?,NOW())";
+        try (Connection con = Conexion.getConnection();
+             PreparedStatement psIns = con.prepareStatement(insertSql)) {
+            psIns.setInt(1, r.getIdCurso());
+            psIns.setInt(2, r.getIdUsuario());
+            psIns.setString(3, r.getComentario());
+            psIns.setInt(4, r.getValoracion());
+            int filas = psIns.executeUpdate();
+            return filas > 0;
+        } catch (Exception e) {
+            System.err.println("Error en ReviewDAOImpl.insertarAdmin: " + e.getMessage());
+        }
+        return false;
+    }
 }
