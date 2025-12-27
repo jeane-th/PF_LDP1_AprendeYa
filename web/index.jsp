@@ -74,7 +74,7 @@ Click nbfs://nbhost/SystemFileSystem/Templates/JSP_Servlet/Html.html to edit thi
                                 <div class="py-3 px-4">
                                     <span class="block font-semibold">${sessionScope.usuario.nombre}</span>
                                     <span class="block truncate">${sessionScope.usuario.email}</span>
-                                    <span class="block truncate">${sessionScope.usuario.rol}</span>
+ 
                                 </div>
                                 <ul class="py-1" aria-labelledby="dropdown">
                                     <li>
@@ -102,7 +102,7 @@ Click nbfs://nbhost/SystemFileSystem/Templates/JSP_Servlet/Html.html to edit thi
                                                 <path d="m17 3.34-1 1.73" /><path d="M2 12h2" /><path d="m20.66 17-1.73-1" /> <path d="m20.66 7-1.73 1" /><path d="m3.34 17 1.73-1" /> <path d="m3.34 7 1.73 1" /> 
                                                 <circle cx="12" cy="12" r="2" />  <circle cx="12" cy="12" r="8" />
                                                 </svg>
-                                                Administrador
+                                                Panel de administracion
                                             </a>
                                         </li>
                                     </c:if>
