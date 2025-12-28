@@ -6,6 +6,8 @@ package controlador;
 
 import dao.CursoDAO;
 import dao.CursoDAOImpl;
+import dao.ReviewDAO;
+import dao.ReviewDAOImpl;
 import java.io.IOException;
 import java.io.PrintWriter;
 import jakarta.servlet.ServletException;
@@ -28,10 +30,12 @@ public class IndexServlet extends HttpServlet {
             throws ServletException, IOException {
         CursoDAO dao = new CursoDAOImpl();
         List<Curso> cursos = dao.listar();
-        System.out.println("Cantidad de cursos: " + cursos.size());
+
+        //System.out.println("Cantidad de cursos: " + cursos.size());
         cursos.forEach(c -> System.out.println(c.getTitulo()));
         System.out.println("Se ejecuto el GET");
         request.setAttribute("listaCursos", dao.listar());
         request.getRequestDispatcher("index.jsp").forward(request, response);
+
     }
 }

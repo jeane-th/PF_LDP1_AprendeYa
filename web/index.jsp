@@ -168,7 +168,7 @@ Click nbfs://nbhost/SystemFileSystem/Templates/JSP_Servlet/Html.html to edit thi
                             <p class="text-gray-400 text-sm mt-2">${c.descripcion}</p>
                             <p class="text-gray-500 text-xs">Por: ${c.profesor}</p>
                             <div class="flex items-center gap-4 text-xs text-gray-400 mt-2 mb-4">
-                                <span class="text-yellow-400 font-bold"><i class="fa-solid fa-star"></i> 4.8</span>
+                                <span class="text-yellow-400 font-bold"><i class="fa-solid fa-star"></i>5.0</span>
                                 <!--                                <span><i class="fa-solid fa-user-group"></i> 2340</span>-->
                                 <span><i class="fa-regular fa-clock"></i> ${c.duracion} horas</span>
                             </div>

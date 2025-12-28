@@ -23,23 +23,24 @@
         <title>AprendeYa | Login</title>
     </head>
     <body class="bg-gray-900">
-        
-         <%-- mensaje cierre de sesion --%>
-            <c:if test="${param.logout eq 'success'}">
-                <div id="logoutToast"
-                     class="fixed top-5 right-5 bg-green-600 text-white px-4 py-2 rounded-lg shadow-lg z-50 transition">
-                    ✅ Sesión cerrada correctamente.
-                </div>
-                <script>
-                    // arreglo desbanecimiento
-                    setTimeout(() => {
-                        const toast = document.getElementById('logoutToast');
-                        if (toast) toast.style.display = 'none';
-                    }, 3000);
-                </script>
-             </c:if>
-        
-           <header class="h-16 fixed top-0 left-0 w-full z-50 bg-gray-900 shadow-lg">
+
+        <%-- mensaje cierre de sesion --%>
+        <c:if test="${param.logout eq 'success'}">
+            <div id="logoutToast"
+                 class="fixed top-5 right-5 bg-green-600 text-white px-4 py-2 rounded-lg shadow-lg z-50 transition">
+                ✅ Sesión cerrada correctamente.
+            </div>
+            <script>
+                // arreglo desbanecimiento
+                setTimeout(() => {
+                    const toast = document.getElementById('logoutToast');
+                    if (toast)
+                        toast.style.display = 'none';
+                }, 3000);
+            </script>
+        </c:if>
+
+        <header class="h-16 fixed top-0 left-0 w-full z-50 bg-gray-900 shadow-lg">
             <div class="max-w-7xl mx-auto px-6 flex items-center justify-between text-white h-full">
                 <!-- Logo -->
                 <div>
@@ -77,7 +78,7 @@
                                 <div class="py-3 px-4">
                                     <span class="block font-semibold">${sessionScope.usuario.nombre}</span>
                                     <span class="block truncate">${sessionScope.usuario.email}</span>
- 
+
                                 </div>
                                 <ul class="py-1" aria-labelledby="dropdown">
                                     <li>
@@ -178,28 +179,66 @@
                 </form>
             </section>
         </main>
+        <footer class="flex flex-rown justify-between gap-10 p-10 bg-gray-900 text-base-content border-t border-gray-800 max-w-7xl mx-auto">
+            <aside>
+                <div class="flex items-center gap-2 mb-2">
+                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5"
+                         stroke="currentColor" class="text-blue-600 size-8 text-xl font-bold mr-3 h-6 sm:h-9">
+                    <path stroke-linecap="round" stroke-linejoin="round"
+                          d="M12 6.042A8.967 8.967 0 0 0 6 3.75c-1.052 0-2.062.18-3 .512v14.25A8.987 8.987 0 0 1 6 18c2.305 0 4.408.867 6 2.292m0-14.25a8.966 8.966 0 0 1 6-2.292c1.052 0 2.062.18 3 .512v14.25A8.987 8.987 0 0 0 18 18a8.967 8.967 0 0 0-6 2.292m0-14.25v14.25" />
+                    </svg>
+                    <span class="text-xl font-bold text-white">AprenderYa</span>
+                </div>
+                <p class="text-gray-400 max-w-xs">Tu plataforma de aprendizaje online para alcanzar tus metas profesionales.</p>
+            </aside> 
+            <nav class="flex flex-col">
+                <h6 class="footer-title text-white opacity-100">Cursos</h6> 
+                <a class="link link-hover text-gray-400">Desarrollo Web</a>
+                <a class="link link-hover text-gray-400">Diseño</a>
+                <a class="link link-hover text-gray-400">Marketing</a>
+                <a class="link link-hover text-gray-400">Negocios</a>
+            </nav> 
+            <nav class="flex flex-col">
+                <h6 class="footer-title text-white opacity-100">Empresa</h6> 
+                <a class="link link-hover text-gray-400">Sobre Nosotros</a>
+                <a class="link link-hover text-gray-400">Blog</a>
+                <a class="link link-hover text-gray-400">Carreras</a>
+                <a class="link link-hover text-gray-400">Contacto</a>
+            </nav> 
+            <nav class="flex flex-col">
+                <h6 class="footer-title text-white opacity-100">Legal</h6> 
+                <a class="link link-hover text-gray-400">Terminos de Uso</a>
+                <a class="link link-hover text-gray-400">Privacidad</a>
+                <a class="link link-hover text-gray-400">Cookies</a>
+            </nav>
+        </footer>
+        <div class="footer footer-center p-4 bg-gray-900 text-gray-500 border-t border-gray-800">
+            <aside class="text-center">
+                <p>© 2025 AprenderYa. Todos los derechos reservados.</p>
+            </aside>
+        </div>
         <script src="https://cdn.jsdelivr.net/npm/flowbite@4.0.1/dist/flowbite.min.js"></script>
 
         <!-- validacion -->
         <script>
-            const validate = new JustValidate('#formLogin', {
-                errorFieldCssClass: 'border-red-500',
-                errorLabelCssClass: 'text-red-500 text-sm mt-1',
-                focusInvalidField: true
-            });
-
-            validate
-                    .addField('#email', [
-                        {rule: 'required', errorMessage: 'Complete su email'},
-                        {rule: 'email', errorMessage: 'Email inválido'}
-                    ])
-                    .addField('#password', [
-                        {rule: 'required', errorMessage: 'Complete su contraseña'},
-                        {rule: 'minLength', value: 6, errorMessage: 'Mínimo 6 caracteres'}
-                    ])
-                    .onSuccess((event) => {
-                        event.target.submit();
+                    const validate = new JustValidate('#formLogin', {
+                        errorFieldCssClass: 'border-red-500',
+                        errorLabelCssClass: 'text-red-500 text-sm mt-1',
+                        focusInvalidField: true
                     });
+
+                    validate
+                            .addField('#email', [
+                                {rule: 'required', errorMessage: 'Complete su email'},
+                                {rule: 'email', errorMessage: 'Email inválido'}
+                            ])
+                            .addField('#password', [
+                                {rule: 'required', errorMessage: 'Complete su contraseña'},
+                                {rule: 'minLength', value: 6, errorMessage: 'Mínimo 6 caracteres'}
+                            ])
+                            .onSuccess((event) => {
+                                event.target.submit();
+                            });
         </script>
 
     </body>
