@@ -21,7 +21,6 @@
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <title>Gestión de Comentarios - AprendeYa</title>
-
         <link href="https://cdn.jsdelivr.net/npm/daisyui@3.9.4/dist/full.css" rel="stylesheet" type="text/css" />
         <script src="https://cdn.tailwindcss.com"></script>
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css" integrity="sha512-SnH5WK+bZxgPHs44uWIX+LLJAJ9/2PkPKZ5QiAj6Ta86w+fsb2TkcmfRyVX3pBnMFcV7oQPJkl9QevSCWr3W6A==" crossorigin="anonymous" referrerpolicy="no-referrer" />
@@ -36,19 +35,19 @@
                     Volver
                 </a>
                 <div class="text-sm breadcrumbs text-gray-400">
-                     <ul>
-                     <li><a href="usuarioPanel.jsp">Panel de Administración</a></li>
-                     <li><a>Comentarios</a></li>
+                    <ul>
+                        <li><a href="usuarioPanel.jsp">Panel de Administración</a></li>
+                        <li><a>Comentarios</a></li>
                     </ul>
                 </div>
             </div>
-            
+
             <div class="tabs tabs-boxed bg-transparent mb-8 gap-4 border-b border-white/10 rounded-none pb-0">
-                <a href="cursoPanel.jsp" class="tab hover:text-white">Cursos</a>
-                <a href="usuarioPanel.jsp" class="tab hover:text-white">Usuarios</a>
-                <a href="matriculaPanel.jsp" class="tab hover:text-white">Matrículas</a>
-                <a class="tab tab-active text-primary border-b-2 border-primary font-bold bg-transparent">Comentarios</a>
-                <a class="tab hover:text-white">Reportes</a>
+                <a href="${pageContext.request.contextPath}/cursoPanel.jsp" class="tab hover:text-white">Cursos</a>
+                <a href="${pageContext.request.contextPath}/usuarioPanel.jsp" class="tab hover:text-white">Usuarios</a>
+                <a href="#" " class="tab hover:text-white">Matrículas</a>
+                <a href="${pageContext.request.contextPath}/comentariosAdmin.jsp"  class="tab tab-active text-primary border-b-2 border-primary font-bold bg-transparent"">Comentarios</a>
+                <a href="#" class="tab hover:text-white">Reportes</a>
             </div>
 
             <div class="mb-8">
@@ -56,37 +55,44 @@
                 <p class="text-gray-400">Administra los comentarios de los cursos.</p>
                 <p class="text-gray-400">Total de comentarios: <%= listaComentarios.size()%></p>
             </div>
+            <div class="bg-[#1d232a] p-4 rounded-lg border border-white/5 mb-6 flex flex-wrap gap-4 items-center">
+                <div class="relative grow max-w-md">
+                    <span class="absolute inset-y-0 left-0 flex items-center pl-3 text-gray-500">🔍</span>
+                    <input type="text" id="searchInput" 
+                           oninput="filterUsers()" placeholder="Buscar por nombre o email..." class="input input-bordered w-full pl-10 bg-[#15191e] border-white/10 focus:border-primary" />
+                </div>
+            </div>
 
             <div class="overflow-x-auto bg-[#1d232a] rounded-lg border border-white/5 shadow-xl">
                 <table class="table w-full">
                     <thead class="bg-base-200/50 text-gray-400 font-semibold uppercase text-xs">
                         <tr>
                             <th class="py-4 pl-6">ID</th>
-                            <th>Curso</th>
-                            <th>Usuario</th>
-                            <th>Comentario</th>
-                            <th>Valoración</th>
+                            <th class="min-w-[180px]">Curso</th>
+                            <th class="min-w-[180px]">Usuario</th>
+                            <th class="max-w-[400px]">Comentario</th>
+                            <th class="text-center">Valoración</th>
                             <th>Fecha</th>
                             <th class="pr-6 text-right">Acciones</th>
                         </tr>
                     </thead>
                     <tbody class="text-sm" id="commentsTableBody">
-                        <% for (Review r : listaComentarios) { %>
-                        <tr class="hover:bg-white/5 border-b border-white/5 transition-colors">
-                            <td class="pl-6 py-4"><%= r.getIdReview() %></td>
-                            <td><%= r.getNombreCurso() %></td>
-                            <td><%= r.getNombreUsuario() %></td>
-                            <td><%= r.getComentario() %></td>
-                            <td><%= r.getValoracion() %></td>
-                            <td><%= r.getFecha() %></td>
-                            <td class="text-right pr-6">
+                        <% for (Review r : listaComentarios) {%>
+                        <tr class="user-row hover:bg-white/5 border-b border-white/5 transition-colors">
+                            <td class="pl-6 py-4"><%= r.getIdReview()%></td>
+                            <td class="min-w-[180px]"><%= r.getNombreCurso()%></td>
+                            <td class="min-w-[180px]"><%= r.getNombreUsuario()%></td>
+                            <td class="max-w-[400px]"><%= r.getComentario()%></td>
+                            <td class="text-center"><span class="mr-2">⭐</span><%= r.getValoracion()%></td>
+                            <td><%= r.getFecha()%></td>
+                            <td class="text-center">
                                 <div class="dropdown dropdown-left">
                                     <div tabindex="0" role="button" class="btn btn-ghost btn-circle btn-sm">
-                                        <i class="fa-solid fa-ellipsis-vertical text-lg">⋮</i>
+                                        <i class="fa-solid fa-ellipsis-vertical text-lg"></i>
                                     </div>
                                     <ul tabindex="0" class="dropdown-content z-[1] menu p-2 shadow bg-base-100 rounded-box w-52">
                                         <li>
-                                            <a onclick="abrirModalEditar('<%= r.getIdReview()%>', '<%= r.getIdCurso() %>', '<%= r.getIdUsuario() %>', '<%= r.getComentario() %>', '<%= r.getValoracion() %>')">
+                                            <a onclick="abrirModalEditar('<%= r.getIdReview()%>', '<%= r.getIdCurso()%>', '<%= r.getIdUsuario()%>', '<%= r.getComentario()%>', '<%= r.getValoracion()%>')">
                                                 <i class="fa-regular fa-pen-to-square"></i> Editar
                                             </a>
                                         </li>
@@ -99,12 +105,12 @@
                                 </div>
                             </td>
                         </tr>
-                        <% } %>
+                        <% }%>
                     </tbody>
                 </table>
             </div>
         </div>
-        
+
         <!-- Modal Editar -->
         <dialog id="modal_editar_comentario" class="modal">
             <div class="modal-box w-11/12 max-w-3xl bg-slate-900 text-white">
@@ -138,7 +144,31 @@
             </div>
             <form method="dialog" class="modal-backdrop"><button>close</button></form>
         </dialog>
+        <script>
+            // el filtro funciona
+            function filterUsers() {
+                const searchInput = document.getElementById('searchInput');
+                const rows = document.querySelectorAll('.user-row');
+                const noResults = document.getElementById('noResults');
 
+                const searchTerm = searchInput.value.toLowerCase();
+
+                let visibleCount = 0;
+
+                rows.forEach(row => {
+                    const rowText = row.innerText.toLowerCase();
+
+                    const matchesSearch = rowText.includes(searchTerm);
+
+                    if (matchesSearch) {
+                        row.style.display = '';
+                        visibleCount++;
+                    } else {
+                        row.style.display = 'none';
+                    }
+                });
+            }
+        </script>
         <script>
             function abrirModalEditar(id, idCurso, idUsuario, comentario, valoracion) {
                 document.getElementById('modal_edit_id').value = id;
