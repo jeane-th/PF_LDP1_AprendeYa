@@ -17,8 +17,8 @@
         <title>AprendeYa | Curso: </title>
         <meta name="viewport" content="width=device-width, initial-scale=1">
     </head>
-    <body class="bg-gray-900">
-         <header class="h-16 fixed top-0 left-0 w-full z-50 bg-gray-900 shadow-lg">
+    <body>
+        <header class="h-16 fixed top-0 left-0 w-full z-50 bg-gray-900 shadow-lg">
             <div class="max-w-7xl mx-auto px-6 flex items-center justify-between text-white h-full">
                 <!-- Logo -->
                 <div>
@@ -56,7 +56,7 @@
                                 <div class="py-3 px-4">
                                     <span class="block font-semibold">${sessionScope.usuario.nombre}</span>
                                     <span class="block truncate">${sessionScope.usuario.email}</span>
- 
+
                                 </div>
                                 <ul class="py-1" aria-labelledby="dropdown">
                                     <li>
@@ -197,41 +197,37 @@
                 </section>
             </c:if>
         </main>
-                        <footer class="flex flex-rown justify-between gap-10 p-10 bg-gray-900 text-base-content border-t border-gray-800 max-w-7xl mx-auto">
+        <footer class="footer p-10 bg-brand-dark text-base-content border-t border-gray-800 max-w-7xl mx-auto">
             <aside>
                 <div class="flex items-center gap-2 mb-2">
-                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5"
-                         stroke="currentColor" class="text-blue-600 size-8 text-xl font-bold mr-3 h-6 sm:h-9">
-                    <path stroke-linecap="round" stroke-linejoin="round"
-                          d="M12 6.042A8.967 8.967 0 0 0 6 3.75c-1.052 0-2.062.18-3 .512v14.25A8.987 8.987 0 0 1 6 18c2.305 0 4.408.867 6 2.292m0-14.25a8.966 8.966 0 0 1 6-2.292c1.052 0 2.062.18 3 .512v14.25A8.987 8.987 0 0 0 18 18a8.967 8.967 0 0 0-6 2.292m0-14.25v14.25" />
-                    </svg>
+                    <i class="fa-solid fa-book-open text-blue-500 text-xl"></i>
                     <span class="text-xl font-bold text-white">AprenderYa</span>
                 </div>
                 <p class="text-gray-400 max-w-xs">Tu plataforma de aprendizaje online para alcanzar tus metas profesionales.</p>
             </aside> 
-            <nav class="flex flex-col">
+            <nav>
                 <h6 class="footer-title text-white opacity-100">Cursos</h6> 
                 <a class="link link-hover text-gray-400">Desarrollo Web</a>
                 <a class="link link-hover text-gray-400">Diseño</a>
                 <a class="link link-hover text-gray-400">Marketing</a>
                 <a class="link link-hover text-gray-400">Negocios</a>
             </nav> 
-            <nav class="flex flex-col">
+            <nav>
                 <h6 class="footer-title text-white opacity-100">Empresa</h6> 
                 <a class="link link-hover text-gray-400">Sobre Nosotros</a>
                 <a class="link link-hover text-gray-400">Blog</a>
                 <a class="link link-hover text-gray-400">Carreras</a>
                 <a class="link link-hover text-gray-400">Contacto</a>
             </nav> 
-            <nav class="flex flex-col">
+            <nav>
                 <h6 class="footer-title text-white opacity-100">Legal</h6> 
                 <a class="link link-hover text-gray-400">Terminos de Uso</a>
                 <a class="link link-hover text-gray-400">Privacidad</a>
                 <a class="link link-hover text-gray-400">Cookies</a>
             </nav>
         </footer>
-        <div class="footer footer-center p-4 bg-gray-900 text-gray-500 border-t border-gray-800">
-            <aside class="text-center">
+        <div class="footer footer-center p-4 bg-brand-dark text-gray-500 border-t border-gray-800">
+            <aside>
                 <p>© 2025 AprenderYa. Todos los derechos reservados.</p>
             </aside>
         </div>

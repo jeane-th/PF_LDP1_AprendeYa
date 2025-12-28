@@ -49,6 +49,31 @@
         </a>
     </div>
 
+    <!-- Mensajes de éxito o error -->
+    <c:if test="${param.success == 'insertar'}">
+        <div class="bg-green-600 text-white px-4 py-2 mb-4 rounded">
+            ✅ Curso agregado correctamente.
+        </div>
+    </c:if>
+
+    <c:if test="${param.success == 'actualizar'}">
+        <div class="bg-green-600 text-white px-4 py-2 mb-4 rounded">
+            ✅ Curso actualizado correctamente.
+        </div>
+    </c:if>
+
+    <c:if test="${param.success == 'eliminar'}">
+        <div class="bg-green-600 text-white px-4 py-2 mb-4 rounded">
+            ✅ Curso eliminado correctamente.
+        </div>
+    </c:if>
+
+    <c:if test="${param.error != null}">
+        <div class="bg-red-600 text-white px-4 py-2 mb-4 rounded">
+            ⚠ Ocurrió un error al procesar la acción. Intenta nuevamente.
+        </div>
+    </c:if>
+
     <div class="overflow-x-auto">
         <table class="table w-full border border-gray-700 text-sm">
             <thead class="bg-gray-800 text-blue-300 uppercase">
@@ -65,40 +90,38 @@
                 </tr>
             </thead>
             <tbody>
-                
-                
-               <c:forEach var="c" items="${listaCursos}">
-                <tr class="hover:bg-gray-800">
-                    <td class="py-2 px-4">${c.idCurso}</td>
-                    <td class="py-2 px-4 font-semibold text-blue-400">${c.titulo}</td>
-                    <td class="py-2 px-4">${c.categoria}</td>
-                    <td class="py-2 px-4">${c.profesor}</td>
-                    <td class="py-2 px-4 text-green-400">S/ ${c.precio}</td>                     
-                    <td class="py-2 px-4">${c.duracion}</td>
-                    <td class="py-2 px-4 text-yellow-400 font-semibold">${c.totalMatriculados}</td>
-                    <td class="py-2 px-4">
-                        <c:choose>
-                            <c:when test="${c.estado}">
-                                <span class="text-green-400 font-semibold">Activo</span>
-                            </c:when>
-                            <c:otherwise>
-                                <span class="text-red-400 font-semibold">Inactivo</span>
-                            </c:otherwise>
-                        </c:choose>
-                    </td>
-                    <td class="py-2 px-4 flex gap-2">
-                        <a href="${pageContext.request.contextPath}/admin/cursos?action=editar&id=${c.idCurso}"
-                            class="bg-yellow-500 hover:bg-yellow-600 text-white px-3 py-1 rounded text-xs font-semibold transition">
-                            ✏ Editar
-                        </a>
-                        <a href="${pageContext.request.contextPath}/admin/cursos?action=eliminar&id=${c.idCurso}"
-                            class="bg-red-600 hover:bg-red-700 text-white px-3 py-1 rounded text-xs font-semibold transition"
-                            onclick="return confirm('¿Estás seguro de eliminar el curso \"${c.titulo}\"?');">
-                             🗑 Eliminar
-                        </a>
-                                </td>
-                            </tr>
-            </c:forEach>
+                <c:forEach var="c" items="${listaCursos}">
+                    <tr class="hover:bg-gray-800">
+                        <td class="py-2 px-4">${c.idCurso}</td>
+                        <td class="py-2 px-4 font-semibold text-blue-400">${c.titulo}</td>
+                        <td class="py-2 px-4">${c.categoria}</td>
+                        <td class="py-2 px-4">${c.profesor}</td>
+                        <td class="py-2 px-4 text-green-400">S/ ${c.precio}</td>                     
+                        <td class="py-2 px-4">${c.duracion}</td>
+                        <td class="py-2 px-4 text-yellow-400 font-semibold">${c.totalMatriculados}</td>
+                        <td class="py-2 px-4">
+                            <c:choose>
+                                <c:when test="${c.estado}">
+                                    <span class="text-green-400 font-semibold">Activo</span>
+                                </c:when>
+                                <c:otherwise>
+                                    <span class="text-red-400 font-semibold">Inactivo</span>
+                                </c:otherwise>
+                            </c:choose>
+                        </td>
+                        <td class="py-2 px-4 flex gap-2">
+                            <a href="${pageContext.request.contextPath}/admin/cursos?action=editar&id=${c.idCurso}"
+                                class="bg-yellow-500 hover:bg-yellow-600 text-white px-3 py-1 rounded text-xs font-semibold transition">
+                                ✏ Editar
+                            </a>
+                            <a href="${pageContext.request.contextPath}/admin/cursos?action=eliminar&id=${c.idCurso}"
+                                class="bg-red-600 hover:bg-red-700 text-white px-3 py-1 rounded text-xs font-semibold transition"
+                                onclick="return confirm('¿Estás seguro de eliminar el curso \"${c.titulo}\"?');">
+                                 🗑 Eliminar
+                            </a>
+                        </td>
+                    </tr>
+                </c:forEach>
             </tbody>
         </table>
     </div>

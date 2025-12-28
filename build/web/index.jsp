@@ -36,7 +36,7 @@ Click nbfs://nbhost/SystemFileSystem/Templates/JSP_Servlet/Html.html to edit thi
         </script>
     </head>
     <body class="bg-brand-dark text-white font-sans">
-         <header class="h-16 fixed top-0 left-0 w-full z-50 bg-gray-900 shadow-lg">
+        <header class="h-16 fixed top-0 left-0 w-full z-50 bg-gray-900 shadow-lg">
             <div class="max-w-7xl mx-auto px-6 flex items-center justify-between text-white h-full">
                 <!-- Logo -->
                 <div>
@@ -74,7 +74,7 @@ Click nbfs://nbhost/SystemFileSystem/Templates/JSP_Servlet/Html.html to edit thi
                                 <div class="py-3 px-4">
                                     <span class="block font-semibold">${sessionScope.usuario.nombre}</span>
                                     <span class="block truncate">${sessionScope.usuario.email}</span>
- 
+
                                 </div>
                                 <ul class="py-1" aria-labelledby="dropdown">
                                     <li>
@@ -126,6 +126,9 @@ Click nbfs://nbhost/SystemFileSystem/Templates/JSP_Servlet/Html.html to edit thi
                     </c:choose>
             </div>
         </header>
+
+
+
         <div class=" bg-blue-600/65 hero py-20 bg-gradient-to-b from-blue-900/30 to-brand-dark mt-16">
             <div class="hero-content text-center">
                 <div class="max-w-3xl">
@@ -168,7 +171,7 @@ Click nbfs://nbhost/SystemFileSystem/Templates/JSP_Servlet/Html.html to edit thi
                             <p class="text-gray-400 text-sm mt-2">${c.descripcion}</p>
                             <p class="text-gray-500 text-xs">Por: ${c.profesor}</p>
                             <div class="flex items-center gap-4 text-xs text-gray-400 mt-2 mb-4">
-                                <span class="text-yellow-400 font-bold"><i class="fa-solid fa-star"></i>5.0</span>
+                                <span class="text-yellow-400 font-bold"><i class="fa-solid fa-star"></i> 4.8</span>
                                 <!--                                <span><i class="fa-solid fa-user-group"></i> 2340</span>-->
                                 <span><i class="fa-regular fa-clock"></i> ${c.duracion} horas</span>
                             </div>

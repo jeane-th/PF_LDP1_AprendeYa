@@ -40,6 +40,7 @@ public class CursosAdminServlet extends HttpServlet {
         String action = request.getParameter("action");
 
         try {
+            // Acción editar
             if ("editar".equalsIgnoreCase(action)) {
                 int id = Integer.parseInt(request.getParameter("id"));
                 Curso curso = dao.buscar(id);
@@ -52,7 +53,19 @@ public class CursosAdminServlet extends HttpServlet {
                 return;
             }
 
-            // listar cursos
+            // Acción eliminar
+            if ("eliminar".equalsIgnoreCase(action)) {
+                int id = Integer.parseInt(request.getParameter("id"));
+                boolean eliminado = dao.eliminar(id);
+                if (eliminado) {
+                    response.sendRedirect(request.getContextPath() + "/admin/cursos?success=eliminar");
+                } else {
+                    response.sendRedirect(request.getContextPath() + "/admin/cursos?error=eliminar");
+                }
+                return; // importante para que no siga con el listado
+            }
+
+            // Listar cursos
             List<Curso> listaCursos = dao.listarConMatriculas();
             request.setAttribute("listaCursos", listaCursos);
             request.getRequestDispatcher("/admin/cursos.jsp").forward(request, response);

@@ -26,7 +26,7 @@ public class IntegranteDAO {
         String sql = """
             SELECT idIntegrante, nombre, funcion, descripcion, estado, fecha_creacion
             FROM integrantes_proyecto
-            ORDER BY fecha_creacion DESC
+            ORDER BY idIntegrante ASC
         """;
 
         try (
