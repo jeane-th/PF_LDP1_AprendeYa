@@ -13,30 +13,27 @@ import modelo.Usuario;
  */
 public interface UsuarioDAO {
 
-    // Para entrar al sistema
+    // inicio
     public Usuario validar(String email, String password);
 
-    // Para mostrar la tabla en tu página
-    public List<Usuario> listarUsuarios();
+    // obtener lista usuarios
+    public List<Usuario> getAll();
     
-    // Para guardar uno nuevo (siempre es bueno tenerlo)
+    // insertar nuevo
     public boolean insertar(Usuario usuario);
 
-    // LO QUE PEDISTE:
-    // Para guardar cambios (Nombre, Email, Rol, etc.)
+    // actualizar
     public boolean actualizar(Usuario usuario);
 
-    // Para desactivar un usuario (Cambiar estado a 0)
+    // eliminar
     public boolean eliminar(int id);
 
-    // Extra: Para cargar los datos en el Modal antes de editar
+    // prepargar datos
     public Usuario obtenerPorId(int id);
 
-    // Metodo para hacer login
+    // login
     public Usuario login(String email, String password);
 
-    
+    // estado
     public boolean cambiarEstado(int id, int nuevoEstado);
-
 }
-

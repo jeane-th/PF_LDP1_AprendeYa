@@ -18,10 +18,9 @@ public class MatriculaDAOImpl implements MatriculaDAO {
 
     @Override
     public boolean matricular(int idUsuario, int idCurso) {
-
         try (Connection con = Conexion.getConnection()) {
 
-            // 1️⃣ Intentar reactivar matrícula existente
+            // reactivar 
             String updateSql = """
                 UPDATE matriculas
                 SET estado = 1
@@ -34,7 +33,7 @@ public class MatriculaDAOImpl implements MatriculaDAO {
 
                 int filas = ps.executeUpdate();
 
-                // 2️⃣ Si no existía, insertar nueva
+                // insertar si no existe
                 if (filas == 0) {
                     String insertSql = """
                         INSERT INTO matriculas (idUsuario, idCurso, estado)
@@ -59,7 +58,6 @@ public class MatriculaDAOImpl implements MatriculaDAO {
 
     @Override
     public boolean estaMatriculado(int idUsuario, int idCurso) {
-
         String sql = """
             SELECT idMatricula
             FROM matriculas
@@ -83,7 +81,6 @@ public class MatriculaDAOImpl implements MatriculaDAO {
 
     @Override
     public boolean existeMatricula(int idUsuario, int idCurso) {
-
         String sql = """
             SELECT idMatricula
             FROM matriculas
@@ -107,7 +104,6 @@ public class MatriculaDAOImpl implements MatriculaDAO {
 
     @Override
     public List<Curso> cursosPorUsuario(int idUsuario) {
-
         List<Curso> lista = new ArrayList<>();
 
         String sql = """
@@ -144,29 +140,26 @@ public class MatriculaDAOImpl implements MatriculaDAO {
         }
         return lista;
     }
-    
-    
-    
-         @Override
-            public boolean eliminarMatricula(int idUsuario, int idCurso) {
 
-                String sql = """
-                    UPDATE matriculas
-                    SET estado = 0
-                    WHERE idUsuario = ? AND idCurso = ?
-                """;
+    @Override
+    public boolean eliminarMatricula(int idUsuario, int idCurso) {
+        String sql = """
+            UPDATE matriculas
+            SET estado = 0
+            WHERE idUsuario = ? AND idCurso = ?
+        """;
 
-                try (Connection con = Conexion.getConnection();
-                     PreparedStatement ps = con.prepareStatement(sql)) {
+        try (Connection con = Conexion.getConnection();
+             PreparedStatement ps = con.prepareStatement(sql)) {
 
-                    ps.setInt(1, idUsuario);
-                    ps.setInt(2, idCurso);
+            ps.setInt(1, idUsuario);
+            ps.setInt(2, idCurso);
 
-                    return ps.executeUpdate() > 0;
+            return ps.executeUpdate() > 0;
 
-                } catch (Exception e) {
-                    System.err.println("Error eliminar matrícula: " + e.getMessage());
-                }
-                return false;
-            }
+        } catch (Exception e) {
+            System.err.println("Error eliminar matrícula: " + e.getMessage());
+        }
+        return false;
+    }
 }

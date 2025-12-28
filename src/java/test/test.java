@@ -7,7 +7,7 @@ package test;
 import dao.CursoDAO;
 import dao.CursoDAOImpl;
 import dao.UsuarioDAO;
-import dao.UsuarioDAOImpl;
+import dao.UsuarioDAOimpl;
 import modelo.Usuario;
 
 /**

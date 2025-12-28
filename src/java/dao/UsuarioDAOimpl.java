@@ -17,7 +17,7 @@ import util.Conexion;
  *
  * @author GamingWorld
  */
-public class UsuarioDAOImpl implements UsuarioDAO {
+public class UsuarioDAOimpl implements UsuarioDAO {
 
     Conexion cn;
     Connection con;
@@ -27,11 +27,11 @@ public class UsuarioDAOImpl implements UsuarioDAO {
 
     @Override
     public Usuario validar(String email, String password) {
-        Usuario u = null; // Inicializamos en null
-        // OJO: Solo dejamos entrar si estado = 1 (Activo)
+        Usuario u = null; 
+        
         String sql = "SELECT * FROM tb_usuarios WHERE email=? AND password=? AND estado=1";
         try {
-            con = Conexion.getConnection(); // Asegúrate que tu método en Conexion se llame así
+            con = Conexion.getConnection();
             ps = con.prepareStatement(sql);
             ps.setString(1, email);
             ps.setString(2, password);
@@ -81,34 +81,44 @@ public class UsuarioDAOImpl implements UsuarioDAO {
     }
 
     @Override
-    public List<Usuario> listarUsuarios() {
-        List<Usuario> lista = new ArrayList<>();
-        String sql = "SELECT u.*, " +
-                 "(SELECT COUNT(*) FROM matriculas m WHERE m.idUsuario = u.idUsuario) as total_cursos " +
+public List<Usuario> getAll() {
+    List<Usuario> lista = new ArrayList<>();
+    String sql = "SELECT u.*, " +
+                 "(SELECT COUNT(*) FROM matriculas m WHERE m.idUsuario = u.idUsuario) AS total_cursos " +
                  "FROM tb_usuarios u";
-        try {
-            con = Conexion.getConnection();
-            ps = con.prepareStatement(sql);
-            rs = ps.executeQuery();
-            while (rs.next()) {
-                Usuario u = new Usuario();
-                u.setIdUsuario(rs.getInt("idUsuario"));
-                u.setNombre(rs.getString("nombre"));
-                u.setEmail(rs.getString("email"));
-                u.setPassword(rs.getString("password"));
-                u.setRol(rs.getString("rol"));
-                u.setEstado(rs.getInt("estado"));
-                u.setNroCursos(rs.getInt("total_cursos"));
-                lista.add(u);
-            }
-        } catch (Exception e) {
-            System.err.println("Error en listar: " + e);
+
+    try {
+        con = Conexion.getConnection();
+        ps = con.prepareStatement(sql);
+        rs = ps.executeQuery();
+
+        while (rs.next()) {
+            Usuario u = new Usuario();
+            u.setIdUsuario(rs.getInt("idUsuario"));
+            u.setNombre(rs.getString("nombre"));
+            u.setEmail(rs.getString("email"));
+            u.setPassword(rs.getString("password"));
+            u.setPais(rs.getString("pais"));
+            u.setRol(rs.getString("rol"));
+            u.setEstado(rs.getInt("estado"));
+            u.setNroCursos(rs.getInt("total_cursos"));
+            u.setFechaRegistro(rs.getTimestamp("fecha_registro"));
+            lista.add(u);
         }
-        finally {
-            try { if(rs!=null)rs.close(); if(ps!=null)ps.close(); if(con!=null)con.close(); } catch(Exception e){}
-         }
-        return lista;
+
+    } catch (Exception e) {
+        System.err.println("Error en getAll(): " + e);
+    } finally {
+        try {
+            if (rs != null) rs.close();
+            if (ps != null) ps.close();
+            if (con != null) con.close();
+        } catch (Exception e) {
+            System.err.println("Error cerrando conexión: " + e);
+        }
     }
+    return lista;
+}
 
     @Override
     public boolean insertar(Usuario usuario) {
@@ -156,8 +166,7 @@ public class UsuarioDAOImpl implements UsuarioDAO {
 
     @Override
     public boolean eliminar(int id) {
-        // CAMBIO: Usamos DELETE para borrar físicamente el registro
-        // Asegúrate de que el nombre de la columna sea 'idUsuario' (tal cual tu imagen)
+        
         String sql = "DELETE FROM tb_usuarios WHERE idUsuario=?";
 
         try {
@@ -165,12 +174,12 @@ public class UsuarioDAOImpl implements UsuarioDAO {
             ps = con.prepareStatement(sql);
             ps.setInt(1, id);
 
-            int filas = ps.executeUpdate(); // Ejecuta el borrado real
+            int filas = ps.executeUpdate();
             return filas > 0;
 
         } catch (Exception e) {
             System.err.println("Error al eliminar de la BD: " + e);
-            // IMPORTANTE: Si te sale error aquí, lee la advertencia de abajo
+
         } finally {
             try { if(ps!=null) ps.close(); if(con!=null) con.close(); } catch(Exception e){}
         }
@@ -204,7 +213,7 @@ public class UsuarioDAOImpl implements UsuarioDAO {
     @Override 
     
     public boolean cambiarEstado(int id, int nuevoEstado) {
-    // Solo tocamos el campo 'estado'
+
         String sql = "UPDATE tb_usuarios SET estado=? WHERE idUsuario=?";
 
         try {
@@ -219,6 +228,24 @@ public class UsuarioDAOImpl implements UsuarioDAO {
 
         } catch (Exception e) {
             System.err.println("Error al cambiar estado: " + e);
+        } finally {
+            try { if(ps!=null) ps.close(); if(con!=null) con.close(); } catch(Exception e){}
+        }
+        return false;
+    }
+    
+    
+    public boolean cambiarPassword(int idUsuario, String nuevaPasswordHash) {
+        String sql = "UPDATE tb_usuarios SET password=? WHERE idUsuario=?";
+        try {
+            con = Conexion.getConnection();
+            ps = con.prepareStatement(sql);
+            ps.setString(1, nuevaPasswordHash);
+            ps.setInt(2, idUsuario);
+            int filas = ps.executeUpdate();
+            return filas > 0;
+        } catch (Exception e) {
+            System.err.println("❌ Error al cambiar contraseña: " + e);
         } finally {
             try { if(ps!=null) ps.close(); if(con!=null) con.close(); } catch(Exception e){}
         }

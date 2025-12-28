@@ -7,7 +7,7 @@ package controlador;
 import dao.MatriculaDAO;
 import dao.MatriculaDAOImpl;
 import dao.UsuarioDAO;
-import dao.UsuarioDAOImpl;
+import dao.UsuarioDAOimpl;
 import java.io.IOException;
 import java.io.PrintWriter;
 import jakarta.servlet.ServletException;
@@ -29,23 +29,23 @@ public class PerfilServlet extends HttpServlet {
 
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        // Obtenemos la sesion sin crear una nueva
+        
         HttpSession session = request.getSession(false);
 
         Usuario u = null;
-        // validamos q la sesion exista
+
         if (session != null) {
-            // Obtenemos el usuario de la sesion
+
             u = (Usuario) session.getAttribute("usuario");
         }
-        // validamos que el usuario exista
+
         if (u == null) {
             response.sendRedirect("login.jsp");
             return;
         }
         MatriculaDAO dao = new MatriculaDAOImpl();
 
-        // Cursos matriculados del usuario logueado
+
         List<Curso> cursos = dao.cursosPorUsuario(u.getIdUsuario());
 
         request.setAttribute("listaCursos", cursos);

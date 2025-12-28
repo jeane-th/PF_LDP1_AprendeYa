@@ -7,10 +7,9 @@ public class Review {
     private int idReview;
     private int idCurso;
     private int idUsuario;
-    private String nombreUsuario; // opcional, para mostrar en listings
-    private String nombreCurso; // opcional, para mostrar en listings
+    private String nombreUsuario;
     private String comentario;
-    private int valoracion; // 1-5
+    private int valoracion;
     private Timestamp fecha;
 
     public Review() {
@@ -23,14 +22,6 @@ public class Review {
         this.comentario = comentario;
         this.valoracion = valoracion;
         this.fecha = fecha;
-    }
-
-    public String getNombreCurso() {
-        return nombreCurso;
-    }
-
-    public void setNombreCurso(String nombreCurso) {
-        this.nombreCurso = nombreCurso;
     }
 
     public int getIdReview() {

@@ -19,7 +19,7 @@
         <meta name="viewport" content="width=device-width, initial-scale=1">
     </head>
     <body>
-        <header class="h-16 fixed top-0 left-0 w-full z-50 bg-gray-900 shadow-lg">
+              <header class="h-16 fixed top-0 left-0 w-full z-50 bg-gray-900 shadow-lg">
             <div class="max-w-7xl mx-auto px-6 flex items-center justify-between text-white h-full">
                 <!-- Logo -->
                 <div>
@@ -41,7 +41,7 @@
                 </nav>
                 <c:choose>
                     <c:when test="${not empty sessionScope.usuario}">
-                        <!-- Usuario logueado -->
+                        <!-- logeado -->
                         <div>
 
                             <button type="button" class="" id="user-menu-button" aria-expanded="false"
@@ -76,7 +76,7 @@
                                     </li>
                                     <c:if test="${sessionScope.usuario.rol eq 'Admin'}">
                                         <li>
-                                            <a href="${pageContext.request.contextPath}/UsuarioServlet"
+                                            <a href="${pageContext.request.contextPath}/dashboardAdmin"
                                                class="flex items-center py-2 px-4  hover:bg-gray-100 hover:bg-gray-600 hover:text-white gap-2">
                                                 <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24"
                                                      fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
@@ -101,7 +101,7 @@
                     </c:when>
 
                     <c:otherwise>
-                        <!-- Usuario NO logueado -->
+                        <!-- si no esta logeado -->
                         <a href="${pageContext.request.contextPath}/login.jsp"
                            class="bg-blue-600 hover:bg-blue-700 text-white font-semibold py-1 px-2 p rounded-xl cursor-pointer px-4 py-2.5 my-4">
                             Iniciar sesión</a>
@@ -111,14 +111,15 @@
         </header>
 
         <main class="pt-16 ">
-            <!-- Fondo degradado -->
+            
             <section class="bg-gradient-to-br from-blue-900 via-blue-700 to-gray-900 text-white">
                 <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12 md:items-start">
                     <div class="flex flex-col items-center md:flex-row gap-6">
                         <div class="w-32 h-32 rounded-full border-4 border-white shadow-lg
                              text-white flex items-center justify-center text-5xl flex-shrink-0">
-                            <!-- Toma la primera letra y q sea mayuscula -->
+                            
                             ${fn:toUpperCase(fn:substring(sessionScope.usuario.nombre, 0, 1))}
+                            
                         </div>
                         <div class="flex flex-col">
                             <div class="flex flex-col items-center md:items-start md:flex-row md:justify-start
@@ -130,8 +131,9 @@
                                  text-center md:text-left gap-2 md:gap-6 ">
                                 <div class="flex items-center gap-2">
                                     <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-mail-icon lucide-mail"><path d="m22 7-8.991 5.727a2 2 0 0 1-2.009 0L2 7"/><rect x="2" y="4" width="20" height="16" rx="2"/></svg>
-                                    <!-- Email de sesion de usuario -->
+                                    
                                     <span>${sessionScope.usuario.email}</span>
+                                    
                                 </div>
                                 <div class="flex items-center gap-2">
                                     <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-map-pin-icon lucide-map-pin"><path d="M20 10c0 4.993-5.539 10.193-7.399 11.799a1 1 0 0 1-1.202 0C9.539 20.193 4 14.993 4 10a8 8 0 0 1 16 0"/><circle cx="12" cy="10" r="3"/></svg>
@@ -153,7 +155,7 @@
                             </div>
                         </div>
                     </div>
-                    <!-- tarjetas resumen de usuario -->
+
                     <div class="grid grid-cols-2 md:grid-cols-4 gap-4 mt-8">
 
                     </div>
@@ -161,24 +163,19 @@
             </section>
             <section class="bg-gray-50 py-8 antialiased bg-gray-900 md:py-12">
                 <div class="mx-auto max-w-screen-xl px-4 2xl:px-0">
-                    <!-- Heading & Filters -->
+                    
                     <div class="mb-4 items-end justify-between space-y-4 sm:flex sm:space-y-0 md:mb-8">
                         <h2 class="mt-3 text-xl font-semibold text-gray-900 text-white sm:text-2xl">Mis cursos</h2>
                     </div>
 
-
-
-
                     <div class="mb-4 grid gap-4 sm:grid-cols-2 md:mb-8 lg:grid-cols-3 xl:grid-cols-4">
 
                         <c:choose>
-
-                            <c:when test="${empty listaCursos}">
+                           <c:when test="${empty listaCursos}">
                                 <div class="col-span-full text-center text-gray-500 text-gray-400 text-lg py-12">
                                     Aún no estás matriculado a ningún curso
                                 </div>
                             </c:when>
-
                             <c:otherwise>
                                 <c:forEach var="c" items="${listaCursos}">
                                     <div class="rounded-lg border border-gray-200  shadow-sm border-gray-700 bg-gray-800">
@@ -269,15 +266,7 @@
                         </c:choose>
 
                     </div>
-
-
-
-
-
-
-                    <!--                    <div class="w-full text-center">
-                                            <button type="button" class="rounded-lg border border-gray-200 bg-white px-5 py-2.5 text-sm font-medium text-gray-900 hover:bg-gray-100 hover:text-gray-700 focus:z-10 focus:outline-none focus:ring-4 focus:ring-gray-100 border-gray-600 bg-gray-800 text-gray-400 hover:bg-gray-700 hover:text-white focus:ring-gray-700">Show more</button>
-                                        </div>-->
+                    
                 </div>
 
             </section>

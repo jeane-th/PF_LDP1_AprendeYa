@@ -18,7 +18,7 @@
         <meta name="viewport" content="width=device-width, initial-scale=1">
     </head>
     <body>
-        <header class="h-16 fixed top-0 left-0 w-full z-50 bg-gray-900 shadow-lg">
+         <header class="h-16 fixed top-0 left-0 w-full z-50 bg-gray-900 shadow-lg">
             <div class="max-w-7xl mx-auto px-6 flex items-center justify-between text-white h-full">
                 <!-- Logo -->
                 <div>
@@ -40,7 +40,7 @@
                 </nav>
                 <c:choose>
                     <c:when test="${not empty sessionScope.usuario}">
-                        <!-- Usuario logueado -->
+                        <!-- logeado -->
                         <div>
 
                             <button type="button" class="" id="user-menu-button" aria-expanded="false"
@@ -75,7 +75,7 @@
                                     </li>
                                     <c:if test="${sessionScope.usuario.rol eq 'Admin'}">
                                         <li>
-                                            <a href="${pageContext.request.contextPath}/UsuarioServlet"
+                                            <a href="${pageContext.request.contextPath}/dashboardAdmin"
                                                class="flex items-center py-2 px-4  hover:bg-gray-100 hover:bg-gray-600 hover:text-white gap-2">
                                                 <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24"
                                                      fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
@@ -100,7 +100,7 @@
                     </c:when>
 
                     <c:otherwise>
-                        <!-- Usuario NO logueado -->
+                        <!-- si no esta logeado -->
                         <a href="${pageContext.request.contextPath}/login.jsp"
                            class="bg-blue-600 hover:bg-blue-700 text-white font-semibold py-1 px-2 p rounded-xl cursor-pointer px-4 py-2.5 my-4">
                             Iniciar sesión</a>
@@ -108,7 +108,6 @@
                     </c:choose>
             </div>
         </header>
-
         <main class="pt-16 ">
             <c:if test="${not empty curso}">
                 <section class="pb-8 pt-2 antialiased bg-gray-900 md:py-16">
@@ -127,7 +126,7 @@
                                     <div class="flex justify-between items-center mb-6">
                                         <h2 class="text-lg lg:text-2xl font-bold text-white">       Comentarios (${totalReviews})</h2>
                                     </div>
-                                    <!-- FORMULARIO DE COMENTARIOS -->
+                                    <!-- comentarios -->
                                     <c:if test="${not empty sessionScope.usuario}">
                                         <form action="${pageContext.request.contextPath}/reproductorServlet" method="post">
                                             <input type="hidden" name="idCurso" value="${curso.idCurso}">

@@ -23,7 +23,23 @@
         <title>AprendeYa | Login</title>
     </head>
     <body class="bg-gray-900">
-        <header class="h-16 fixed top-0 left-0 w-full z-50 bg-gray-900 shadow-lg">
+        
+         <%-- mensaje cierre de sesion --%>
+            <c:if test="${param.logout eq 'success'}">
+                <div id="logoutToast"
+                     class="fixed top-5 right-5 bg-green-600 text-white px-4 py-2 rounded-lg shadow-lg z-50 transition">
+                    ✅ Sesión cerrada correctamente.
+                </div>
+                <script>
+                    // arreglo desbanecimiento
+                    setTimeout(() => {
+                        const toast = document.getElementById('logoutToast');
+                        if (toast) toast.style.display = 'none';
+                    }, 3000);
+                </script>
+             </c:if>
+        
+           <header class="h-16 fixed top-0 left-0 w-full z-50 bg-gray-900 shadow-lg">
             <div class="max-w-7xl mx-auto px-6 flex items-center justify-between text-white h-full">
                 <!-- Logo -->
                 <div>
@@ -45,7 +61,7 @@
                 </nav>
                 <c:choose>
                     <c:when test="${not empty sessionScope.usuario}">
-                        <!-- Usuario logueado -->
+                        <!-- logeado -->
                         <div>
 
                             <button type="button" class="" id="user-menu-button" aria-expanded="false"
@@ -61,6 +77,7 @@
                                 <div class="py-3 px-4">
                                     <span class="block font-semibold">${sessionScope.usuario.nombre}</span>
                                     <span class="block truncate">${sessionScope.usuario.email}</span>
+ 
                                 </div>
                                 <ul class="py-1" aria-labelledby="dropdown">
                                     <li>
@@ -77,19 +94,22 @@
                                             Perfil
                                         </a>
                                     </li>
-                                    <li>
-                                        <a href="#"
-                                           class="flex items-center py-2 px-4  hover:bg-gray-100 hover:bg-gray-600 hover:text-white gap-2">
-                                            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24"
-                                                 fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
-                                                 stroke-linejoin="round" class="lucide lucide-cog-icon lucide-cog">
-                                            <path d="M11 10.27 7 3.34" /> <path d="m11 13.73-4 6.93" /><path d="M12 22v-2" /> <path d="M12 2v2" /><path d="M14 12h8" /><path d="m17 20.66-1-1.73" /> 
-                                            <path d="m17 3.34-1 1.73" /><path d="M2 12h2" /><path d="m20.66 17-1.73-1" /> <path d="m20.66 7-1.73 1" /><path d="m3.34 17 1.73-1" /> <path d="m3.34 7 1.73 1" /> 
-                                            <circle cx="12" cy="12" r="2" />  <circle cx="12" cy="12" r="8" />
-                                            </svg>
-                                            Administrador
-                                        </a>
-                                    </li>
+                                    <c:if test="${sessionScope.usuario.rol eq 'Admin'}">
+                                        <li>
+                                            <a href="${pageContext.request.contextPath}/dashboardAdmin"
+                                               class="flex items-center py-2 px-4  hover:bg-gray-100 hover:bg-gray-600 hover:text-white gap-2">
+                                                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24"
+                                                     fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                                                     stroke-linejoin="round" class="lucide lucide-cog-icon lucide-cog">
+                                                <path d="M11 10.27 7 3.34" /> <path d="m11 13.73-4 6.93" /><path d="M12 22v-2" /> <path d="M12 2v2" /><path d="M14 12h8" /><path d="m17 20.66-1-1.73" /> 
+                                                <path d="m17 3.34-1 1.73" /><path d="M2 12h2" /><path d="m20.66 17-1.73-1" /> <path d="m20.66 7-1.73 1" /><path d="m3.34 17 1.73-1" /> <path d="m3.34 7 1.73 1" /> 
+                                                <circle cx="12" cy="12" r="2" />  <circle cx="12" cy="12" r="8" />
+                                                </svg>
+                                                Panel de administracion
+                                            </a>
+                                        </li>
+                                    </c:if>
+
                                 </ul>
                                 <ul class="py-1" aria-labelledby="dropdown">
                                     <li>
@@ -101,7 +121,7 @@
                     </c:when>
 
                     <c:otherwise>
-                        <!-- Usuario NO logueado -->
+                        <!-- si no esta logeado -->
                         <a href="${pageContext.request.contextPath}/login.jsp"
                            class="bg-blue-600 hover:bg-blue-700 text-white font-semibold py-1 px-2 p rounded-xl cursor-pointer px-4 py-2.5 my-4">
                             Iniciar sesión</a>
@@ -129,37 +149,38 @@
                     <div class="mb-5">
                         <label for="email" class="block mb-2.5 text-sm font-medium text-gray-700 text-white">Email</label>
                         <input type="email" name="email" id="email"
-                               class="border border-gray-300 text-gray-900 rounded-xl  focus:border-blue-500 block w-full p-2.5 bg-gray-700 placeholder-gray-400 text-white"
+                               class="border border-gray-300 text-gray-900 rounded-xl focus:border-blue-500 block w-full p-2.5 bg-gray-700 placeholder-gray-400 text-white"
                                placeholder="name@flowbite.com">
                     </div>
                     <div class="mb-5">
                         <label for="password"
                                class="block mb-2.5 text-sm font-medium text-gray-700 text-white">Contraseña</label>
                         <input type="password" name="password" id="password"
-                               class="border border-gray-300 text-gray-900 rounded-xl  focus:border-blue-500 block w-full p-2.5 bg-gray-700 placeholder-gray-400 text-white"
+                               class="border border-gray-300 text-gray-900 rounded-xl focus:border-blue-500 block w-full p-2.5 bg-gray-700 placeholder-gray-400 text-white"
                                placeholder="********">
                     </div>
                     <button type="submit"
-                            class="bg-blue-600 hover:bg-blue-700 text-white font-semibold py-1 px-2 p rounded-xl cursor-pointer w-full px-4 py-2.5 my-4">Iniciar
-                        sesion</button>
+                            class="bg-blue-600 hover:bg-blue-700 text-white font-semibold py-1 px-2 p rounded-xl cursor-pointer w-full px-4 py-2.5 my-4">
+                        Iniciar sesion
+                    </button>
+
+                    <!-- mensaje si hay error -->
+                    <c:if test="${not empty error}">
+                        <p class="text-red-500 text-center font-semibold mt-2">${error}</p>
+                    </c:if>
+
                     <div class="pt-4 border-t border-gray-300 border-gray-700 mt-4">
-                        <p class=" text-sm font-medium text-gray-700 text-white select-none h-6 w-full text-center">¿No
-                            tienes una cuenta?<a href="registro.jsp" class="text-blue-600 hover:underline ml-2">Registrate aquí
-                            </a></p>
+                        <p class="text-sm font-medium text-gray-700 text-white select-none h-6 w-full text-center">
+                            ¿No tienes una cuenta?
+                            <a href="registro.jsp" class="text-blue-600 hover:underline ml-2">Registrate aquí</a>
+                        </p>
                     </div>
                 </form>
-                <!-- <div>
-                    <p class="text-red-500 h-6 w-full text-center">
-                <c:if test="${not empty error}">
-                    ${error}
-                </c:if>
-            </p>
-        </div> -->
             </section>
         </main>
         <script src="https://cdn.jsdelivr.net/npm/flowbite@4.0.1/dist/flowbite.min.js"></script>
 
-        <!-- Tu validación -->
+        <!-- validacion -->
         <script>
             const validate = new JustValidate('#formLogin', {
                 errorFieldCssClass: 'border-red-500',
@@ -176,7 +197,6 @@
                         {rule: 'required', errorMessage: 'Complete su contraseña'},
                         {rule: 'minLength', value: 6, errorMessage: 'Mínimo 6 caracteres'}
                     ])
-
                     .onSuccess((event) => {
                         event.target.submit();
                     });

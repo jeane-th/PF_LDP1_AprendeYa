@@ -16,14 +16,13 @@
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
         <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
         <link href="https://cdn.jsdelivr.net/npm/flowbite@4.0.1/dist/flowbite.min.css" rel="stylesheet" />
-        <!-- Librería JustValidate (SIN defer) -->
         <script src="https://cdn.jsdelivr.net/npm/just-validate@latest/dist/just-validate.production.min.js"></script>
         <link rel="icon" type="image/svg+xml" href="icons/icon_book.svg">
         <title>AprendeYa | Registro</title>
     </head>
 
     <body class="bg-gray-900">
-        <header class="h-16 fixed top-0 left-0 w-full z-50 bg-gray-900 shadow-lg">
+          <header class="h-16 fixed top-0 left-0 w-full z-50 bg-gray-900 shadow-lg">
             <div class="max-w-7xl mx-auto px-6 flex items-center justify-between text-white h-full">
                 <!-- Logo -->
                 <div>
@@ -45,7 +44,7 @@
                 </nav>
                 <c:choose>
                     <c:when test="${not empty sessionScope.usuario}">
-                        <!-- Usuario logueado -->
+                        <!-- logeado -->
                         <div>
 
                             <button type="button" class="" id="user-menu-button" aria-expanded="false"
@@ -61,6 +60,7 @@
                                 <div class="py-3 px-4">
                                     <span class="block font-semibold">${sessionScope.usuario.nombre}</span>
                                     <span class="block truncate">${sessionScope.usuario.email}</span>
+ 
                                 </div>
                                 <ul class="py-1" aria-labelledby="dropdown">
                                     <li>
@@ -77,19 +77,22 @@
                                             Perfil
                                         </a>
                                     </li>
-                                    <li>
-                                        <a href="#"
-                                           class="flex items-center py-2 px-4  hover:bg-gray-100 hover:bg-gray-600 hover:text-white gap-2">
-                                            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24"
-                                                 fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
-                                                 stroke-linejoin="round" class="lucide lucide-cog-icon lucide-cog">
-                                            <path d="M11 10.27 7 3.34" /> <path d="m11 13.73-4 6.93" /><path d="M12 22v-2" /> <path d="M12 2v2" /><path d="M14 12h8" /><path d="m17 20.66-1-1.73" /> 
-                                            <path d="m17 3.34-1 1.73" /><path d="M2 12h2" /><path d="m20.66 17-1.73-1" /> <path d="m20.66 7-1.73 1" /><path d="m3.34 17 1.73-1" /> <path d="m3.34 7 1.73 1" /> 
-                                            <circle cx="12" cy="12" r="2" />  <circle cx="12" cy="12" r="8" />
-                                            </svg>
-                                            Administrador
-                                        </a>
-                                    </li>
+                                    <c:if test="${sessionScope.usuario.rol eq 'Admin'}">
+                                        <li>
+                                            <a href="${pageContext.request.contextPath}/dashboardAdmin"
+                                               class="flex items-center py-2 px-4  hover:bg-gray-100 hover:bg-gray-600 hover:text-white gap-2">
+                                                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24"
+                                                     fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                                                     stroke-linejoin="round" class="lucide lucide-cog-icon lucide-cog">
+                                                <path d="M11 10.27 7 3.34" /> <path d="m11 13.73-4 6.93" /><path d="M12 22v-2" /> <path d="M12 2v2" /><path d="M14 12h8" /><path d="m17 20.66-1-1.73" /> 
+                                                <path d="m17 3.34-1 1.73" /><path d="M2 12h2" /><path d="m20.66 17-1.73-1" /> <path d="m20.66 7-1.73 1" /><path d="m3.34 17 1.73-1" /> <path d="m3.34 7 1.73 1" /> 
+                                                <circle cx="12" cy="12" r="2" />  <circle cx="12" cy="12" r="8" />
+                                                </svg>
+                                                Panel de administracion
+                                            </a>
+                                        </li>
+                                    </c:if>
+
                                 </ul>
                                 <ul class="py-1" aria-labelledby="dropdown">
                                     <li>
@@ -101,7 +104,7 @@
                     </c:when>
 
                     <c:otherwise>
-                        <!-- Usuario NO logueado -->
+                        <!-- si no esta logeado -->
                         <a href="${pageContext.request.contextPath}/login.jsp"
                            class="bg-blue-600 hover:bg-blue-700 text-white font-semibold py-1 px-2 p rounded-xl cursor-pointer px-4 py-2.5 my-4">
                             Iniciar sesión</a>
@@ -109,7 +112,6 @@
                     </c:choose>
             </div>
         </header>
-
 
         <main class="pt-16 bg-gray-900">
             <section
@@ -162,8 +164,7 @@
                             </a></p>
                     </div>
                 </form>
-                <!-- <div>
-                    <p class="text-red-500 h-6 w-full text-center">
+                
                 <c:if test="${not empty error}">
                     ${error}
                 </c:if>
@@ -175,7 +176,7 @@
 
 
 
-        <!-- Tu validación -->
+        <!-- just validate -->
         <script>
             const validate = new JustValidate('#formRegistro', {
                 errorFieldCssClass: 'border-red-500',

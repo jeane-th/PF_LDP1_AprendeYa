@@ -13,10 +13,8 @@
     <head>
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
-
         <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
         <script src="https://cdn.tailwindcss.com"></script>
-
         <link href="https://cdn.jsdelivr.net/npm/flowbite@4.0.1/dist/flowbite.min.css" rel="stylesheet"/>
         <link href="https://cdn.jsdelivr.net/npm/daisyui@4.7.2/dist/full.min.css" rel="stylesheet"/>
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
@@ -41,7 +39,7 @@
     <body class="bg-brand-dark text-white font-sans">
 
 
-         <header class="h-16 fixed top-0 left-0 w-full z-50 bg-gray-900 shadow-lg">
+        <header class="h-16 fixed top-0 left-0 w-full z-50 bg-gray-900 shadow-lg">
             <div class="max-w-7xl mx-auto px-6 flex items-center justify-between text-white h-full">
                 <!-- Logo -->
                 <div>
@@ -63,7 +61,7 @@
                 </nav>
                 <c:choose>
                     <c:when test="${not empty sessionScope.usuario}">
-                        <!-- Usuario logueado -->
+                        <!-- logeado -->
                         <div>
 
                             <button type="button" class="" id="user-menu-button" aria-expanded="false"
@@ -79,7 +77,7 @@
                                 <div class="py-3 px-4">
                                     <span class="block font-semibold">${sessionScope.usuario.nombre}</span>
                                     <span class="block truncate">${sessionScope.usuario.email}</span>
- 
+
                                 </div>
                                 <ul class="py-1" aria-labelledby="dropdown">
                                     <li>
@@ -98,7 +96,7 @@
                                     </li>
                                     <c:if test="${sessionScope.usuario.rol eq 'Admin'}">
                                         <li>
-                                            <a href="${pageContext.request.contextPath}/UsuarioServlet"
+                                            <a href="${pageContext.request.contextPath}/dashboardAdmin"
                                                class="flex items-center py-2 px-4  hover:bg-gray-100 hover:bg-gray-600 hover:text-white gap-2">
                                                 <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24"
                                                      fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
@@ -123,7 +121,7 @@
                     </c:when>
 
                     <c:otherwise>
-                        <!-- Usuario NO logueado -->
+                        <!-- si no esta logeado -->
                         <a href="${pageContext.request.contextPath}/login.jsp"
                            class="bg-blue-600 hover:bg-blue-700 text-white font-semibold py-1 px-2 p rounded-xl cursor-pointer px-4 py-2.5 my-4">
                             Iniciar sesión</a>
@@ -166,6 +164,7 @@
                     </div>
                 </div>
 
+                <!-- LISTADO DE COMENTARIOS -->
                 <div class="bg-brand-card border border-gray-800 rounded-xl shadow-xl p-6 h-fit">
 
                     <p class="text-3xl font-bold text-blue-400 mb-4">
@@ -200,6 +199,46 @@
                     </div>
                 </div>
 
+                <div class="py-8 col-span-2">
+                    <div class="flex justify-between items-center mb-6">
+                        <h2 class="text-lg lg:text-2xl font-bold text-white">       Opiniones (${totalReviews})</h2>
+                    </div>
+                    <section class="mt-8">
+                        <c:choose>
+                            <c:when test="${empty reviews}">
+                                <p class="text-gray-500">Aún no hay comentarios para este curso.</p>
+                            </c:when>
+                            <c:otherwise>
+                                <div class="space-y-4">
+                                    <c:forEach var="r" items="${reviews}">
+                                        <div class="bg-gray-800 rounded-lg shadow p-4">
+                                            <div class="flex flex-rown justify-between items-center gap-2     mb-2">
+                                                <div class="flex flex-rown gap-2 items-center">
+                                                    <span
+                                                        class="bg-blue-600 hover:bg-blue-700 text-white font-bold py-1 px-2 w-6 h-6 rounded-full flex items-center justify-center cursor-pointer"> 
+                                                        ${fn:toUpperCase(fn:substring(r.nombreUsuario, 0, 1))}
+                                                    </span>
+                                                    <span class="font-semibold text-gray-200">
+                                                        ${r.nombreUsuario}
+                                                    </span>
+                                                    <span class="text-sm text-gray-300">
+                                                        ⭐ ${r.valoracion}/5
+                                                    </span>
+                                                </div>
+                                                <span class=" text-gray-200">
+                                                    ${fn:toUpperCase(fn:substring(r.fecha, 0, 10))}
+                                                </span>
+                                            </div>
+                                            <p class="text-gray-300">
+                                                ${r.comentario}
+                                            </p>
+                                        </div>
+                                    </c:forEach>
+                                </div>
+                            </c:otherwise>
+                        </c:choose>
+                    </section>
+                </div>    
             </div>
         </main>
 
