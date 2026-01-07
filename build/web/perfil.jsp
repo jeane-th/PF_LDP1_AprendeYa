@@ -18,8 +18,8 @@
         <title>AprendeYa | Perfil</title>
         <meta name="viewport" content="width=device-width, initial-scale=1">
     </head>
-    <body>
-       <header class="h-16 fixed top-0 left-0 w-full z-50 bg-gray-900 shadow-lg">
+    <body class="bg-gray-900">
+        <header class="h-16 fixed top-0 left-0 w-full z-50 bg-gray-900 shadow-lg">
             <div class="max-w-7xl mx-auto px-6 flex items-center justify-between text-white h-full">
                 <!-- Logo -->
                 <div>
@@ -111,15 +111,15 @@
         </header>
 
         <main class="pt-16 ">
-            
+
             <section class="bg-gradient-to-br from-blue-900 via-blue-700 to-gray-900 text-white">
                 <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12 md:items-start">
                     <div class="flex flex-col items-center md:flex-row gap-6">
                         <div class="w-32 h-32 rounded-full border-4 border-white shadow-lg
                              text-white flex items-center justify-center text-5xl flex-shrink-0">
-                            
+
                             ${fn:toUpperCase(fn:substring(sessionScope.usuario.nombre, 0, 1))}
-                            
+
                         </div>
                         <div class="flex flex-col">
                             <div class="flex flex-col items-center md:items-start md:flex-row md:justify-start
@@ -131,9 +131,9 @@
                                  text-center md:text-left gap-2 md:gap-6 ">
                                 <div class="flex items-center gap-2">
                                     <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-mail-icon lucide-mail"><path d="m22 7-8.991 5.727a2 2 0 0 1-2.009 0L2 7"/><rect x="2" y="4" width="20" height="16" rx="2"/></svg>
-                                    
+
                                     <span>${sessionScope.usuario.email}</span>
-                                    
+
                                 </div>
                                 <div class="flex items-center gap-2">
                                     <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-map-pin-icon lucide-map-pin"><path d="M20 10c0 4.993-5.539 10.193-7.399 11.799a1 1 0 0 1-1.202 0C9.539 20.193 4 14.993 4 10a8 8 0 0 1 16 0"/><circle cx="12" cy="10" r="3"/></svg>
@@ -163,7 +163,7 @@
             </section>
             <section class="bg-gray-50 py-8 antialiased bg-gray-900 md:py-12">
                 <div class="mx-auto max-w-screen-xl px-4 2xl:px-0">
-                    
+
                     <div class="mb-4 items-end justify-between space-y-4 sm:flex sm:space-y-0 md:mb-8">
                         <h2 class="mt-3 text-xl font-semibold text-gray-900 text-white sm:text-2xl">Mis cursos</h2>
                     </div>
@@ -171,7 +171,7 @@
                     <div class="mb-4 grid gap-4 sm:grid-cols-2 md:mb-8 lg:grid-cols-3 xl:grid-cols-4">
 
                         <c:choose>
-                           <c:when test="${empty listaCursos}">
+                            <c:when test="${empty listaCursos}">
                                 <div class="col-span-full text-center text-gray-500 text-gray-400 text-lg py-12">
                                     Aún no estás matriculado a ningún curso
                                 </div>
@@ -266,42 +266,46 @@
                         </c:choose>
 
                     </div>
-                    
+
                 </div>
 
             </section>
         </main>
-                                        <footer class="footer p-10 bg-brand-dark text-base-content border-t border-gray-800 max-w-7xl mx-auto">
+        <footer class="flex flex-rown justify-between gap-10 p-10 bg-gray-900 text-base-content border-t border-gray-800 max-w-7xl mx-auto">
             <aside>
                 <div class="flex items-center gap-2 mb-2">
-                    <i class="fa-solid fa-book-open text-blue-500 text-xl"></i>
+                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5"
+                         stroke="currentColor" class="text-blue-600 size-8 text-xl font-bold mr-3 h-6 sm:h-9">
+                    <path stroke-linecap="round" stroke-linejoin="round"
+                          d="M12 6.042A8.967 8.967 0 0 0 6 3.75c-1.052 0-2.062.18-3 .512v14.25A8.987 8.987 0 0 1 6 18c2.305 0 4.408.867 6 2.292m0-14.25a8.966 8.966 0 0 1 6-2.292c1.052 0 2.062.18 3 .512v14.25A8.987 8.987 0 0 0 18 18a8.967 8.967 0 0 0-6 2.292m0-14.25v14.25" />
+                    </svg>
                     <span class="text-xl font-bold text-white">AprenderYa</span>
                 </div>
                 <p class="text-gray-400 max-w-xs">Tu plataforma de aprendizaje online para alcanzar tus metas profesionales.</p>
             </aside> 
-            <nav>
+            <nav class="flex flex-col">
                 <h6 class="footer-title text-white opacity-100">Cursos</h6> 
                 <a class="link link-hover text-gray-400">Desarrollo Web</a>
                 <a class="link link-hover text-gray-400">Diseño</a>
                 <a class="link link-hover text-gray-400">Marketing</a>
                 <a class="link link-hover text-gray-400">Negocios</a>
             </nav> 
-            <nav>
+            <nav class="flex flex-col">
                 <h6 class="footer-title text-white opacity-100">Empresa</h6> 
                 <a class="link link-hover text-gray-400">Sobre Nosotros</a>
                 <a class="link link-hover text-gray-400">Blog</a>
                 <a class="link link-hover text-gray-400">Carreras</a>
                 <a class="link link-hover text-gray-400">Contacto</a>
             </nav> 
-            <nav>
+            <nav class="flex flex-col">
                 <h6 class="footer-title text-white opacity-100">Legal</h6> 
                 <a class="link link-hover text-gray-400">Terminos de Uso</a>
                 <a class="link link-hover text-gray-400">Privacidad</a>
                 <a class="link link-hover text-gray-400">Cookies</a>
             </nav>
         </footer>
-        <div class="footer footer-center p-4 bg-brand-dark text-gray-500 border-t border-gray-800">
-            <aside>
+        <div class="footer footer-center p-4 bg-gray-900 text-gray-500 border-t border-gray-800">
+            <aside class="text-center">
                 <p>© 2025 AprenderYa. Todos los derechos reservados.</p>
             </aside>
         </div>
