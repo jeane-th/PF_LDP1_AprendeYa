@@ -14,13 +14,9 @@ import java.sql.DriverManager;
 public class Conexion {
 
 
-    /*private static final String URL = "jdbc:mysql://bhofdycde3nrmo12f1zd-mysql.services.clever-cloud.com:3306/bhofdycde3nrmo12f1zd";
-    private static final String USER = "uwerzwhyzlodeacv";
-    private static final String PASSWORD = "JUeJE6Aq6iyy0YrmYnxT";*/
-
-    private static final String URL = System.getProperty("DB_URL");
-    private static final String USER = System.getProperty("DB_USER");
-    private static final String PASSWORD = System.getProperty("DB_PASS");
+    private static final String URL = System.getenv("DB_URL");
+    private static final String USER = System.getenv("DB_USER");
+    private static final String PASSWORD = System.getenv("DB_PASS");
 
     public static Connection getConnection() {
         Connection con = null;
